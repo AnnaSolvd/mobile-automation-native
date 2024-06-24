@@ -6,7 +6,7 @@
 
 	<test name="Mobile test">
 		<classes>
-			<class name="org.example.carina.demo.MobileSampleTest" />
+			<class name="com.solvd.MobileSampleTest" />
 		</classes>
 	</test>
 

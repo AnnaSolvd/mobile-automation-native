@@ -1,4 +1,4 @@
-package org.example.carina.demo;
+package com.solvd;
 
 import org.testng.annotations.Test;
 
