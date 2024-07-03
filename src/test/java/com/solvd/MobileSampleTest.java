@@ -1,5 +1,6 @@
 package com.solvd;
 
+import mobile.gui.pages.common.HomePageBase;
 import org.testng.annotations.Test;
 
 import com.zebrunner.carina.core.IAbstractTest;
@@ -10,9 +11,9 @@ import com.zebrunner.carina.utils.mobile.IMobileUtils;
 public class MobileSampleTest implements IAbstractTest, IMobileUtils {
 
     @Test()
-    @MethodOwner(owner = "anna")
-    @TestLabel(name = "feature", value = {"mobile"})
     public void testStart() {
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.open();
     }
 
 }
