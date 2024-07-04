@@ -18,9 +18,8 @@ public class SideMenu extends AbstractUIObject implements ICustomTypePageFactory
     private static final Logger logger = LoggerFactory.getLogger(SideMenu.class);
 
     //TODO: improve locator
-    @FindBy(xpath = "//android.widget.ScrollView[@resource-id='com.reddit.frontpage:id/drawer_nav_items_scroll_view']//android.widget.Button")
+    @FindBy(xpath = "")
     private List<ExtendedWebElement> sideMenuButtons;
-
 
     @FindBy(id = "nav_user_name")
     private ExtendedWebElement usernameText;

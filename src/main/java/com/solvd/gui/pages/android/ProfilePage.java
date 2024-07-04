@@ -1,10 +1,13 @@
 package com.solvd.gui.pages.android;
 
+import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.ProfilePageBase;
+import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProfilePage.class)
 public class ProfilePage extends ProfilePageBase {
 
     @FindBy(id = "title")
