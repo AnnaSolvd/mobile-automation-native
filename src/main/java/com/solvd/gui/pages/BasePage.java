@@ -1,4 +1,4 @@
-package mobile.gui.pages;
+package com.solvd.gui.pages;
 
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;

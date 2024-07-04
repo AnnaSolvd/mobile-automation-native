@@ -1,8 +1,8 @@
 package com.solvd;
 
-import constans.SideMenuTitle;
-import mobile.gui.components.SideMenu;
-import mobile.gui.pages.common.HomePageBase;
+import com.solvd.constans.SideMenuTitle;
+import com.solvd.gui.components.SideMenu;
+import com.solvd.gui.pages.common.HomePageBase;
 import org.testng.annotations.Test;
 
 import com.zebrunner.carina.core.IAbstractTest;

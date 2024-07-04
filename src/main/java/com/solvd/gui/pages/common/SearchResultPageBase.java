@@ -1,4 +1,4 @@
-package mobile.gui.pages.common;
+package com.solvd.gui.pages.common;
 
 public class SearchResultPageBase {
 }

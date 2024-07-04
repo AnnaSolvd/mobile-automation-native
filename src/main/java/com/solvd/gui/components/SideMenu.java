@@ -1,10 +1,9 @@
-package mobile.gui.components;
+package com.solvd.gui.components;
 
 import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
-import mobile.gui.pages.common.ProfilePageBase;
-import org.openqa.selenium.By;
+import com.solvd.gui.pages.common.ProfilePageBase;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;

@@ -1,4 +1,4 @@
-package constans;
+package com.solvd.constans;
 
 import lombok.Getter;
 

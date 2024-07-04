@@ -1,9 +1,9 @@
-package mobile.gui.pages.android;
+package com.solvd.gui.pages.android;
 
+import com.solvd.gui.components.SideMenu;
+import com.solvd.gui.pages.common.HomePageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import mobile.gui.components.SideMenu;
-import mobile.gui.pages.common.HomePageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 

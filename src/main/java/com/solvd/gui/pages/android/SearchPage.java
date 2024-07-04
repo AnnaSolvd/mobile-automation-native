@@ -1,7 +1,7 @@
-package mobile.gui.pages.android;
+package com.solvd.gui.pages.android;
 
+import com.solvd.gui.pages.common.SearchPageBase;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import mobile.gui.pages.common.SearchPageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
