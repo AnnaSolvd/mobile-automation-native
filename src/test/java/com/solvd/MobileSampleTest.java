@@ -4,9 +4,9 @@ import mobile.gui.pages.common.HomePageBase;
 import org.testng.annotations.Test;
 
 import com.zebrunner.carina.core.IAbstractTest;
-import com.zebrunner.agent.core.annotation.TestLabel;
-import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
+
+import static org.testng.Assert.assertTrue;
 
 public class MobileSampleTest implements IAbstractTest, IMobileUtils {
 
@@ -14,6 +14,10 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
     public void testStart() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
+
+        boolean isIconVisible = homePage.isProfileIconVisible();
+        assertTrue(isIconVisible, "User should see profile icon on home page");
+        homePage.clickProfileIcon();
     }
 
 }
