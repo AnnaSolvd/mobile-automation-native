@@ -1,5 +1,7 @@
 package com.solvd;
 
+import constans.SideMenuTitle;
+import mobile.gui.components.SideMenu;
 import mobile.gui.pages.common.HomePageBase;
 import org.testng.annotations.Test;
 
@@ -17,7 +19,10 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
 
         boolean isIconVisible = homePage.isProfileIconVisible();
         assertTrue(isIconVisible, "User should see profile icon on home page");
-        homePage.clickProfileIcon();
+
+        SideMenu menu =  homePage.clickProfileIcon();
+        boolean isProfileButtonPresent = menu.checkPresenceOfButton(String.valueOf(SideMenuTitle.PROFILE));
+        assertTrue(isProfileButtonPresent, "User should see profile button in side menu");
     }
 
 }
