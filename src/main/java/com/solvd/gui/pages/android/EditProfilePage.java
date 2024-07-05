@@ -10,7 +10,8 @@ import org.openqa.selenium.support.FindBy;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = EditProfilePage.class)
 public class EditProfilePage extends EditProfilePageBase {
 
-    @FindBy(id = "about_field")
+    //TODO: better locator
+    @FindBy(xpath = "//android.widget.EditText[@resource-id='about_field']")
     private ExtendedWebElement aboutFieldInput;
 
     @FindBy(id = "save_button")
@@ -21,7 +22,8 @@ public class EditProfilePage extends EditProfilePageBase {
     }
 
     @Override
-    public void typeToAboutYouField(String text) {
+    public void typeAboutField(String text) {
+        aboutFieldInput.click();
         aboutFieldInput.type(text);
     }
 

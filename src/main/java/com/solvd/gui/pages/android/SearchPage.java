@@ -3,7 +3,9 @@ package com.solvd.gui.pages.android;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.SearchPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
+import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -19,6 +21,9 @@ public class SearchPage extends SearchPageBase {
 
     @Override
     public void typeSearchInput(String searchText) {
+        searchInput.click();
         searchInput.type(searchText);
+        hideKeyboard();
+        searchInput.sendKeys(Keys.ENTER);
     }
 }
