@@ -12,5 +12,5 @@ public abstract class ProfilePageBase extends AbstractPage implements IMobileUti
 
     public abstract EditProfilePageBase clickEditButton();
 
-    public abstract boolean isCorrectTextInBiographySection();
+    public abstract boolean isCorrectTextInBiographySection(String aboutUserText);
 }

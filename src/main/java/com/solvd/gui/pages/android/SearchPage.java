@@ -1,11 +1,9 @@
 package com.solvd.gui.pages.android;
 
-import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.SearchPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
-import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import org.openqa.selenium.Keys;
+import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -17,6 +15,8 @@ public class SearchPage extends SearchPageBase {
 
     protected SearchPage(WebDriver driver) {
         super(driver);
+        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+        setUiLoadedMarker(searchInput);
     }
 
     @Override
@@ -24,6 +24,5 @@ public class SearchPage extends SearchPageBase {
         searchInput.click();
         searchInput.type(searchText);
         hideKeyboard();
-        searchInput.sendKeys(Keys.ENTER);
     }
 }

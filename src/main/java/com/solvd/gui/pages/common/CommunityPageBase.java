@@ -9,4 +9,6 @@ public abstract class CommunityPageBase extends AbstractPage implements IMobileU
     public CommunityPageBase(WebDriver driver) {
         super(driver);
     }
+
+    public abstract boolean isCommunityTitlePresent();
 }

@@ -7,6 +7,7 @@ import com.solvd.gui.pages.common.SearchPageBase;
 import com.solvd.gui.pages.common.SearchResultPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
@@ -34,6 +35,8 @@ public class HomePage extends HomePageBase {
 
     public HomePage(WebDriver driver) {
         super(driver);
+        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+        setUiLoadedMarker(profileButton);
     }
 
     @Override

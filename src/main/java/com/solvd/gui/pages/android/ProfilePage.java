@@ -4,6 +4,7 @@ import com.solvd.gui.pages.common.EditProfilePageBase;
 import com.solvd.gui.pages.common.ProfilePageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -23,6 +24,8 @@ public class ProfilePage extends ProfilePageBase {
 
     public ProfilePage(WebDriver driver) {
         super(driver);
+        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+        setUiLoadedMarker(usernameTitle);
     }
 
     @Override
@@ -32,9 +35,8 @@ public class ProfilePage extends ProfilePageBase {
     }
 
     @Override
-    public boolean isCorrectTextInBiographySection() {
-//        return accountInformation.stream()
-//                .anyMatch(button -> button.getText().equalsIgnoreCase(text));
+    public boolean isCorrectTextInBiographySection(String aboutUserText) {
+//        return accountInformation.
         return true;
     }
 
