@@ -1,5 +1,6 @@
 package com.solvd.gui.components;
 
+import com.solvd.gui.pages.common.CreatePostPageBase;
 import com.solvd.gui.pages.common.ProfilePageBase;
 import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
@@ -29,7 +30,7 @@ public class BottomNavigationBar extends AbstractUIObject implements ICustomType
         super(driver, searchContext);
     }
 
-    public ProfilePageBase clickMenuButtonByName(String buttonName) {
+    public CreatePostPageBase clickMenuButtonByName(String buttonName) {
         navigationBarButtonsList.stream()
                 .filter(button -> {
                     List<ExtendedWebElement> textViews = button.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
@@ -40,7 +41,7 @@ public class BottomNavigationBar extends AbstractUIObject implements ICustomType
 
         logger.info("Clicked on the button: {}", buttonName);
 
-        return initPage(driver, ProfilePageBase.class);
+        return initPage(driver, CreatePostPageBase.class);
     }
 
     public boolean checkPresenceOfButton(String buttonName) {

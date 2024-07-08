@@ -1,8 +1,10 @@
 package com.solvd.constans;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public enum SideMenuTitle {
     PROFILE("Profile"),
     CREATE_A_COMMUNITY("Create a community"),
@@ -14,8 +16,4 @@ public enum SideMenuTitle {
     SETTINGS("Settings");
 
     private String title;
-
-    SideMenuTitle(String title) {
-        this.title = title;
-    }
 }

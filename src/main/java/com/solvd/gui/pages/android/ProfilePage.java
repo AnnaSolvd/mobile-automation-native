@@ -11,10 +11,10 @@ import org.openqa.selenium.support.FindBy;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProfilePageBase.class)
 public class ProfilePage extends ProfilePageBase {
 
-    @FindBy(id = "title")
+    //TODO: fix locators
+    @FindBy(xpath = "//android.widget.TextView[@resource-id='title']")
     private ExtendedWebElement usernameTitle;
 
-    //TODO: better locator
     @FindBy(xpath = "//android.view.ViewGroup[@resource-id='com.reddit.frontpage:id/profile_pager_header'" +
             "]/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.widget.Button")
     private ExtendedWebElement editButton;

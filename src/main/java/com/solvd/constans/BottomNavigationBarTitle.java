@@ -1,8 +1,10 @@
 package com.solvd.constans;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public enum BottomNavigationBarTitle {
     HOME("Home"),
     COMMUNITIES("Communities"),
@@ -11,8 +13,4 @@ public enum BottomNavigationBarTitle {
     INBOX("Inbox");
 
     private String title;
-
-    BottomNavigationBarTitle(String title) {
-        this.title = title;
-    }
 }
