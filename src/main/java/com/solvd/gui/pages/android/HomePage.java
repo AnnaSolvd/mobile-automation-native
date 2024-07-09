@@ -32,17 +32,10 @@ public class HomePage extends HomePageBase {
             "or contains(@resource-id, 'promoted_post_unit')]")
     private List<ExtendedWebElement> postComponentsList;
 
-
     public HomePage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(profileButton);
-    }
-
-    @Override
-    public SideMenu clickProfileIcon() {
-        profileButton.click();
-        return new SideMenu(getDriver());
     }
 
     @Override
@@ -55,17 +48,5 @@ public class HomePage extends HomePageBase {
         searchButton.click();
         return initPage(SearchPageBase.class, getDriver());
     }
-
-    public void clickOnFirstPost() {
-        if (!postComponentsList.isEmpty()) {
-            ExtendedWebElement firstPost = postComponentsList.get(0);
-            firstPost.click();
-            logger.info("Clicked on first post");
-        } else {
-            logger.warn("No post components found to click on");
-        }
-    }
-
-
 
 }

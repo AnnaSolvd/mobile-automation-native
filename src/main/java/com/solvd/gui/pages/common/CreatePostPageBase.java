@@ -15,4 +15,8 @@ public abstract class CreatePostPageBase extends AbstractPage implements IMobile
     public abstract void typePostBody(String text);
 
     public abstract CommunityPageBase clickPostButton();
+
+    public abstract boolean checkPostTitleButtonVisibility();
+
+    public abstract boolean checkPostBodyButtonVisibility();
 }

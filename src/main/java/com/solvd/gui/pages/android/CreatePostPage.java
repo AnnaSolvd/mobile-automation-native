@@ -4,11 +4,17 @@ import com.solvd.gui.pages.common.CommunityPageBase;
 import com.solvd.gui.pages.common.CreatePostPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = CreatePostPageBase.class)
 public class CreatePostPage extends CreatePostPageBase {
+
+    private static final Logger logger = LoggerFactory.getLogger(CreatePostPage.class);
 
     //TODO: better locators
     @FindBy(xpath = "//android.widget.EditText[@resource-id='post_title']/android.view.View[2]")
@@ -20,8 +26,15 @@ public class CreatePostPage extends CreatePostPageBase {
     @FindBy(xpath = "//android.view.View[@resource-id='action_button']/android.view.View/android.view.View/android.widget.Button")
     private ExtendedWebElement postButton;
 
-    protected CreatePostPage(WebDriver driver) {
+    public CreatePostPage(WebDriver driver) {
         super(driver);
+        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+        setUiLoadedMarker(postTitle);
+    }
+
+    @Override
+    public boolean checkPostTitleButtonVisibility() {
+        return postTitle.isVisible() && postTitle.isClickable();
     }
 
     @Override
@@ -29,6 +42,11 @@ public class CreatePostPage extends CreatePostPageBase {
         postTitle.click();
         postTitle.type(text);
         hideKeyboard();
+    }
+
+    @Override
+    public boolean checkPostBodyButtonVisibility() {
+        return postBody.isVisible() && postBody.isClickable();
     }
 
     @Override

@@ -10,10 +10,10 @@ import org.openqa.selenium.support.FindBy;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = SearchPage.class)
 public class SearchPage extends SearchPageBase {
 
-    @FindBy(id = "search")
+    @FindBy(xpath = "//android.widget.EditText[@resource-id='com.reddit.frontpage:id/search']")
     private ExtendedWebElement searchInput;
 
-    protected SearchPage(WebDriver driver) {
+    public SearchPage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(searchInput);
