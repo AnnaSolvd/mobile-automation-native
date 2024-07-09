@@ -9,6 +9,13 @@ import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
 
+/* Reduce time of regression:
+ * Deeplink - implemented
+ * Api calls
+ * Remove unnecessary steps - implemented because of deeplink
+ * Split tests
+ * More threads
+ */
 public abstract class BaseTest implements IAbstractTest {
 
     protected WebDriver driver;
