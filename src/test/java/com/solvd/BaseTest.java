@@ -9,31 +9,27 @@ import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
 
-/* Reduce time of regression:
- * Deeplink - implemented
- * Api calls
- * Remove unnecessary steps - implemented because of deeplink
- * Split tests
- * More threads
- */
 public abstract class BaseTest implements IAbstractTest {
 
     protected WebDriver driver;
 
     protected String username;
 
-    protected String aboutUser;
+    protected String aboutUserText;
 
     @BeforeClass
     public void setUp() {
         username = R.TESTDATA.get("user.username");
-        aboutUser = R.TESTDATA.get("user.biography_text");
+        aboutUserText = R.TESTDATA.get("user.about_text");
     }
 
     @BeforeMethod
     public void setupTestMethod(Method method) {
         String deeplink = null;
         switch (method.getName()) {
+            case "verifySearchFunctionality":
+                deeplink = R.TESTDATA.get("deeplink.home");
+                break;
             case "verifyThatUserCanUpdateProfileBio":
                 deeplink = R.TESTDATA.get("deeplink.profile") + username;
                 break;

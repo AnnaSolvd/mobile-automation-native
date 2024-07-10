@@ -24,14 +24,11 @@ public class MobileTest extends BaseTest {
         profilePage.clickEditButton();
         EditProfilePageBase editProfilePage = profilePage.clickEditButton();
 
-        editProfilePage.typeAboutField(R.TESTDATA.get("user.biography_text"));
+        editProfilePage.typeAboutField(aboutUserText);
         editProfilePage.clickSaveButton();
 
-        //TODO: don't work
-//        boolean isTextOnProfileMatching = profilePage.isCorrectTextInBiographySection(
-//                R.TESTDATA.get("user.biography_text"));
-//        assertTrue(isTextOnProfileMatching, "");
-
+        boolean isTextOnProfileMatching = profilePage.isCorrectTextInBiographySection(aboutUserText);
+        assertTrue(isTextOnProfileMatching, "Bio text match with written one");
         //sa.assertAll();
     }
 

@@ -1,20 +1,22 @@
 package com.solvd;
 
 import com.solvd.gui.pages.common.*;
+import com.zebrunner.carina.utils.R;
 import org.testng.annotations.Test;
 
 public class MobileSampleTest extends BaseTest {
 
     @Test(description = "TC-01")
-    public void verifyThatUserCanUpdateProfileBio() {
-        ProfilePageBase profilePage = initPage(driver, ProfilePageBase.class);
-        profilePage.isPageOpened();
+    public void verifySearchFunctionality() {
+        //SoftAssert sa = new SoftAssert();
+        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        homePage.isPageOpened();
+        //TODO: soft assert -> homePage.checkIfCorrectSomething()
 
-        profilePage.clickEditButton();
-        EditProfilePageBase editProfilePage = profilePage.clickEditButton();
+        SearchPageBase searchPage =  homePage.clickSearchButton();
+        searchPage.typeSearchInput(R.TESTDATA.get("search_term"));
 
-        editProfilePage.typeAboutField(aboutUser);
-        editProfilePage.clickSaveButton();
+        //sa.assertAll();
     }
 
 }

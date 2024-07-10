@@ -13,19 +13,20 @@ public class ProfilePage extends ProfilePageBase {
 
     //TODO: fix locators
     @FindBy(xpath = "//android.widget.TextView[@resource-id='title']")
-    private ExtendedWebElement usernameTitle;
+    private ExtendedWebElement usernameText;
 
     @FindBy(xpath = "//android.view.ViewGroup[@resource-id='com.reddit.frontpage:id/profile_pager_header'" +
             "]/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.widget.Button")
     private ExtendedWebElement editButton;
 
-    @FindBy(id = "profile_pager_header")
-    private ExtendedWebElement accountInformation;
+    @FindBy(xpath = "//android.view.ViewGroup[@resource-id='com.reddit.frontpage:id/profile_pager_header']" +
+            "//android.view.View[contains(@content-desc, 'karma')];")
+    private ExtendedWebElement accountInformationHeader;
 
     public ProfilePage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
-        setUiLoadedMarker(usernameTitle);
+        setUiLoadedMarker(usernameText);
     }
 
     @Override
@@ -36,8 +37,7 @@ public class ProfilePage extends ProfilePageBase {
 
     @Override
     public boolean isCorrectTextInBiographySection(String aboutUserText) {
-//        return accountInformation.
-        return true;
+        return accountInformationHeader.getAttribute("content-desc").contains(aboutUserText);
     }
 
 }
