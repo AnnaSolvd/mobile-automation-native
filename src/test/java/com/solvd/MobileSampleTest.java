@@ -16,10 +16,6 @@ public class MobileSampleTest extends BaseTest {
         communityPage.isPageOpened();
         //softAssert.assertTrue(communityPage.isIconVisible(), "");
 
-
-
-
-
         softAssert.assertAll();
     }
 

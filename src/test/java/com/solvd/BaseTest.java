@@ -1,5 +1,6 @@
 package com.solvd;
 
+import com.solvd.utils.DeepLinkManager;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.utils.R;
 import org.openqa.selenium.WebDriver;
@@ -19,41 +20,26 @@ public abstract class BaseTest implements IAbstractTest {
 
     protected String searchTerm;
 
+    protected String publicCommunity;
+
+    protected String testingCommunity;
+
+    protected DeepLinkManager deepLinkManager;
+
     @BeforeClass
     public void setUp() {
         username = R.TESTDATA.get("user.username");
         aboutUserText = R.TESTDATA.get("user.about_text");
         searchTerm = R.TESTDATA.get("search_term");
+        publicCommunity = R.TESTDATA.get("community.public");
+        testingCommunity = R.TESTDATA.get("community.testing");
     }
 
     @BeforeMethod
     public void setupTestMethod(Method method) {
-        String deeplink = null;
-        switch (method.getName()) {
-            case "verifySearchFunctionality":
-                deeplink = R.TESTDATA.get("deeplink.home");
-                break;
-            case "verifyThatUserCanUpdateProfileBio":
-                deeplink = R.TESTDATA.get("deeplink.profile") + username;
-                break;
-            case "verifyUserPostingOnCommunity":
-                deeplink = R.TESTDATA.get("deeplink.community") + "testing_android";
-                break;
-            case "verifyJoiningCommunityAndYourCommunitiesSection":
-                deeplink = R.TESTDATA.get("deeplink.community") + "Android";
-                break;
-            case "testInternationalization":
-                deeplink = R.TESTDATA.get("deeplink.settings");
-                break;
-        }
-        if (deeplink != null) {
-            setupDriverWithDeeplink(deeplink);
-        }
-    }
-
-    private void setupDriverWithDeeplink(String deeplink) {
-        this.driver = getDriver();
-        this.driver.get(deeplink);
+        driver = getDriver();
+        deepLinkManager = new DeepLinkManager(driver);
+        deepLinkManager.setupDeepLink(method.getName(), username, publicCommunity, testingCommunity);
     }
 
     @AfterMethod
