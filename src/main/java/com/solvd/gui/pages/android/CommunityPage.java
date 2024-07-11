@@ -13,6 +13,9 @@ public class CommunityPage extends CommunityPageBase {
     @FindBy(xpath = "//android.widget.TextView[@resource-id='subreddit_header_title']")
     private ExtendedWebElement communityTitle;
 
+    @FindBy(id = "subreddit_join_button")
+    private ExtendedWebElement subredditJoinButton;
+
     public CommunityPage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
@@ -22,6 +25,11 @@ public class CommunityPage extends CommunityPageBase {
     @Override
     public boolean isCommunityTitlePresent() {
         return communityTitle.isPresent();
+    }
+
+    @Override
+    public void clickJoinButton() {
+        subredditJoinButton.click();
     }
 
 

@@ -9,11 +9,11 @@ import org.openqa.selenium.support.FindBy;
 
 public class Post extends AbstractUIObject implements ICustomTypePageFactory {
 
-    @FindBy(xpath = "//android.view.View[@resource-id='post_header'])[2]/android.view.View[2]")
-    private ExtendedWebElement postCommunityTitle;
-
-    @FindBy(xpath = "post_join_button")
-    private ExtendedWebElement joinButton;
+//    @FindBy(xpath = "//android.view.View[@resource-id='post_header'])[2]/android.view.View[2]")
+//    private ExtendedWebElement postCommunityTitle;
+//
+//    @FindBy(xpath = "post_join_button")
+//    private ExtendedWebElement joinButton;
 
     public Post(WebDriver driver) {
         super(driver);
@@ -23,7 +23,7 @@ public class Post extends AbstractUIObject implements ICustomTypePageFactory {
         super(driver, searchContext);
     }
 
-    public void clickPostCommunityTitle() {
-        postCommunityTitle.click();
-    }
+//    public void clickPostCommunityTitle() {
+//        postCommunityTitle.click();
+//    }
 }

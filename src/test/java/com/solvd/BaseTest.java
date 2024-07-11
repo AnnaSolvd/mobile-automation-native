@@ -17,10 +17,13 @@ public abstract class BaseTest implements IAbstractTest {
 
     protected String aboutUserText;
 
+    protected String searchTerm;
+
     @BeforeClass
     public void setUp() {
         username = R.TESTDATA.get("user.username");
         aboutUserText = R.TESTDATA.get("user.about_text");
+        searchTerm = R.TESTDATA.get("search_term");
     }
 
     @BeforeMethod
@@ -34,7 +37,10 @@ public abstract class BaseTest implements IAbstractTest {
                 deeplink = R.TESTDATA.get("deeplink.profile") + username;
                 break;
             case "verifyUserPostingOnCommunity":
-                deeplink = R.TESTDATA.get("deeplink.community");
+                deeplink = R.TESTDATA.get("deeplink.community") + "testing_android";
+                break;
+            case "verifyJoiningCommunityAndYourCommunitiesSection":
+                deeplink = R.TESTDATA.get("deeplink.community") + "Android";
                 break;
             case "testInternationalization":
                 deeplink = R.TESTDATA.get("deeplink.settings");

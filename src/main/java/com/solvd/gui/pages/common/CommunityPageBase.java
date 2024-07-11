@@ -11,4 +11,6 @@ public abstract class CommunityPageBase extends AbstractPage implements IMobileU
     }
 
     public abstract boolean isCommunityTitlePresent();
+
+    public abstract void clickJoinButton();
 }

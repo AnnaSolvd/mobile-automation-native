@@ -10,7 +10,9 @@ public abstract class HomePageBase extends BasePage implements IMobileUtils {
         super(driver);
     }
 
-    public abstract boolean isProfileIconVisible();
+    public abstract boolean isRedditIconVisible();
 
     public abstract SearchPageBase clickSearchButton();
+
+    public abstract void clickRandomPost();
 }

@@ -22,8 +22,8 @@ public class HomePage extends HomePageBase {
 
     private static final Logger logger = LoggerFactory.getLogger(HomePage.class);
 
-    @FindBy(id = "inner_peeking_snoovatar")
-    private ExtendedWebElement profileButton;
+    @FindBy(xpath = "//android.view.View[@content-desc='Home feed']")
+    private ExtendedWebElement redditIcon;
 
     @FindBy(id = "feed_control_search_icon")
     private ExtendedWebElement searchButton;
@@ -35,18 +35,23 @@ public class HomePage extends HomePageBase {
     public HomePage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
-        setUiLoadedMarker(profileButton);
+        setUiLoadedMarker(redditIcon);
     }
 
     @Override
-    public boolean isProfileIconVisible() {
-        return profileButton.isVisible();
+    public boolean isRedditIconVisible() {
+        return redditIcon.isVisible();
     }
 
     @Override
     public SearchPageBase clickSearchButton() {
         searchButton.click();
-        return initPage(getDriver(), SearchPageBase.class);
+        return initPage(driver, SearchPageBase.class);
+    }
+
+    @Override
+    public void clickRandomPost() {
+
     }
 
 }

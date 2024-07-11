@@ -9,4 +9,6 @@ public abstract class SearchResultPageBase extends AbstractPage implements IMobi
     public SearchResultPageBase(WebDriver driver) {
         super(driver);
     }
+
+    public abstract boolean isStringPresentInElement(String searchString);
 }
