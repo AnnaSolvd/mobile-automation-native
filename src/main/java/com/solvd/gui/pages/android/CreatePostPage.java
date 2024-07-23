@@ -16,7 +16,7 @@ public class CreatePostPage extends CreatePostPageBase {
 
     private static final Logger logger = LoggerFactory.getLogger(CreatePostPage.class);
 
-    //TODO: better locators
+    //TODO: make better locators
     @FindBy(xpath = "//android.widget.EditText[@resource-id='post_title']/android.view.View[2]")
     private ExtendedWebElement postTitle;
 
@@ -30,6 +30,7 @@ public class CreatePostPage extends CreatePostPageBase {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(postTitle);
+        logger.info("CreatePage open");
     }
 
     @Override

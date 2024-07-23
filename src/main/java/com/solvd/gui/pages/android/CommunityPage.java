@@ -7,10 +7,15 @@ import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = CommunityPageBase.class)
 public class CommunityPage extends CommunityPageBase {
 
+    private static final Logger logger = LoggerFactory.getLogger(CommunityPage.class);
+
+    //TODO: make better locators
     @FindBy(xpath = "//android.widget.TextView[@resource-id='subreddit_header_title']")
     private ExtendedWebElement communityTitle;
 
@@ -24,6 +29,7 @@ public class CommunityPage extends CommunityPageBase {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(communityTitle);
+        logger.info("CommunityPage open");
     }
 
     @Override

@@ -18,6 +18,7 @@ public class HomePage extends HomePageBase {
 
     private static final Logger logger = LoggerFactory.getLogger(HomePage.class);
 
+    //TODO: make better locators
     @FindBy(xpath = "//android.view.View[contains(@content-desc,'Home feed')]")
     private ExtendedWebElement redditIcon;
 
@@ -32,6 +33,7 @@ public class HomePage extends HomePageBase {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(redditIcon);
+        logger.info("HomePage open");
     }
 
     @Override
@@ -46,8 +48,6 @@ public class HomePage extends HomePageBase {
     }
 
     @Override
-    public void clickRandomPost() {
-
-    }
+    public void clickRandomPost() {}
 
 }
