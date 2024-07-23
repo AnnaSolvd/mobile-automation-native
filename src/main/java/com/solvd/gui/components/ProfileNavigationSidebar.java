@@ -55,7 +55,6 @@ public class ProfileNavigationSidebar extends AbstractUIObject implements ICusto
                     return textViews.stream().anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
                 });
         logger.info("Checking presence of button: {} - Found: {}", buttonName, isPresent);
-
         return isPresent;
     }
 

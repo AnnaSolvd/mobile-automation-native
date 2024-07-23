@@ -11,11 +11,11 @@ import java.util.List;
 
 public class NavigationSidebar extends AbstractUIObject implements ICustomTypePageFactory {
 
-//    @FindBy(xpath = "")
-//    private List<ExtendedWebElement> recentlyVisitedSectionList;
-//
-//    @FindBy(xpath = "")
-//    private List<ExtendedWebElement> moderatingSectionList;
+    @FindBy(xpath = "")
+    private List<ExtendedWebElement> recentlyVisitedSectionList;
+
+    @FindBy(xpath = "")
+    private List<ExtendedWebElement> moderatingSectionList;
 
     @FindBy(xpath = "")
     private List<ExtendedWebElement> yourCommunitiesSectionList;

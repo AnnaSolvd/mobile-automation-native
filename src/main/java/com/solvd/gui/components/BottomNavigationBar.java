@@ -40,7 +40,6 @@ public class BottomNavigationBar extends AbstractUIObject implements ICustomType
                 .ifPresent(ExtendedWebElement::click);
 
         logger.info("Clicked on the button: {}", buttonName);
-
         return initPage(driver, CreatePostPageBase.class);
     }
 
@@ -51,7 +50,6 @@ public class BottomNavigationBar extends AbstractUIObject implements ICustomType
                     return textViews.stream().anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
                 });
         logger.info("Checking presence of button: {} - Found: {}", buttonName, isPresent);
-
         return isPresent;
     }
 }
