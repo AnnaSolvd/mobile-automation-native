@@ -3,6 +3,7 @@ package com.solvd;
 import com.solvd.constans.BottomNavigationBarTitle;
 import com.solvd.gui.components.BottomNavigationBar;
 import com.solvd.gui.pages.common.*;
+import com.solvd.service.PostService;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -10,7 +11,6 @@ import static org.testng.Assert.assertTrue;
 
 public class MobileSampleTest extends BaseTest {
 
-    //TODO: not working locator to TextEdit post title
     @Test(description = "TC-02")
     public void verifyUserPostingOnCommunity() {
         SoftAssert softAssert = new SoftAssert();
@@ -26,8 +26,9 @@ public class MobileSampleTest extends BaseTest {
         assertTrue(createPostPage.checkPostBodyButtonVisibility(), "Post body is not visible");
         assertTrue(createPostPage.checkPostTitleButtonVisibility(), "Post title is not visible");
 
-//        createPostPage.typePostTitle("Title title");
-//        createPostPage.typePostBody("body body body");
+        //TODO: problem with typing post title and body
+//        createPostPage.typePostTitle(PostService.generateRandomPostTitle());
+//        createPostPage.typePostBody(PostService.generateRandomPostBody());
 //        createPostPage.clickPostButton();
 
         softAssert.assertAll();
