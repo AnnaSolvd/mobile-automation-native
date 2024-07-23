@@ -1,10 +1,10 @@
 package com.solvd.gui.pages.common;
 
-import com.solvd.gui.pages.BasePage;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
+import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
-public abstract class HomePageBase extends BasePage implements IMobileUtils {
+public abstract class HomePageBase extends AbstractPage implements IMobileUtils {
 
     protected HomePageBase(WebDriver driver) {
         super(driver);
