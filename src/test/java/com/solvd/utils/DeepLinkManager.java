@@ -10,15 +10,15 @@ public class DeepLinkManager {
 
     private static final Logger logger = LoggerFactory.getLogger(DeepLinkManager.class);
 
-    private WebDriver driver;
-    private static String publicCommunity;
-    private static String testingCommunity;
-    private static String username;
+    private final WebDriver driver;
+    private static final String publicCommunity;
+    private static final String testingCommunity;
+    private static final String username;
 
     static {
-        String publicCommunity = R.TESTDATA.get("community.public");
-        String testingCommunity = R.TESTDATA.get("community.testing");
-        String username = R.TESTDATA.get("user.username");
+        publicCommunity = R.TESTDATA.get("community.public");
+        testingCommunity = R.TESTDATA.get("community.testing");
+        username = R.TESTDATA.get("user.username");
     }
 
     public DeepLinkManager(WebDriver driver) {
