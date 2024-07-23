@@ -1,6 +1,5 @@
-package com.solvd.utils;
+package com.solvd.util;
 
-import com.solvd.gui.pages.android.SearchResultPage;
 import com.zebrunner.carina.utils.R;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;

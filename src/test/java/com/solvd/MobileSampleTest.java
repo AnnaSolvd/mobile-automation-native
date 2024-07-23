@@ -26,10 +26,13 @@ public class MobileSampleTest extends BaseTest {
         assertTrue(createPostPage.checkPostBodyButtonVisibility(), "Post body is not visible");
         assertTrue(createPostPage.checkPostTitleButtonVisibility(), "Post title is not visible");
 
-        //TODO: problem with typing post title and body
-//        createPostPage.typePostTitle(PostService.generateRandomPostTitle());
-//        createPostPage.typePostBody(PostService.generateRandomPostBody());
-//        createPostPage.clickPostButton();
+        createPostPage.typePostTitle(PostService.generateRandomPostTitle());
+        createPostPage.typePostBody(PostService.generateRandomPostBody());
+        createPostPage.clickPostButton();
+
+        //TODO:
+        // click go back
+        // check first post title and body
 
         softAssert.assertAll();
     }

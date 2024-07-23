@@ -1,6 +1,6 @@
 package com.solvd;
 
-import com.solvd.utils.DeepLinkManager;
+import com.solvd.util.DeepLinkManager;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.utils.R;
 import org.openqa.selenium.WebDriver;

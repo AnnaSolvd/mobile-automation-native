@@ -17,13 +17,14 @@ public class CreatePostPage extends CreatePostPageBase {
     private static final Logger logger = LoggerFactory.getLogger(CreatePostPage.class);
 
     //TODO: make better locators
-    @FindBy(xpath = "//android.widget.EditText[@resource-id='post_title']/android.view.View[2]")
+    @FindBy(xpath = "//android.widget.EditText[@resource-id='post_title']")
     private ExtendedWebElement postTitle;
 
-    @FindBy(xpath = "//android.widget.TextView[@resource-id='post_body_placeholder_text']")
+    @FindBy(xpath = "//android.widget.EditText[@resource-id='post_body']")
     private ExtendedWebElement postBody;
 
-    @FindBy(xpath = "//android.view.View[@resource-id='action_button']/android.view.View/android.view.View/android.widget.Button")
+    @FindBy(xpath = "//android.view.View[@resource-id='action_button']/android.view.View/android.view.View" +
+            "/android.widget.Button")
     private ExtendedWebElement postButton;
 
     public CreatePostPage(WebDriver driver) {
