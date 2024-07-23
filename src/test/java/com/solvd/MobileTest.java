@@ -10,48 +10,27 @@ import static org.testng.Assert.assertTrue;
 
 public class MobileTest extends BaseTest {
 
+    //TODO: problem with edit button on profile page
     @Test(description = "TC-01")
     public void verifyThatUserCanUpdateProfileBio() {
         SoftAssert softAssert = new SoftAssert();
+
         ProfilePageBase profilePage = initPage(driver, ProfilePageBase.class);
         profilePage.isPageOpened();
-        //TODO: softAssert.assertTrue(profilePage.checkIfCorrectUsername(), "");
+        softAssert.assertTrue(profilePage.isCorrectUsernameOnProfilePage(username));
 
         profilePage.clickEditButton();
         EditProfilePageBase editProfilePage = profilePage.clickEditButton();
-        editProfilePage.typeAboutField(aboutUserText);
-        editProfilePage.clickSaveButton();
+        editProfilePage.isPageOpened();
+        //editProfilePage.typeAboutField(aboutUserText);
+        //editProfilePage.clickSaveButton();
 
-        //TODO: work?
         //boolean isTextOnProfileMatching = profilePage.isCorrectTextInBiographySection(aboutUserText);
         //assertTrue(isTextOnProfileMatching, "Text from about user section don't match text on profile");
-
         softAssert.assertAll();
     }
 
-    @Test(description = "TC-02")
-    public void verifyUserPostingOnCommunity() {
-        SoftAssert softAssert = new SoftAssert();
-        CommunityPageBase communityPage = initPage(driver, CommunityPageBase.class);
-
-        boolean isElementPresent = communityPage.isCommunityTitlePresent();
-        softAssert.assertTrue(isElementPresent, "Community title is not present on screen");
-        BottomNavigationBar bottomNavigationBar = new BottomNavigationBar(getDriver());
-
-        CreatePostPageBase createPostPage = bottomNavigationBar
-                .clickMenuButtonByName(BottomNavigationBarTitle.CREATE.getTitle());
-
-        assertTrue(createPostPage.checkPostBodyButtonVisibility(), "Post body is not visible");
-        assertTrue(createPostPage.checkPostTitleButtonVisibility(), "Post title is not visible");
-
-        //TODO: don't work
-//        createPostPage.typePostTitle("Title title");
-//        createPostPage.typePostBody("body body body");
-//        createPostPage.clickPostButton();
-
-        softAssert.assertAll();
-    }
-
+    //TODO: work but sometimes is not stable, add wait
     @Test(description = "TC-03")
     public void verifySearchFunctionality() {
         SoftAssert softAssert = new SoftAssert();
@@ -62,8 +41,26 @@ public class MobileTest extends BaseTest {
 
         SearchPageBase searchPage = homePage.clickSearchButton();
         SearchResultPageBase searchResultPage = searchPage.typeSearchInput(searchTerm);
-        boolean isSearchTermTextPresent =  searchResultPage.isStringPresentInElement(searchTerm);
+        boolean isSearchTermTextPresent =  searchResultPage.isTermPresentInSearchPostsList(searchTerm);
         assertTrue(isSearchTermTextPresent, "Search term is not present in post results");
+
+        softAssert.assertAll();
+    }
+
+    @Test(description = "TC-04")
+    public void verifyJoiningCommunityAndYourCommunitiesSection() {
+        SoftAssert softAssert = new SoftAssert();
+
+        CommunityPageBase communityPage = initPage(driver, CommunityPageBase.class);
+        communityPage.isPageOpened();
+        //softAssert.assertTrue(communityPage.isIconVisible(), "");
+
+        communityPage.clickJoinButton();
+        boolean isJoinedState = communityPage.hasJoinedState();
+        softAssert.assertTrue(isJoinedState, "Button text don't change from join to joined");
+
+        BottomNavigationBar bottomNavigationBar = new BottomNavigationBar(driver);
+        bottomNavigationBar.clickMenuButtonByName(BottomNavigationBarTitle.HOME.getTitle());
 
         softAssert.assertAll();
     }

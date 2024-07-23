@@ -10,6 +10,8 @@ public abstract class ProfilePageBase extends AbstractPage implements IMobileUti
         super(driver);
     }
 
+    public abstract boolean isCorrectUsernameOnProfilePage(String username);
+
     public abstract EditProfilePageBase clickEditButton();
 
     public abstract boolean isCorrectTextInBiographySection(String aboutUserText);

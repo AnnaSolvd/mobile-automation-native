@@ -20,7 +20,7 @@ public class CreatePostPage extends CreatePostPageBase {
     @FindBy(xpath = "//android.widget.EditText[@resource-id='post_title']/android.view.View[2]")
     private ExtendedWebElement postTitle;
 
-    @FindBy(xpath = "//android.widget.EditText[@resource-id='post_body']")
+    @FindBy(xpath = "//android.widget.TextView[@resource-id='post_body_placeholder_text']")
     private ExtendedWebElement postBody;
 
     @FindBy(xpath = "//android.view.View[@resource-id='action_button']/android.view.View/android.view.View/android.widget.Button")

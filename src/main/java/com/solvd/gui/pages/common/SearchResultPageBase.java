@@ -10,5 +10,5 @@ public abstract class SearchResultPageBase extends AbstractPage implements IMobi
         super(driver);
     }
 
-    public abstract boolean isStringPresentInElement(String searchString);
+    public abstract boolean isTermPresentInSearchPostsList(String searchTerm);
 }

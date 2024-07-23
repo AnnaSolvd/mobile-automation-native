@@ -17,7 +17,7 @@ public class SearchResultPage extends SearchResultPageBase{
     private static final Logger logger = LoggerFactory.getLogger(SearchResultPage.class);
 
     @FindBy(xpath = " //android.view.View[@resource-id='tab_unit'])[1]/android.view.View")
-    private ExtendedWebElement postTabButton;
+    private ExtendedWebElement postsNavigationTabButton;
 
     @FindBy(xpath = "//android.view.View[@resource-id='search_post_section']")
     private List<ExtendedWebElement> postList;
@@ -25,17 +25,15 @@ public class SearchResultPage extends SearchResultPageBase{
     public SearchResultPage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
-        setUiLoadedMarker(postTabButton);
+        setUiLoadedMarker(postsNavigationTabButton);
     }
 
     @Override
-    public boolean isStringPresentInElement(String searchString) {
-        logger.info(postList.toString());
+    public boolean isTermPresentInSearchPostsList(String searchTerm) {
         return postList.stream()
                 .anyMatch(post -> {
                     String contentDesc = post.getAttribute("content-desc");
-                    String text = post.getAttribute("text");
-                    return contentDesc.contains(searchString) || text.contains(searchString);
+                    return contentDesc.contains(searchTerm);
                 });
     }
 

@@ -14,9 +14,9 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 
-public class SideMenu extends AbstractUIObject implements ICustomTypePageFactory {
+public class ProfileNavigationSidebar extends AbstractUIObject implements ICustomTypePageFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(SideMenu.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProfileNavigationSidebar.class);
 
     //TODO: better locator
     @FindBy(xpath = "//android.widget.ScrollView[@resource-id='com.reddit.frontpage:id/drawer_nav_items_scroll_view']" +
@@ -27,11 +27,11 @@ public class SideMenu extends AbstractUIObject implements ICustomTypePageFactory
     @FindBy(id = "nav_user_name")
     private ExtendedWebElement usernameText;
 
-    public SideMenu(WebDriver driver) {
+    public ProfileNavigationSidebar(WebDriver driver) {
         super(driver);
     }
 
-    protected SideMenu(WebDriver driver, SearchContext searchContext) {
+    protected ProfileNavigationSidebar(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 

@@ -21,10 +21,10 @@ public class DeepLinkManager {
                 deeplink = R.TESTDATA.get("deeplink.profile") + username;
                 break;
             case "verifyUserPostingOnCommunity":
-                deeplink = R.TESTDATA.get("deeplink.community") + publicCommunity;
+                deeplink = R.TESTDATA.get("deeplink.community") + testingCommunity;
                 break;
             case "verifyJoiningCommunityAndYourCommunitiesSection":
-                deeplink = R.TESTDATA.get("deeplink.community") + testingCommunity;
+                deeplink = R.TESTDATA.get("deeplink.community") + publicCommunity;
                 break;
             case "testInternationalization":
                 deeplink = R.TESTDATA.get("deeplink.settings");

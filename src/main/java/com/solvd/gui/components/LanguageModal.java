@@ -1,7 +1,6 @@
 package com.solvd.gui.components;
 
 import com.solvd.gui.pages.common.ProfilePageBase;
-import com.solvd.gui.pages.common.SettingsPageBase;
 import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
@@ -16,7 +15,7 @@ import java.util.List;
 
 public class LanguageModal extends AbstractUIObject implements ICustomTypePageFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(SideMenu.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProfileNavigationSidebar.class);
 
     @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView[@resource-id='com.reddit.frontpage:id/bottomsheet_recycler_view']")
     private List<ExtendedWebElement> languageButtonsList;

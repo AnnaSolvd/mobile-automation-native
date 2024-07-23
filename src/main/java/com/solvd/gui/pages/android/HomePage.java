@@ -1,10 +1,7 @@
 package com.solvd.gui.pages.android;
 
-import com.solvd.gui.components.Post;
-import com.solvd.gui.components.SideMenu;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.SearchPageBase;
-import com.solvd.gui.pages.common.SearchResultPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
@@ -14,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.Random;
 
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = HomePageBase.class)
@@ -22,7 +18,7 @@ public class HomePage extends HomePageBase {
 
     private static final Logger logger = LoggerFactory.getLogger(HomePage.class);
 
-    @FindBy(xpath = "//android.view.View[@content-desc='Home feed']")
+    @FindBy(xpath = "//android.view.View[contains(@content-desc,'Home feed')]")
     private ExtendedWebElement redditIcon;
 
     @FindBy(id = "feed_control_search_icon")
