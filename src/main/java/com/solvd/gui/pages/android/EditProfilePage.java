@@ -32,16 +32,15 @@ public class EditProfilePage extends EditProfilePageBase {
     @Override
     public void typeAboutField(String aboutUserText) {
         aboutFieldInput.click();
-        logger.info("About field clicked");
         aboutFieldInput.type(aboutUserText);
-        logger.info("Type text to field");
+        logger.info("Enter text into about field");
         hideKeyboard();
     }
 
     @Override
     public ProfilePageBase clickSaveButton() {
         saveButton.click();
-        logger.info("Save button clicked");
+        logger.info("Click save button");
         return initPage(getDriver(), ProfilePageBase.class);
     }
 

@@ -45,6 +45,7 @@ public class HomePage extends HomePageBase {
     @Override
     public SearchPageBase clickSearchButton() {
         searchButton.click();
+        logger.info("Click search button");
         return initPage(getDriver(), SearchPageBase.class);
     }
 

@@ -40,6 +40,7 @@ public class CommunityPage extends CommunityPageBase {
     @Override
     public void clickJoinButton() {
         subredditJoinButton.click();
+        logger.info("Click join button");
         pressKeyboardKey(AndroidKey.ENTER);
     }
 

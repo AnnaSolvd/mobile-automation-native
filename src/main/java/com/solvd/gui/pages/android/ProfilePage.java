@@ -42,7 +42,7 @@ public class ProfilePage extends ProfilePageBase {
     @Override
     public EditProfilePageBase clickEditButton() {
         editButton.click();
-        logger.info("Edit button clicked");
+        logger.info("Click edit button");
         return initPage(getDriver(), EditProfilePageBase.class);
     }
 

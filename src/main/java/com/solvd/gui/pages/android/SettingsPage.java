@@ -29,6 +29,7 @@ public class SettingsPage extends SettingsPageBase {
     @Override
     public LanguageModal clickLanguageButton() {
         languageButton.click();
+        logger.info("Click language button");
         return new LanguageModal(getDriver());
     }
 

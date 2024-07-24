@@ -43,6 +43,7 @@ public class CreatePostPage extends CreatePostPageBase {
     public void typePostTitle(String text) {
         postTitle.click();
         postTitle.type(text);
+        logger.info("Enter text into post title");
         hideKeyboard();
     }
 
@@ -55,12 +56,14 @@ public class CreatePostPage extends CreatePostPageBase {
     public void typePostBody(String text) {
         postBody.click();
         postBody.type(text);
+        logger.info("Enter text into post body");
         hideKeyboard();
     }
 
     @Override
     public CommunityPageBase clickPostButton() {
         postButton.click();
+        logger.info("Click post button");
         return initPage(getDriver(), CommunityPageBase.class);
     }
 }

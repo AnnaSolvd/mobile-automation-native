@@ -31,6 +31,7 @@ public class SearchPage extends SearchPageBase {
     public SearchResultPageBase typeSearchInput(String searchText) {
         searchInput.type(searchText);
         pressKeyboardKey(AndroidKey.ENTER);
+        logger.info("Enter text into search input");
         return initPage(getDriver(), SearchResultPageBase.class);
     }
 }
