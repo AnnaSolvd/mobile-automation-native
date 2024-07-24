@@ -4,12 +4,18 @@ import com.solvd.util.DeepLinkFactory;
 import com.solvd.util.DeepLinkManager;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.utils.R;
+import com.zebrunner.carina.utils.resources.L10N;
+import com.zebrunner.carina.webdriver.config.WebDriverConfiguration;
 import org.openqa.selenium.WebDriver;
+import com.zebrunner.carina.utils.config.Configuration;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
+import java.util.Locale;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 public abstract class BaseTest implements IAbstractTest {
 
@@ -25,6 +31,11 @@ public abstract class BaseTest implements IAbstractTest {
         username = R.TESTDATA.get("user.username");
         aboutUserText = R.TESTDATA.get("user.about_text");
         searchTerm = R.TESTDATA.get("search_term");
+
+        Locale locale = L10N.getLocale();
+        String loadedLocale = locale.getLanguage() + "_" + locale.getCountry();
+        String configLocale = Configuration.getRequired(WebDriverConfiguration.Parameter.LOCALE);
+        assertEquals(loadedLocale, configLocale);
     }
 
     @BeforeMethod
