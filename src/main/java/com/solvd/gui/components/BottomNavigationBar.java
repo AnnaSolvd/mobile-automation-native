@@ -40,7 +40,7 @@ public class BottomNavigationBar extends AbstractUIObject implements ICustomType
                 .ifPresent(ExtendedWebElement::click);
 
         logger.info("Clicked on the button: {}", buttonName);
-        return initPage(driver, CreatePostPageBase.class);
+        return initPage(getDriver(), CreatePostPageBase.class);
     }
 
     public boolean checkPresenceOfButton(String buttonName) {

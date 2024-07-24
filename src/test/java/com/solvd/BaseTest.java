@@ -37,7 +37,10 @@ public abstract class BaseTest implements IAbstractTest {
         username = R.TESTDATA.get("user.username");
         aboutUserText = R.TESTDATA.get("user.about_text");
         searchTerm = R.TESTDATA.get("search_term");
+    }
 
+    @BeforeClass
+    public void testLocaleLoad() {
         Locale locale = L10N.getLocale();
         logger.info("Loaded locale: {}", locale.toString());
 
