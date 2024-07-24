@@ -18,11 +18,16 @@ public class CommunityPage extends CommunityPageBase {
     @FindBy(id = "subreddit_header_title")
     private ExtendedWebElement communityTitle;
 
-    //TODO: make better locators
-    @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'{L10N:CommunityPage.joinButtonText}']")
+//    @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'Join')]")
+//    private ExtendedWebElement subredditJoinButton;
+//
+//    @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'Leave')]")
+//    private ExtendedWebElement subredditLeaveButton;
+
+    @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'{L10N:CommunityPage.joinButtonText}')]")
     private ExtendedWebElement subredditJoinButton;
 
-    @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'{L10N:CommunityPage.leaveButtonText}']")
+    @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'{L10N:CommunityPage.leaveButtonText}')]")
     private ExtendedWebElement subredditLeaveButton;
 
     public CommunityPage(WebDriver driver) {
@@ -49,6 +54,5 @@ public class CommunityPage extends CommunityPageBase {
         String contentDesc = subredditJoinButton.getAttribute("content-desc");
         return contentDesc.contains("Leave");
     }
-
 
 }
