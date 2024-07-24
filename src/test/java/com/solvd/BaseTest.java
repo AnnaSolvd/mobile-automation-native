@@ -39,7 +39,8 @@ public abstract class BaseTest implements IAbstractTest {
         searchTerm = R.TESTDATA.get("search_term");
 
         Locale locale = L10N.getLocale();
-        logger.info(locale.getCountry());
+        logger.info("Loaded locale: {}", locale.toString());
+
         String loadedLocale = locale.getLanguage() + "_" + locale.getCountry();
         String configLocale = Configuration.getRequired(WebDriverConfiguration.Parameter.LOCALE);
         assertEquals(loadedLocale, configLocale);

@@ -5,6 +5,7 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import io.appium.java_client.android.nativekey.AndroidKey;
+import org.checkerframework.checker.i18n.qual.Localized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
@@ -24,9 +25,11 @@ public class CommunityPage extends CommunityPageBase {
 //    @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'Leave')]")
 //    private ExtendedWebElement subredditLeaveButton;
 
+    @Localized
     @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'{L10N:CommunityPage.joinButtonText}')]")
     private ExtendedWebElement subredditJoinButton;
 
+    @Localized
     @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'{L10N:CommunityPage.leaveButtonText}')]")
     private ExtendedWebElement subredditLeaveButton;
 
