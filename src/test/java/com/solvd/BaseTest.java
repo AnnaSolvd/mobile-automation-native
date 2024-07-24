@@ -1,13 +1,17 @@
 package com.solvd;
 
+import com.solvd.gui.pages.android.CommunityPage;
 import com.solvd.util.DeepLinkFactory;
 import com.solvd.util.DeepLinkManager;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.utils.resources.L10N;
 import com.zebrunner.carina.webdriver.config.WebDriverConfiguration;
+import lombok.extern.flogger.Flogger;
 import org.openqa.selenium.WebDriver;
 import com.zebrunner.carina.utils.config.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -18,6 +22,8 @@ import java.util.Locale;
 import static org.testng.AssertJUnit.assertEquals;
 
 public abstract class BaseTest implements IAbstractTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(BaseTest.class);
 
     protected WebDriver driver;
     protected String username;
