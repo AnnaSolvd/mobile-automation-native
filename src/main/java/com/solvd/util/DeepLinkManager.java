@@ -1,6 +1,5 @@
 package com.solvd.util;
 
-import com.zebrunner.carina.utils.R;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,34 +9,24 @@ public class DeepLinkManager {
     private static final Logger logger = LoggerFactory.getLogger(DeepLinkManager.class);
 
     private final WebDriver driver;
-    private static final String publicCommunity;
-    private static final String testingCommunity;
-    private static final String username;
+    private final DeepLinkFactory deepLinkFactory;
 
-    static {
-        publicCommunity = R.TESTDATA.get("community.public");
-        testingCommunity = R.TESTDATA.get("community.testing");
-        username = R.TESTDATA.get("user.username");
-    }
-
-    public DeepLinkManager(WebDriver driver) {
+    public DeepLinkManager(WebDriver driver, DeepLinkFactory deepLinkFactory) {
         this.driver = driver;
+        this.deepLinkFactory = deepLinkFactory;
     }
 
     public void setupDeepLink(String methodName) {
-        logger.info("Method name: {}", methodName);
-        String deepLink = createDeepLink(methodName);
-        logger.info("Deeplink: {}", deepLink);
-        driver.get(deepLink);
-    }
-
-    private String createDeepLink(String methodName) {
-        return switch (methodName) {
-            case "verifySearchFunctionality" -> R.TESTDATA.get("deeplink.home");
-            case "verifyThatUserCanUpdateProfileBio" -> R.TESTDATA.get("deeplink.profile") + username;
-            case "verifyUserPostingOnCommunity" -> R.TESTDATA.get("deeplink.community") + testingCommunity;
-            case "verifyJoiningCommunityAndYourCommunitiesSection" -> R.TESTDATA.get("deeplink.community") + publicCommunity;
-            default -> throw new IllegalArgumentException("Invalid method name: " + methodName);
-        };
+        logger.info("Deep link for method: {}", methodName);
+        try {
+            String deepLink = deepLinkFactory.createDeepLink(methodName);
+            logger.info("Navigating to deep link: {}", deepLink);
+            driver.get(deepLink);
+        }
+        catch (IllegalArgumentException e) {
+            logger.error("Error setting up deep link: {}", e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 }
+

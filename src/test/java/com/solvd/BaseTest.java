@@ -1,5 +1,6 @@
 package com.solvd;
 
+import com.solvd.util.DeepLinkFactory;
 import com.solvd.util.DeepLinkManager;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.utils.R;
@@ -17,6 +18,7 @@ public abstract class BaseTest implements IAbstractTest {
     protected String aboutUserText;
     protected String searchTerm;
     protected DeepLinkManager deepLinkManager;
+    protected DeepLinkFactory deepLinkFactory;
 
     @BeforeClass
     public void setUp() {
@@ -28,7 +30,8 @@ public abstract class BaseTest implements IAbstractTest {
     @BeforeMethod
     public void setupTestMethod(Method method) {
         driver = getDriver();
-        deepLinkManager = new DeepLinkManager(driver);
+        deepLinkFactory = new DeepLinkFactory();
+        deepLinkManager = new DeepLinkManager(driver, deepLinkFactory);
         deepLinkManager.setupDeepLink(method.getName());
     }
 

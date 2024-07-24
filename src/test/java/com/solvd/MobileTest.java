@@ -72,7 +72,7 @@ public class MobileTest extends BaseTest {
     }
 
     @Test(description = "TC-04")
-    public void verifyJoiningCommunityAndYourCommunitiesSection() {
+    public void verifyJoiningCommunity() {
         SoftAssert softAssert = new SoftAssert();
 
         CommunityPageBase communityPage = initPage(driver, CommunityPageBase.class);
