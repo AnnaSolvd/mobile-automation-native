@@ -17,10 +17,10 @@ public class CreatePostPage extends CreatePostPageBase {
     private static final Logger logger = LoggerFactory.getLogger(CreatePostPage.class);
 
     //TODO: make better locators
-    @FindBy(xpath = "//android.widget.EditText[@resource-id='post_title']")
+    @FindBy(id = "post_title")
     private ExtendedWebElement postTitle;
 
-    @FindBy(xpath = "//android.widget.EditText[@resource-id='post_body']")
+    @FindBy(id = "post_body")
     private ExtendedWebElement postBody;
 
     @FindBy(xpath = "//android.view.View[@resource-id='action_button']/android.view.View/android.view.View" +

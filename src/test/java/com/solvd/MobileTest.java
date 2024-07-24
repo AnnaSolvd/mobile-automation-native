@@ -3,6 +3,7 @@ package com.solvd;
 import com.solvd.constans.BottomNavigationBarTitle;
 import com.solvd.gui.components.BottomNavigationBar;
 import com.solvd.gui.pages.common.*;
+import com.solvd.service.PostService;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -10,7 +11,6 @@ import static org.testng.Assert.assertTrue;
 
 public class MobileTest extends BaseTest {
 
-    //TODO: problem with edit button on profile page
     @Test(description = "TC-01")
     public void verifyThatUserCanUpdateProfileBio() {
         SoftAssert softAssert = new SoftAssert();
@@ -19,18 +19,42 @@ public class MobileTest extends BaseTest {
         profilePage.isPageOpened();
         softAssert.assertTrue(profilePage.isCorrectUsernameOnProfilePage(username));
 
-        profilePage.clickEditButton();
         EditProfilePageBase editProfilePage = profilePage.clickEditButton();
         editProfilePage.isPageOpened();
-        //editProfilePage.typeAboutField(aboutUserText);
-        //editProfilePage.clickSaveButton();
+        editProfilePage.typeAboutField(aboutUserText);
+        profilePage = editProfilePage.clickSaveButton();
 
-        //boolean isTextOnProfileMatching = profilePage.isCorrectTextInBiographySection(aboutUserText);
-        //assertTrue(isTextOnProfileMatching, "Text from about user section don't match text on profile");
+        boolean isTextOnProfileMatching = profilePage.isCorrectTextInBiographySection(aboutUserText);
+        assertTrue(isTextOnProfileMatching, "Text from about user section don't match text on profile");
         softAssert.assertAll();
     }
 
-    //TODO: work but sometimes is not stable, add wait
+    @Test(description = "TC-02")
+    public void verifyUserPostingOnCommunity() {
+        SoftAssert softAssert = new SoftAssert();
+        CommunityPageBase communityPage = initPage(driver, CommunityPageBase.class);
+
+        boolean isElementPresent = communityPage.isCommunityTitlePresent();
+        softAssert.assertTrue(isElementPresent, "Community title is not present on screen");
+        BottomNavigationBar bottomNavigationBar = new BottomNavigationBar(getDriver());
+
+        CreatePostPageBase createPostPage = bottomNavigationBar
+                .clickMenuButtonByName(BottomNavigationBarTitle.CREATE.getTitle());
+
+        assertTrue(createPostPage.checkPostBodyButtonVisibility(), "Post body is not visible");
+        assertTrue(createPostPage.checkPostTitleButtonVisibility(), "Post title is not visible");
+
+        createPostPage.typePostTitle(PostService.generateRandomPostTitle());
+        createPostPage.typePostBody(PostService.generateRandomPostBody());
+        createPostPage.clickPostButton();
+
+        //TODO:
+        // click go back
+        // check first posts title and body
+        softAssert.assertAll();
+    }
+
+    //TODO: it works, but it's flaky; add wait between search
     @Test(description = "TC-03")
     public void verifySearchFunctionality() {
         SoftAssert softAssert = new SoftAssert();
@@ -53,15 +77,17 @@ public class MobileTest extends BaseTest {
 
         CommunityPageBase communityPage = initPage(driver, CommunityPageBase.class);
         communityPage.isPageOpened();
-        //softAssert.assertTrue(communityPage.isIconVisible(), "");
+        softAssert.assertTrue(communityPage.isCommunityTitlePresent(), "Community title is not present");
 
         communityPage.clickJoinButton();
         boolean isJoinedState = communityPage.hasJoinedState();
         softAssert.assertTrue(isJoinedState, "Button text don't change from join to joined");
 
-        BottomNavigationBar bottomNavigationBar = new BottomNavigationBar(driver);
-        bottomNavigationBar.clickMenuButtonByName(BottomNavigationBarTitle.HOME.getTitle());
+        //TODO: problem with welcome community modal
+        //BottomNavigationBar bottomNavigationBar = new BottomNavigationBar(driver);
+        //bottomNavigationBar.clickMenuButtonByName(BottomNavigationBarTitle.HOME.getTitle());
 
         softAssert.assertAll();
     }
+
 }

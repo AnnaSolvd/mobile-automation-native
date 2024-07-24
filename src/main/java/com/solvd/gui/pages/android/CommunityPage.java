@@ -15,10 +15,10 @@ public class CommunityPage extends CommunityPageBase {
 
     private static final Logger logger = LoggerFactory.getLogger(CommunityPage.class);
 
-    //TODO: make better locators
-    @FindBy(xpath = "//android.widget.TextView[@resource-id='subreddit_header_title']")
+    @FindBy(id = "subreddit_header_title")
     private ExtendedWebElement communityTitle;
 
+    //TODO: make better locators
     @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'Join')]")
     private ExtendedWebElement subredditJoinButton;
 

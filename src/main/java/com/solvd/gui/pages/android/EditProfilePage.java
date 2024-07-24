@@ -42,7 +42,7 @@ public class EditProfilePage extends EditProfilePageBase {
     public ProfilePageBase clickSaveButton() {
         saveButton.click();
         logger.info("Save button clicked");
-        return initPage(driver, ProfilePageBase.class);
+        return initPage(getDriver(), ProfilePageBase.class);
     }
 
 }

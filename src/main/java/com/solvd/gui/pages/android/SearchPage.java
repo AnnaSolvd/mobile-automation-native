@@ -17,7 +17,7 @@ public class SearchPage extends SearchPageBase {
     private static final Logger logger = LoggerFactory.getLogger(SearchPage.class);
 
     //TODO: make better locators
-    @FindBy(xpath = "//android.widget.EditText[@resource-id='com.reddit.frontpage:id/search']")
+    @FindBy(id = "com.reddit.frontpage:id/search")
     private ExtendedWebElement searchInput;
 
     public SearchPage(WebDriver driver) {
@@ -31,6 +31,6 @@ public class SearchPage extends SearchPageBase {
     public SearchResultPageBase typeSearchInput(String searchText) {
         searchInput.type(searchText);
         pressKeyboardKey(AndroidKey.ENTER);
-        return initPage(driver, SearchResultPageBase.class);
+        return initPage(getDriver(), SearchResultPageBase.class);
     }
 }

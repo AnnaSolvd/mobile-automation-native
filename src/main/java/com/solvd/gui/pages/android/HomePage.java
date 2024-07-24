@@ -5,6 +5,7 @@ import com.solvd.gui.pages.common.SearchPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
+import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
@@ -19,10 +20,10 @@ public class HomePage extends HomePageBase {
     private static final Logger logger = LoggerFactory.getLogger(HomePage.class);
 
     //TODO: make better locators
-    @FindBy(xpath = "//android.view.View[contains(@content-desc,'Home feed')]")
+    @ExtendedFindBy(accessibilityId = "Home feed")
     private ExtendedWebElement redditIcon;
 
-    @FindBy(id = "feed_control_search_icon")
+    @ExtendedFindBy(accessibilityId = "Search")
     private ExtendedWebElement searchButton;
 
     @FindBy(xpath = "//android.view.View[@resource-id='feed_lazy_column']/android.view.View[contains(@resource-id, 'post_unit') " +
@@ -44,7 +45,7 @@ public class HomePage extends HomePageBase {
     @Override
     public SearchPageBase clickSearchButton() {
         searchButton.click();
-        return initPage(driver, SearchPageBase.class);
+        return initPage(getDriver(), SearchPageBase.class);
     }
 
     @Override

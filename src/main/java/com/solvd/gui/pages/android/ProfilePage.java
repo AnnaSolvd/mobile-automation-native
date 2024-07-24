@@ -10,6 +10,8 @@ import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
+
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProfilePageBase.class)
 public class ProfilePage extends ProfilePageBase {
 
@@ -22,14 +24,13 @@ public class ProfilePage extends ProfilePageBase {
     @FindBy(xpath = "//android.widget.TextView[@resource-id='edit_button']")
     private ExtendedWebElement editButton;
 
-    @FindBy(xpath = "//android.view.ViewGroup[@resource-id='com.reddit.frontpage:id/profile_pager_header']" +
-            "//android.view.View[contains(@content-desc, 'karma')];")
+    @FindBy(xpath = "//android.view.View[contains(@content-desc, 'karma')]")
     private ExtendedWebElement accountInformationHeader;
 
     public ProfilePage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
-        setUiLoadedMarker(usernameText);
+        setUiLoadedMarker(editButton);
         logger.info("ProfilePage open");
     }
 
@@ -42,7 +43,7 @@ public class ProfilePage extends ProfilePageBase {
     public EditProfilePageBase clickEditButton() {
         editButton.click();
         logger.info("Edit button clicked");
-        return initPage(EditProfilePageBase.class, getDriver());
+        return initPage(getDriver(), EditProfilePageBase.class);
     }
 
     @Override
