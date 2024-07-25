@@ -16,7 +16,10 @@ public class DeepLinkFactory {
 
     public String createDeepLink(String methodName) {
         return switch (methodName) {
+            //TODO: duplication
             case "verifySearchFunctionality" -> R.TESTDATA.get("deeplink.home");
+            case "verifyRecentlyVisitedSection" -> R.TESTDATA.get("deeplink.home");
+
             case "verifyThatUserCanUpdateProfileBio" -> R.TESTDATA.get("deeplink.profile") + USERNAME;
             case "verifyUserPostingOnCommunity" -> R.TESTDATA.get("deeplink.community") + TESTING_COMMUNITY;
             case "verifyJoiningCommunity" -> R.TESTDATA.get("deeplink.community") + PUBLIC_COMMUNITY;

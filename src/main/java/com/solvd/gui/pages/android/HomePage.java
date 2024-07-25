@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Random;
 
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = HomePageBase.class)
@@ -20,15 +22,15 @@ public class HomePage extends HomePageBase {
     private static final Logger logger = LoggerFactory.getLogger(HomePage.class);
 
     //TODO: make better locators
-    @ExtendedFindBy(accessibilityId = "Home feed")
+    @FindBy(xpath = "//android.view.View[@content-desc='Home feed']")
     private ExtendedWebElement redditIcon;
 
     @ExtendedFindBy(accessibilityId = "Search")
     private ExtendedWebElement searchButton;
 
-    @FindBy(xpath = "//android.view.View[@resource-id='feed_lazy_column']/android.view.View[contains(@resource-id, 'post_unit') " +
-            "or contains(@resource-id, 'promoted_post_unit')]")
-    private List<ExtendedWebElement> postComponentsList;
+    @FindBy(xpath = "//android.view.View[@resource-id='feed_lazy_column']/" +
+            "android.view.View[contains(@resource-id, 'post_unit')]")
+    private List<ExtendedWebElement> postList;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -50,6 +52,17 @@ public class HomePage extends HomePageBase {
     }
 
     @Override
-    public void clickRandomPost() {}
+    public void clickRandomPost() {
+        if (postList.isEmpty()) {
+            throw new NoSuchElementException("No post found on page");
+        }
+
+        Random random = new Random();
+        int randomIndex = random.nextInt(postList.size());
+        ExtendedWebElement randomPost = postList.get(randomIndex);
+
+        randomPost.click();
+        logger.info("Click random post");
+    }
 
 }
