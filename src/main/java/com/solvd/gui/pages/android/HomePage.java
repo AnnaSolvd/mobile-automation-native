@@ -1,5 +1,8 @@
 package com.solvd.gui.pages.android;
 
+import com.solvd.gui.components.LeftNavigationSidebar;
+import com.solvd.gui.components.Post;
+import com.solvd.gui.pages.common.CommunityPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.SearchPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
@@ -28,9 +31,13 @@ public class HomePage extends HomePageBase {
     @ExtendedFindBy(accessibilityId = "Search")
     private ExtendedWebElement searchButton;
 
+    @FindBy(xpath = "//android.view.View[@resource-id='community_menu_button']/android.view.View/android.view.View/" +
+            "android.widget.Button")
+    private ExtendedWebElement leftNavigationBarButton;
+
     @FindBy(xpath = "//android.view.View[@resource-id='feed_lazy_column']/" +
             "android.view.View[contains(@resource-id, 'post_unit')]")
-    private List<ExtendedWebElement> postList;
+    private List<Post> postList;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -52,17 +59,21 @@ public class HomePage extends HomePageBase {
     }
 
     @Override
-    public void clickRandomPost() {
+    public CommunityPageBase clickRandomPostCommunity() {
         if (postList.isEmpty()) {
             throw new NoSuchElementException("No post found on page");
         }
-
         Random random = new Random();
         int randomIndex = random.nextInt(postList.size());
-        ExtendedWebElement randomPost = postList.get(randomIndex);
+        Post randomPost = postList.get(randomIndex);
+        randomPost.clickCommunityTitle();
+        return initPage(getDriver(), CommunityPageBase.class);
+    }
 
-        randomPost.click();
-        logger.info("Click random post");
+    @Override
+    public LeftNavigationSidebar clickLeftNavigationBar() {
+        leftNavigationBarButton.click();
+        return new LeftNavigationSidebar(getDriver());
     }
 
 }

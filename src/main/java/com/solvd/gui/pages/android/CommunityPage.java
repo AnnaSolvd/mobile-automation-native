@@ -1,6 +1,7 @@
 package com.solvd.gui.pages.android;
 
 import com.solvd.gui.pages.common.CommunityPageBase;
+import com.solvd.gui.pages.common.HomePageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
@@ -16,8 +17,11 @@ public class CommunityPage extends CommunityPageBase {
 
     private static final Logger logger = LoggerFactory.getLogger(CommunityPage.class);
 
-    @FindBy(id = "subreddit_header_title")
+    @FindBy(xpath = "//android.widget.TextView[@resource-id='subreddit_header_title']")
     private ExtendedWebElement communityTitle;
+
+    @FindBy(xpath = "//android.widget.Button[@content-desc='Back']")
+    private ExtendedWebElement returnButton;
 
 //    @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'Join')]")
 //    private ExtendedWebElement subredditJoinButton;
@@ -43,6 +47,17 @@ public class CommunityPage extends CommunityPageBase {
     @Override
     public boolean isCommunityTitlePresent() {
         return communityTitle.isPresent();
+    }
+
+    @Override
+    public String getCommunityTitle() {
+        return communityTitle.getAttribute("text");
+    }
+
+    @Override
+    public HomePageBase clickReturnButton() {
+        returnButton.click();
+        return initPage(getDriver(), HomePageBase.class);
     }
 
     @Override

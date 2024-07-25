@@ -12,7 +12,11 @@ public abstract class CommunityPageBase extends AbstractPage implements IAndroid
 
     public abstract boolean isCommunityTitlePresent();
 
+    public abstract HomePageBase clickReturnButton();
+
     public abstract void clickJoinButton();
 
     public abstract boolean hasJoinedState();
+
+    public abstract String getCommunityTitle();
 }

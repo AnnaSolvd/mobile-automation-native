@@ -15,7 +15,7 @@ import java.util.List;
 
 public class LanguageModal extends AbstractUIObject implements ICustomTypePageFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProfileNavigationSidebar.class);
+    private static final Logger logger = LoggerFactory.getLogger(LanguageModal.class);
 
     @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView[@resource-id='com.reddit.frontpage:id/bottomsheet_recycler_view']")
     private List<ExtendedWebElement> languageButtonsList;

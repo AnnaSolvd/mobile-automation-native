@@ -84,12 +84,7 @@ public class MobileTest extends BaseTest {
         softAssert.assertTrue(isJoinedState, "Button text don't change from join to joined");
 
         //TODO: problem with welcome community modal
-        //BottomNavigationBar bottomNavigationBar = new BottomNavigationBar(driver);
-        //bottomNavigationBar.clickMenuButtonByName(BottomNavigationBarTitle.HOME.getTitle());
-
         softAssert.assertAll();
     }
-
-
 
 }

@@ -1,10 +1,11 @@
 package com.solvd.service;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class PostService {
 
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
 
     public static String generateRandomString(int length) {
         String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
