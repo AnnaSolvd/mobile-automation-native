@@ -4,6 +4,7 @@ import com.solvd.gui.components.LeftNavigationSidebar;
 import com.solvd.gui.components.Post;
 import com.solvd.gui.pages.common.CommunityPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
+import com.solvd.gui.pages.common.PostDetailPageBase;
 import com.solvd.gui.pages.common.SearchPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
@@ -11,12 +12,15 @@ import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.function.Function;
 
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = HomePageBase.class)
@@ -60,13 +64,18 @@ public class HomePage extends HomePageBase {
 
     @Override
     public CommunityPageBase clickRandomPostCommunity() {
-        if (postList.isEmpty()) {
-            throw new NoSuchElementException("No post found on page");
-        }
-        Post randomPost = getRandomPost(postList);
-        randomPost.clickCommunityTitle();
-        logger.info("Click random post");
-        return initPage(getDriver(), CommunityPageBase.class);
+        return clickRandomPost(post -> {
+            post.clickCommunityTitle();
+            return initPage(getDriver(), CommunityPageBase.class);
+        });
+    }
+
+    @Override
+    public PostDetailPageBase clickRandomPostTitle() {
+        return clickRandomPost(post -> {
+            post.clickPostTitle();
+            return initPage(getDriver(), PostDetailPageBase.class);
+        });
     }
 
     @Override
@@ -79,6 +88,12 @@ public class HomePage extends HomePageBase {
     private Post getRandomPost(List<Post> posts) {
         Random random = new Random();
         return posts.get(random.nextInt(posts.size()));
+    }
+
+    private <T> T clickRandomPost(Function<Post, T> action) {
+        logger.info("Post list size: {}", postList.size());
+        Post randomPost = getRandomPost(postList);
+        return action.apply(randomPost);
     }
 
 }

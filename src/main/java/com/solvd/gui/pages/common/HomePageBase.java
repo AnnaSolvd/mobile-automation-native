@@ -18,5 +18,7 @@ public abstract class HomePageBase extends AbstractPage implements IMobileUtils 
 
     public abstract CommunityPageBase clickRandomPostCommunity();
 
+    public abstract PostDetailPageBase clickRandomPostTitle();
+
     public abstract LeftNavigationSidebar clickLeftNavigationBar();
 }

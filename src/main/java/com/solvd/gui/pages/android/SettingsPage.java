@@ -1,6 +1,5 @@
 package com.solvd.gui.pages.android;
 
-import com.solvd.gui.components.LanguageModal;
 import com.solvd.gui.pages.common.SettingsPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
@@ -25,12 +24,7 @@ public class SettingsPage extends SettingsPageBase {
         setUiLoadedMarker(languageButton);
         logger.info("SettingsPage open");
     }
-
-    @Override
-    public LanguageModal clickLanguageButton() {
-        languageButton.click();
-        logger.info("Click language button");
-        return new LanguageModal(getDriver());
-    }
-
 }
+
+
+

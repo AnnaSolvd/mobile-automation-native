@@ -20,7 +20,7 @@ public class MobileSampleTest extends BaseTest {
         homePage.isPageOpened();
         assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
 
-        PostDetailPageBase postDetailPage = homePage.cli
+        PostDetailPageBase postDetailPage = homePage.clickRandomPostTitle();
 
 
         softAssert.assertAll();
