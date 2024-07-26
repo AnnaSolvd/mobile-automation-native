@@ -2,6 +2,7 @@ package com.solvd;
 
 import com.solvd.constans.BottomNavigationBarTitle;
 import com.solvd.gui.components.BottomNavigationBar;
+import com.solvd.gui.components.LeftNavigationSidebar;
 import com.solvd.gui.pages.common.*;
 import com.solvd.service.PostService;
 import org.testng.annotations.Test;
@@ -29,6 +30,7 @@ public class MobileTest extends BaseTest {
         softAssert.assertAll();
     }
 
+
     @Test(description = "TC-02")
     public void verifyUserPostingOnCommunity() {
         SoftAssert softAssert = new SoftAssert();
@@ -48,13 +50,14 @@ public class MobileTest extends BaseTest {
         createPostPage.typePostBody(PostService.generateRandomPostBody());
         createPostPage.clickPostButton();
 
-        //TODO:
-        // click go back
-        // check first posts title and body
+        //TODO: problem with delay in adding post
+        // ADD:
+        // 1. click go back
+        // 2. check first post title and body
         softAssert.assertAll();
     }
 
-    //TODO: it works, but it's flaky; add wait between search
+
     @Test(description = "TC-03")
     public void verifySearchFunctionality() {
         SoftAssert softAssert = new SoftAssert();
@@ -65,6 +68,8 @@ public class MobileTest extends BaseTest {
 
         SearchPageBase searchPage = homePage.clickSearchButton();
         SearchResultPageBase searchResultPage = searchPage.typeSearchInput(searchTerm);
+
+        //TODO: it works, but it's flaky; add wait
         boolean isSearchTermTextPresent =  searchResultPage.isTermPresentInSearchPostsList(searchTerm);
         assertTrue(isSearchTermTextPresent, "Search term is not present in post results");
 
@@ -86,5 +91,7 @@ public class MobileTest extends BaseTest {
         //TODO: problem with welcome community modal
         softAssert.assertAll();
     }
+
+
 
 }

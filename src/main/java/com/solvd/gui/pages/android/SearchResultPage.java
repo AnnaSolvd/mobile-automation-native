@@ -6,6 +6,8 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,6 +34,8 @@ public class SearchResultPage extends SearchResultPageBase{
 
     @Override
     public boolean isTermPresentInSearchPostsList(String searchTerm) {
+//        WebDriverWait wait = new WebDriverWait(driver, driver.manage().timeouts().getImplicitWaitTimeout());
+//        wait.until(ExpectedConditions.invisibilityOf(postList.get(0).getElement()));
         return postList.stream()
                 .anyMatch(post -> {
                     String contentDesc = post.getAttribute("content-desc");

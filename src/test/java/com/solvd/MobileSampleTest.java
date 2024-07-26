@@ -22,12 +22,13 @@ public class MobileSampleTest extends BaseTest {
         CommunityPageBase communityPage = homePage.clickRandomPostCommunity();
         String communityTitle = communityPage.getCommunityTitle();
         logger.info("Community title: {}", communityTitle);
-
         softAssert.assertTrue(communityPage.isCommunityTitlePresent(), "Community title is not present");
 
         homePage = communityPage.clickReturnButton();
         LeftNavigationSidebar navigationSidebar = homePage.clickLeftNavigationBar();
         navigationSidebar.clickSeeAllButton();
+
+        //TODO: don't work, something contains non-printable characters?
         assertTrue(navigationSidebar.checkPresenceOfCommunity(communityTitle),
                 "The recently clicked community should be present in Recently Visited section");
         softAssert.assertAll();

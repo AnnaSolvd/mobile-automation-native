@@ -45,8 +45,8 @@ public class BottomNavigationBar extends AbstractUIObject implements ICustomType
 
     public boolean checkPresenceOfButton(String buttonName) {
         boolean isPresent = navigationBarButtonsList.stream()
-                .anyMatch(button -> { List<ExtendedWebElement>
-                        textViews = button.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
+                .anyMatch(button -> {
+                    List<ExtendedWebElement> textViews = button.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
                     return textViews.stream().anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
                 });
         logger.info("Checking presence of button: {} - Found: {}", buttonName, isPresent);

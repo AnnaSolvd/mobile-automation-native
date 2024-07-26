@@ -35,16 +35,19 @@ public class LeftNavigationSidebar extends AbstractUIObject implements ICustomTy
     }
 
     public boolean checkPresenceOfCommunity(String buttonName) {
+        logger.info("Button name: {}", buttonName);
         boolean isPresent = recentlyVisitedSectionList.stream()
                 .anyMatch(viewGroup -> {
-                    List<ExtendedWebElement> buttons = viewGroup.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
+                    List<ExtendedWebElement> buttons = viewGroup
+                            .findExtendedWebElements(By.xpath(".//android.widget.TextView"));
+
                     return buttons.stream().anyMatch(button -> {
                         String description = button.getAttribute("text");
-                        logger.info("Button title: {}", description);
-                        return description != null && description.contains(buttonName);
+                        logger.info("Button name from list: {}", description);
+                        return description != null && description.equals(buttonName);
                     });
                 });
-        logger.info("Checking presence of button: {} - Found: {}", buttonName, isPresent);
+        logger.info("Found: {}", isPresent);
         return isPresent;
     }
 

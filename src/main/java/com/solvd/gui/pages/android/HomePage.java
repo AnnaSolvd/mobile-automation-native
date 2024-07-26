@@ -36,7 +36,7 @@ public class HomePage extends HomePageBase {
     private ExtendedWebElement leftNavigationBarButton;
 
     @FindBy(xpath = "//android.view.View[@resource-id='feed_lazy_column']/" +
-            "android.view.View[contains(@resource-id, 'post_unit')]")
+            "android.view.View[contains(@resource-id, 'post_unit') and not(contains(@resource-id, 'promoted'))]")
     private List<Post> postList;
 
     public HomePage(WebDriver driver) {
@@ -63,9 +63,7 @@ public class HomePage extends HomePageBase {
         if (postList.isEmpty()) {
             throw new NoSuchElementException("No post found on page");
         }
-        Random random = new Random();
-        int randomIndex = random.nextInt(postList.size());
-        Post randomPost = postList.get(randomIndex);
+        Post randomPost = getRandomPost(postList);
         randomPost.clickCommunityTitle();
         return initPage(getDriver(), CommunityPageBase.class);
     }
@@ -74,6 +72,11 @@ public class HomePage extends HomePageBase {
     public LeftNavigationSidebar clickLeftNavigationBar() {
         leftNavigationBarButton.click();
         return new LeftNavigationSidebar(getDriver());
+    }
+
+    private Post getRandomPost(List<Post> posts) {
+        Random random = new Random();
+        return posts.get(random.nextInt(posts.size()));
     }
 
 }
