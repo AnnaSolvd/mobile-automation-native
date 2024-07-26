@@ -92,6 +92,23 @@ public class MobileTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Test(description = "TC-05")
+    public void verifyRecentlyVisitedSection() {
+        SoftAssert softAssert = new SoftAssert();
+        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        homePage.isPageOpened();
+        assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
 
+        CommunityPageBase communityPage = homePage.clickRandomPostCommunity();
+        String communityTitle = communityPage.getCommunityTitle();
+        softAssert.assertTrue(communityPage.isCommunityTitlePresent(), "Community title is not present");
+
+        homePage = communityPage.clickReturnButton();
+        LeftNavigationSidebar navigationSidebar = homePage.clickLeftNavigationBar();
+        navigationSidebar.clickSeeAllButton();
+        assertTrue(navigationSidebar.checkPresenceOfCommunity(communityTitle),
+                "The recently clicked community should be present in Recently Visited section");
+        softAssert.assertAll();
+    }
 
 }

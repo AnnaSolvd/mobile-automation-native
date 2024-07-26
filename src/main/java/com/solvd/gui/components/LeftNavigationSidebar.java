@@ -1,6 +1,5 @@
 package com.solvd.gui.components;
 
-import com.solvd.gui.pages.android.CreatePostPage;
 import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
@@ -35,23 +34,24 @@ public class LeftNavigationSidebar extends AbstractUIObject implements ICustomTy
     }
 
     public boolean checkPresenceOfCommunity(String buttonName) {
-        logger.info("Button name: {}", buttonName);
-        boolean isPresent = recentlyVisitedSectionList.stream()
+        String cleanString = cleanButtonNameFromCodePoints(buttonName);
+        return recentlyVisitedSectionList.stream()
                 .anyMatch(viewGroup -> {
                     List<ExtendedWebElement> buttons = viewGroup
                             .findExtendedWebElements(By.xpath(".//android.widget.TextView"));
 
                     return buttons.stream().anyMatch(button -> {
                         String description = button.getAttribute("text");
-                        logger.info("Button name from list: {}", description);
-                        return description != null && description.equals(buttonName);
+                        return description != null && description.equals(cleanString);
                     });
                 });
-        logger.info("Found: {}", isPresent);
-        return isPresent;
     }
 
     public void clickSeeAllButton() {
         seeAllButton.click();
+    }
+
+    private String cleanButtonNameFromCodePoints(String buttonName) {
+        return buttonName.replaceAll("\\p{C}", "");
     }
 }

@@ -13,24 +13,16 @@ public class MobileSampleTest extends BaseTest {
 
     private static final Logger logger = LoggerFactory.getLogger(MobileSampleTest.class);
 
-    @Test(description = "TC-05")
-    public void verifyRecentlyVisitedSection() {
+    @Test(description = "TC-06")
+    public void verifySavedPostsSection() {
         SoftAssert softAssert = new SoftAssert();
         HomePageBase homePage = initPage(driver, HomePageBase.class);
         homePage.isPageOpened();
+        assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
 
-        CommunityPageBase communityPage = homePage.clickRandomPostCommunity();
-        String communityTitle = communityPage.getCommunityTitle();
-        logger.info("Community title: {}", communityTitle);
-        softAssert.assertTrue(communityPage.isCommunityTitlePresent(), "Community title is not present");
+        PostDetailPageBase postDetailPage = homePage.cli
 
-        homePage = communityPage.clickReturnButton();
-        LeftNavigationSidebar navigationSidebar = homePage.clickLeftNavigationBar();
-        navigationSidebar.clickSeeAllButton();
 
-        //TODO: don't work, something contains non-printable characters?
-        assertTrue(navigationSidebar.checkPresenceOfCommunity(communityTitle),
-                "The recently clicked community should be present in Recently Visited section");
         softAssert.assertAll();
     }
 

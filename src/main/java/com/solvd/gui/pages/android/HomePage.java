@@ -65,12 +65,14 @@ public class HomePage extends HomePageBase {
         }
         Post randomPost = getRandomPost(postList);
         randomPost.clickCommunityTitle();
+        logger.info("Click random post");
         return initPage(getDriver(), CommunityPageBase.class);
     }
 
     @Override
     public LeftNavigationSidebar clickLeftNavigationBar() {
         leftNavigationBarButton.click();
+        logger.info("Click navigation bar button");
         return new LeftNavigationSidebar(getDriver());
     }
 

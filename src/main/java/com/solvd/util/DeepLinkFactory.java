@@ -20,7 +20,6 @@ public class DeepLinkFactory {
             case "verifyThatUserCanUpdateProfileBio" -> R.TESTDATA.get("deeplink.profile") + USERNAME;
             case "verifyUserPostingOnCommunity" -> R.TESTDATA.get("deeplink.community") + TESTING_COMMUNITY;
             case "verifyJoiningCommunity" -> R.TESTDATA.get("deeplink.community") + PUBLIC_COMMUNITY;
-            case "testLanguage" -> R.TESTDATA.get("deeplink.settings");
             default -> throw new IllegalArgumentException("Unsupported method: " + methodName);
         };
     }
