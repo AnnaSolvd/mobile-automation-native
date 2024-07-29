@@ -50,10 +50,9 @@ public class MobileTest extends BaseTest {
         createPostPage.typePostBody(PostService.generateRandomPostBody());
         createPostPage.clickPostButton();
 
-        //TODO: problem with delay in adding post
-        // ADD:
-        // 1. click go back
-        // 2. check first post title and body
+        /*TODO: problem with delay in adding post
+            1. click go back
+            2. check first post title and body */
         softAssert.assertAll();
     }
 

@@ -8,4 +8,5 @@ public abstract class SavedPostPageBase extends AbstractPage {
     protected SavedPostPageBase(WebDriver driver) {
         super(driver);
     }
+
 }

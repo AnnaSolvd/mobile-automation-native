@@ -9,14 +9,12 @@ import static com.zebrunner.carina.utils.R.CONFIG;
 
 public class I18NTest extends BaseTest {
 
-    //TODO: don't work with default locale
     @Test(description = "TC-05")
     public void verifyJoiningCommunity() {
-        //CONFIG.put("locale", "en_US", true);
-
         CONFIG.put("locale", "fr_FR", true);
         L10N.setLocale("fr_FR");
         L10N.load();
+
         CommunityPageBase communityPage = initPage(driver, CommunityPageBase.class);
         communityPage.isPageOpened();
         communityPage.clickJoinButton();

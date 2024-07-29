@@ -22,21 +22,26 @@ public class MobileSampleTest extends BaseTest {
         SoftAssert softAssert = new SoftAssert();
         HomePageBase homePage = initPage(driver, HomePageBase.class);
         homePage.isPageOpened();
-        assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
+        softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
 
         PostDetailPageBase postDetailPage = homePage.clickRandomPostTitle();
         //TODO: assert that something is visible on site
+        String postTitle = postDetailPage.getPostTitle();
 
-        DropDownMenu menu =  postDetailPage.clickDropDownMenuButton();
+        DropDownMenu menu = postDetailPage.clickDropDownMenuButton();
         menu.clickSaveButton();
-        postDetailPage.clickReturnButton();
-        assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible after return from post page");
 
+        //TODO: Decrease time of regression: Remove steps and go straight to saved post page?
+        postDetailPage.clickReturnButton();
+        softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible after return from post page");
         ProfileNavigationSidebar sidebar = homePage.clickProfileIcon();
         assertTrue(sidebar.checkPresenceOfButton(SideMenuTitle.SAVED.getTitle()), "Saved button is not visible");
-        sidebar.clickMenuButtonByName(SideMenuTitle.SAVED.getTitle());
 
-
+        /*TODO:
+            1. SavedPostPageBase savedPostPage = sidebar.clickMenuButtonByName(SideMenuTitle.SAVED.getTitle());
+            2. String savedPostTitle =  savedPostPage.getFirstSavedPostTitle();
+            3. assertEquals(savedPostTitle, postTitle);
+        */
         softAssert.assertAll();
     }
 

@@ -13,4 +13,6 @@ public abstract class PostDetailPageBase extends AbstractPage{
     public abstract DropDownMenu clickDropDownMenuButton();
 
     public abstract HomePageBase clickReturnButton();
+
+    public abstract String getPostTitle();
 }

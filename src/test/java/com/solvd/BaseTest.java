@@ -33,6 +33,7 @@ public abstract class BaseTest implements IAbstractTest {
 
     @BeforeMethod
     public void setupTestMethod(Method method) {
+        //TODO: don't work if I don't set locale to English
         CONFIG.put("locale", "en_US", true);
         L10N.setLocale("en_Us");
         L10N.load();

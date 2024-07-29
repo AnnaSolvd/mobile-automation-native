@@ -26,6 +26,9 @@ public class PostDetailPage extends PostDetailPageBase {
     @FindBy(xpath = "//android.widget.ImageButton[@content-desc='{L10N:PostDetailPage.returnButtonText}']")
     private ExtendedWebElement returnButton;
 
+    @FindBy(xpath = "//android.widget.TextView[@resource-id='com.reddit.frontpage:id/link_title']")
+    private ExtendedWebElement postTitle;
+
     public PostDetailPage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
@@ -43,6 +46,11 @@ public class PostDetailPage extends PostDetailPageBase {
     public HomePageBase clickReturnButton() {
         returnButton.click();
         return initPage(getDriver(), HomePageBase.class);
+    }
+
+    @Override
+    public String getPostTitle() {
+        return postTitle.getAttribute("text");
     }
 
 }
