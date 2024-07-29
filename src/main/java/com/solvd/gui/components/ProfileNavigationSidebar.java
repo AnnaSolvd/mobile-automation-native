@@ -35,18 +35,18 @@ public class ProfileNavigationSidebar extends AbstractUIObject implements ICusto
         super(driver, searchContext);
     }
 
-    public ProfilePageBase clickMenuButtonByName(String buttonName) {
-        sideMenuButtonsList.stream()
-                .filter(button -> {
-                    List<ExtendedWebElement> textViews = button.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
-                    return textViews.stream().anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
-                })
-                .findFirst()
-                .ifPresent(ExtendedWebElement::click);
-
-        logger.info("Clicked on the button: {}", buttonName);
-        return initPage(driver, ProfilePageBase.class);
-    }
+//    public <T> T clickMenuButtonByName(String buttonName) {
+//        sideMenuButtonsList.stream()
+//                .filter(button -> {
+//                    List<ExtendedWebElement> textViews = button.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
+//                    return textViews.stream().anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
+//                })
+//                .findFirst()
+//                .ifPresent(ExtendedWebElement::click);
+//
+//        logger.info("Clicked on the button: {}", buttonName);
+//        return initPage(driver, );
+//    }
 
     public boolean checkPresenceOfButton(String buttonName) {
         boolean isPresent = sideMenuButtonsList.stream()

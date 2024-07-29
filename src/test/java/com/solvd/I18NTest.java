@@ -11,10 +11,6 @@ public class I18NTest extends BaseTest {
 
     @Test(description = "TC-05")
     public void verifyJoiningCommunity() {
-        CONFIG.put("locale", "fr_FR", true);
-        L10N.setLocale("fr_FR");
-        L10N.load();
-
         CommunityPageBase communityPage = initPage(driver, CommunityPageBase.class);
         communityPage.isPageOpened();
         communityPage.clickJoinButton();
