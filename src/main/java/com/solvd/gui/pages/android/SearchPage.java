@@ -16,7 +16,6 @@ public class SearchPage extends SearchPageBase {
 
     private static final Logger logger = LoggerFactory.getLogger(SearchPage.class);
 
-    //TODO: make better locators
     @FindBy(id = "com.reddit.frontpage:id/search")
     private ExtendedWebElement searchInput;
 

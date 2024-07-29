@@ -1,7 +1,11 @@
 package com.solvd;
 
+import com.solvd.constans.SideMenuTitle;
+import com.solvd.gui.components.DropDownMenu;
 import com.solvd.gui.components.LeftNavigationSidebar;
+import com.solvd.gui.components.ProfileNavigationSidebar;
 import com.solvd.gui.pages.common.*;
+import com.zebrunner.carina.utils.resources.L10N;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -21,6 +25,16 @@ public class MobileSampleTest extends BaseTest {
         assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
 
         PostDetailPageBase postDetailPage = homePage.clickRandomPostTitle();
+        //TODO: assert that something is visible on site
+
+        DropDownMenu menu =  postDetailPage.clickDropDownMenuButton();
+        menu.clickSaveButton();
+        postDetailPage.clickReturnButton();
+        assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible after return from post page");
+
+        ProfileNavigationSidebar sidebar = homePage.clickProfileIcon();
+        assertTrue(sidebar.checkPresenceOfButton(SideMenuTitle.SAVED.getTitle()), "Saved button is not visible");
+        sidebar.clickMenuButtonByName(SideMenuTitle.SAVED.getTitle());
 
 
         softAssert.assertAll();

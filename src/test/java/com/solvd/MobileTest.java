@@ -23,7 +23,7 @@ public class MobileTest extends BaseTest {
         EditProfilePageBase editProfilePage = profilePage.clickEditButton();
         editProfilePage.isPageOpened();
         editProfilePage.typeAboutField(aboutUserText);
-        profilePage = editProfilePage.clickSaveButton();
+        editProfilePage.clickSaveButton();
 
         boolean isTextOnProfileMatching = profilePage.isCorrectTextInBiographySection(aboutUserText);
         assertTrue(isTextOnProfileMatching, "Text from about user section don't match text on profile");
@@ -103,7 +103,7 @@ public class MobileTest extends BaseTest {
         String communityTitle = communityPage.getCommunityTitle();
         softAssert.assertTrue(communityPage.isCommunityTitlePresent(), "Community title is not present");
 
-        homePage = communityPage.clickReturnButton();
+        communityPage.clickReturnButton();
         LeftNavigationSidebar navigationSidebar = homePage.clickLeftNavigationBar();
         navigationSidebar.clickSeeAllButton();
         assertTrue(navigationSidebar.checkPresenceOfCommunity(communityTitle),

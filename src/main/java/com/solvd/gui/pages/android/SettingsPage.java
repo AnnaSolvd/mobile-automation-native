@@ -14,7 +14,6 @@ public class SettingsPage extends SettingsPageBase {
 
     private static final Logger logger = LoggerFactory.getLogger(SettingsPage.class);
 
-    //TODO: make better locators
     @FindBy(xpath = "//android.widget.TextView[@resource-id='android:id/title' and @text='Language']")
     private ExtendedWebElement languageButton;
 

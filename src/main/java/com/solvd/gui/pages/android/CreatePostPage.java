@@ -16,7 +16,6 @@ public class CreatePostPage extends CreatePostPageBase {
 
     private static final Logger logger = LoggerFactory.getLogger(CreatePostPage.class);
 
-    //TODO: make better locators
     @FindBy(id = "post_title")
     private ExtendedWebElement postTitle;
 

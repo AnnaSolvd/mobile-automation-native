@@ -17,7 +17,6 @@ public class ProfilePage extends ProfilePageBase {
 
     private static final Logger logger = LoggerFactory.getLogger(ProfilePage.class);
 
-    //TODO: make better locators
     @FindBy(xpath = "//android.widget.TextView[@resource-id='title']")
     private ExtendedWebElement usernameText;
 

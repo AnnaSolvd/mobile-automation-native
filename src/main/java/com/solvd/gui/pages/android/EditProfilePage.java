@@ -15,7 +15,6 @@ public class EditProfilePage extends EditProfilePageBase {
 
     private static final Logger logger = LoggerFactory.getLogger(EditProfilePage.class);
 
-    //TODO: make better locators
     @FindBy(xpath = "//android.widget.EditText[@resource-id='about_field']")
     private ExtendedWebElement aboutFieldInput;
 

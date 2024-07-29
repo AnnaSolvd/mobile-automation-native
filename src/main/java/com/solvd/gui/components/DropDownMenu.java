@@ -1,16 +1,28 @@
 package com.solvd.gui.components;
 
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
+import org.checkerframework.checker.i18n.qual.Localized;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
 
 public class DropDownMenu extends AbstractUIObject {
 
-    protected DropDownMenu(WebDriver driver) {
+    @Localized
+    @FindBy(xpath = "//android.widget.TextView[@resource-id='com.reddit.frontpage:id/title' and " +
+            "@text='{L10N:DropDownMenu.saveButtonText}']")
+    private ExtendedWebElement saveButton;
+
+    public DropDownMenu(WebDriver driver) {
         super(driver);
     }
 
-    protected DropDownMenu(WebDriver driver, SearchContext searchContext) {
+    public DropDownMenu(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
+    }
+
+    public void clickSaveButton() {
+        saveButton.click();
     }
 }

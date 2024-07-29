@@ -28,12 +28,6 @@ public class CommunityPage extends CommunityPageBase {
     @FindBy(xpath = "//android.widget.Button[@content-desc='Back']")
     private ExtendedWebElement returnButton;
 
-//    @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'Join')]")
-//    private ExtendedWebElement subredditJoinButton;
-//
-//    @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'Leave')]")
-//    private ExtendedWebElement subredditLeaveButton;
-
     @Localized
     @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'{L10N:CommunityPage.joinButtonText}')]")
     private ExtendedWebElement subredditJoinButton;

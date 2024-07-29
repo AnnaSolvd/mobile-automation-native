@@ -4,6 +4,7 @@ import com.solvd.util.DeepLinkFactory;
 import com.solvd.util.DeepLinkManager;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.utils.R;
+import com.zebrunner.carina.utils.resources.L10N;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
@@ -11,6 +12,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
+
+import static com.zebrunner.carina.utils.R.CONFIG;
 
 public abstract class BaseTest implements IAbstractTest {
 
@@ -30,6 +33,10 @@ public abstract class BaseTest implements IAbstractTest {
 
     @BeforeMethod
     public void setupTestMethod(Method method) {
+        CONFIG.put("locale", "en_US", true);
+        L10N.setLocale("en_Us");
+        L10N.load();
+
         driver = getDriver();
         deepLinkFactory = new DeepLinkFactory();
         deepLinkManager = new DeepLinkManager(driver, deepLinkFactory);

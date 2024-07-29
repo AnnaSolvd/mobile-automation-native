@@ -2,6 +2,7 @@ package com.solvd.gui.pages.android;
 
 import com.solvd.gui.components.LeftNavigationSidebar;
 import com.solvd.gui.components.Post;
+import com.solvd.gui.components.ProfileNavigationSidebar;
 import com.solvd.gui.pages.common.CommunityPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.PostDetailPageBase;
@@ -10,6 +11,7 @@ import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
+import org.checkerframework.checker.i18n.qual.Localized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,11 +30,15 @@ public class HomePage extends HomePageBase {
 
     private static final Logger logger = LoggerFactory.getLogger(HomePage.class);
 
-    //TODO: make better locators
-    @FindBy(xpath = "//android.view.View[@content-desc='Home feed']")
+    @Localized
+    @FindBy(xpath = "//android.view.View[@content-desc='{L10N:HomePage.redditIconText}']")
     private ExtendedWebElement redditIcon;
 
-    @ExtendedFindBy(accessibilityId = "Search")
+    @FindBy(xpath = "//android.widget.ImageView[@resource-id='com.reddit.frontpage:id/inner_peeking_snoovatar']]")
+    private ExtendedWebElement profileIcon;
+
+    @Localized
+    @ExtendedFindBy(accessibilityId = "{L10N:HomePage.searchButtonText}")
     private ExtendedWebElement searchButton;
 
     @FindBy(xpath = "//android.view.View[@resource-id='community_menu_button']/android.view.View/android.view.View/" +
@@ -53,6 +59,12 @@ public class HomePage extends HomePageBase {
     @Override
     public boolean isRedditIconVisible() {
         return redditIcon.isVisible();
+    }
+
+    @Override
+    public ProfileNavigationSidebar clickProfileIcon() {
+        profileIcon.click();
+        return new ProfileNavigationSidebar(getDriver());
     }
 
     @Override

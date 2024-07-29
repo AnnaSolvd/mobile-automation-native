@@ -18,7 +18,6 @@ public class SearchResultPage extends SearchResultPageBase{
 
     private static final Logger logger = LoggerFactory.getLogger(SearchResultPage.class);
 
-    //TODO: make better locators
     @FindBy(xpath = " //android.view.View[@resource-id='tab_unit'])[1]/android.view.View")
     private ExtendedWebElement postsNavigationTabButton;
 
