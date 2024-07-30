@@ -15,4 +15,6 @@ public abstract class PostDetailPageBase extends AbstractPage{
     public abstract HomePageBase clickReturnButton();
 
     public abstract String getPostTitle();
+
+    public abstract String getPostCommunity();
 }

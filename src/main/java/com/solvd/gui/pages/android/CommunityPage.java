@@ -7,6 +7,7 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import org.checkerframework.checker.i18n.qual.Localized;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -61,14 +62,21 @@ public class CommunityPage extends CommunityPageBase {
 
     @Override
     public void clickJoinButton() {
-        subredditJoinButton.click();
-        logger.info("Click join button");
-        pressKeyboardKey(AndroidKey.ENTER);
+        if (subredditJoinButton.isElementPresent()) {
+            subredditJoinButton.click();
+            logger.info("Click join button");
+        } else if (subredditLeaveButton.isElementPresent()) {
+            subredditLeaveButton.click();
+            logger.info("Click leave button");
+        } else {
+            throw new NoSuchElementException("Neither join nor leave button is present");
+        }
     }
 
     @Override
     public boolean hasJoinedState() {
         String contentDesc = subredditJoinButton.getAttribute("content-desc");
+        logger.info("Content-desc of join button: {}", contentDesc);
         return contentDesc.contains("Leave");
     }
 

@@ -24,4 +24,6 @@ public abstract class HomePageBase extends AbstractPage implements IMobileUtils 
     public abstract PostDetailPageBase clickRandomPostTitle();
 
     public abstract LeftNavigationSidebar clickLeftNavigationBar();
+
+    public abstract Post getRandomPost();
 }

@@ -1,13 +1,17 @@
 package com.solvd;
 
 import com.solvd.constans.BottomNavigationBarTitle;
+import com.solvd.constans.SideMenuTitle;
 import com.solvd.gui.components.BottomNavigationBar;
+import com.solvd.gui.components.DropDownMenu;
 import com.solvd.gui.components.LeftNavigationSidebar;
+import com.solvd.gui.components.ProfileNavigationSidebar;
 import com.solvd.gui.pages.common.*;
 import com.solvd.service.PostService;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class MobileTest extends BaseTest {
@@ -83,11 +87,16 @@ public class MobileTest extends BaseTest {
         communityPage.isPageOpened();
         softAssert.assertTrue(communityPage.isCommunityTitlePresent(), "Community title is not present");
 
-        communityPage.clickJoinButton();
         boolean isJoinedState = communityPage.hasJoinedState();
-        softAssert.assertTrue(isJoinedState, "Button text don't change from join to joined");
-
-        //TODO: problem with welcome community modal
+        if(!isJoinedState){
+            communityPage.clickJoinButton();
+            isJoinedState = communityPage.hasJoinedState();
+            assertTrue(isJoinedState, "Button text don't change from join to joined");
+        } else {
+            communityPage.clickJoinButton();
+            boolean isUnJoinedState = communityPage.hasJoinedState();
+            assertFalse(isUnJoinedState, "Button text should change from joined to join");
+        }
         softAssert.assertAll();
     }
 
@@ -110,9 +119,37 @@ public class MobileTest extends BaseTest {
         softAssert.assertAll();
     }
 
-//    @Test(description = "TC-07")
-//    public void ()
-//
+    @Test(description = "TC-06")
+    public void verifySavedPostsSection() {
+        SoftAssert softAssert = new SoftAssert();
+        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        homePage.isPageOpened();
+        softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
+
+        PostDetailPageBase postDetailPage = homePage.clickRandomPostTitle();
+        //TODO: assert that something is visible on site
+        String postTitle = postDetailPage.getPostTitle();
+
+        DropDownMenu menu = postDetailPage.clickDropDownMenuButton();
+        menu.clickSaveButton();
+
+        //TODO: Decrease time of regression: Remove steps and go straight to saved post page?
+        postDetailPage.clickReturnButton();
+        softAssert.assertTrue(homePage.isRedditIconVisible(),
+                "Reddit icon is not visible after return from post page");
+        ProfileNavigationSidebar sidebar = homePage.clickProfileIcon();
+        assertTrue(sidebar.checkPresenceOfButton(SideMenuTitle.SAVED.getTitle()),
+                "Saved button is not visible");
+
+        //SavedPostPageBase savedPostPage = sidebar.clickMenuButtonByName(SideMenuTitle.SAVED.getTitle());
+        /*TODO:
+            1. SavedPostPageBase savedPostPage = sidebar.clickMenuButtonByName(SideMenuTitle.SAVED.getTitle());
+            2. String savedPostTitle =  savedPostPage.getFirstSavedPostTitle();
+            3. assertEquals(savedPostTitle, postTitle);
+        */
+        softAssert.assertAll();
+    }
+
 //    @Test(description = "TC-08")
 //    public void ()
 //

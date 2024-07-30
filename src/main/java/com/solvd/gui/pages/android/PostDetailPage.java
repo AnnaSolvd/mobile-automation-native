@@ -29,6 +29,12 @@ public class PostDetailPage extends PostDetailPageBase {
     @FindBy(xpath = "//android.widget.TextView[@resource-id='com.reddit.frontpage:id/link_title']")
     private ExtendedWebElement postTitle;
 
+    @FindBy(xpath = "//android.widget.TextView[@resource-id='com.reddit.frontpage:id/detail_subreddit_name']")
+    private ExtendedWebElement postCommunity;
+
+//    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView[@resource-id='com.reddit.frontpage:id/richtext_recyclerview']/TextView")
+//    private ExtendedWebElement postBody;
+
     public PostDetailPage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
@@ -52,5 +58,15 @@ public class PostDetailPage extends PostDetailPageBase {
     public String getPostTitle() {
         return postTitle.getAttribute("text");
     }
+
+    @Override
+    public String getPostCommunity() {
+        return postCommunity.getAttribute("text");
+    }
+
+//    @Override
+//    public String getPostBody() {
+//        return postBody.getAttribute("text");
+//    }
 
 }

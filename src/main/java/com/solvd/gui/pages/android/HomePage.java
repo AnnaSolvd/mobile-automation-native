@@ -14,15 +14,11 @@ import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.checkerframework.checker.i18n.qual.Localized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.Duration;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Random;
-import java.util.function.Function;
 
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = HomePageBase.class)
@@ -48,6 +44,8 @@ public class HomePage extends HomePageBase {
     @FindBy(xpath = "//android.view.View[@resource-id='feed_lazy_column']/" +
             "android.view.View[contains(@resource-id, 'post_unit') and not(contains(@resource-id, 'promoted'))]")
     private List<Post> postList;
+
+    private Post selectedPost;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -76,18 +74,14 @@ public class HomePage extends HomePageBase {
 
     @Override
     public CommunityPageBase clickRandomPostCommunity() {
-        return clickRandomPost(post -> {
-            post.clickCommunityTitle();
-            return initPage(getDriver(), CommunityPageBase.class);
-        });
+        selectedPost.clickPostCommunity();
+        return initPage(getDriver(), CommunityPageBase.class);
     }
 
     @Override
     public PostDetailPageBase clickRandomPostTitle() {
-        return clickRandomPost(post -> {
-            post.clickPostTitle();
-            return initPage(getDriver(), PostDetailPageBase.class);
-        });
+        selectedPost.clickPostTitle();
+        return initPage(getDriver(), PostDetailPageBase.class);
     }
 
     @Override
@@ -97,15 +91,19 @@ public class HomePage extends HomePageBase {
         return new LeftNavigationSidebar(getDriver());
     }
 
-    private Post getRandomPost(List<Post> posts) {
-        Random random = new Random();
-        return posts.get(random.nextInt(posts.size()));
+    @Override
+    public Post getRandomPost() {
+        Post post = selectedPost;
+        return selectedPost;
     }
 
-    private <T> T clickRandomPost(Function<Post, T> action) {
-        logger.info("Post list size: {}", postList.size());
-        Post randomPost = getRandomPost(postList);
-        return action.apply(randomPost);
+    private Post selectPost() {
+        if (!postList.isEmpty()) {
+            Random random = new Random();
+            selectedPost = postList.get(random.nextInt(postList.size()));
+            return selectedPost;
+        }
+        return null;
     }
 
 }

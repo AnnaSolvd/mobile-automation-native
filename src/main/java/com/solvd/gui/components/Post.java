@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 public class Post extends AbstractUIObject implements ICustomTypePageFactory {
 
     @FindBy(xpath = "(//android.view.View[@resource-id='post_header'])[1]/android.view.View[2]")
-    private ExtendedWebElement communityTitle;
+    private ExtendedWebElement postCommunity;
 
     @FindBy(xpath = "//android.view.View[@resource-id='post_join_button']")
     private ExtendedWebElement joinButton;
@@ -30,8 +30,16 @@ public class Post extends AbstractUIObject implements ICustomTypePageFactory {
         postTitle.click();
     }
 
-    public void clickCommunityTitle() {
-        communityTitle.click();
+    public void clickPostCommunity() {
+        postCommunity.click();
+    }
+
+    public String getTitle() {
+        return postTitle.getText();
+    }
+
+    public String getCommunity() {
+        return postCommunity.getText();
     }
 
 }
