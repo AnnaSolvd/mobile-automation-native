@@ -2,6 +2,7 @@ package com.solvd.util;
 
 import com.zebrunner.carina.utils.R;
 
+
 public class DeepLinkFactory {
 
     private static final String USERNAME;
@@ -16,7 +17,7 @@ public class DeepLinkFactory {
 
     public String createDeepLink(String methodName) {
         return switch (methodName) {
-            case "verifySearchFunctionality", "verifyRecentlyVisitedSection", "verifySavedPostsSection", "verifyPost" -> R.TESTDATA.get("deeplink.home");
+            case "verifySearchFunctionality", "verifyRecentlyVisitedSection", "verifySavedPostsSection", "verifyPost", "testVisibilityOfComments" -> R.TESTDATA.get("deeplink.home");
             case "verifyThatUserCanUpdateProfileBio" -> R.TESTDATA.get("deeplink.profile") + USERNAME;
             case "verifyUserPostingOnCommunity" -> R.TESTDATA.get("deeplink.community") + TESTING_COMMUNITY;
             case "verifyJoiningCommunity" -> R.TESTDATA.get("deeplink.community") + PUBLIC_COMMUNITY;

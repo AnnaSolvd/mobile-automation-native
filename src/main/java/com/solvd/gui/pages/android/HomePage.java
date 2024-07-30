@@ -12,6 +12,7 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.checkerframework.checker.i18n.qual.Localized;
+import org.codehaus.groovy.classgen.asm.BinaryFloatExpressionHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
@@ -54,6 +55,16 @@ public class HomePage extends HomePageBase {
         logger.info("HomePage open");
     }
 
+    private Post selectPost() {
+        if (!postList.isEmpty()) {
+            Random random = new Random();
+            selectedPost = postList.get(random.nextInt(postList.size()));
+            logger.info("Selected post title: {}", selectedPost.getTitle());
+            return selectedPost;
+        }
+        return null;
+    }
+
     @Override
     public boolean isRedditIconVisible() {
         return redditIcon.isVisible();
@@ -74,13 +85,15 @@ public class HomePage extends HomePageBase {
 
     @Override
     public CommunityPageBase clickRandomPostCommunity() {
-        selectedPost.clickPostCommunity();
+        Post post = getRandomPost();
+        post.clickPostCommunity();
         return initPage(getDriver(), CommunityPageBase.class);
     }
 
     @Override
     public PostDetailPageBase clickRandomPostTitle() {
-        selectedPost.clickPostTitle();
+        Post post = getRandomPost();
+        post.clickPostTitle();
         return initPage(getDriver(), PostDetailPageBase.class);
     }
 
@@ -93,17 +106,8 @@ public class HomePage extends HomePageBase {
 
     @Override
     public Post getRandomPost() {
-        Post post = selectedPost;
+        Post post = selectPost();
         return selectedPost;
-    }
-
-    private Post selectPost() {
-        if (!postList.isEmpty()) {
-            Random random = new Random();
-            selectedPost = postList.get(random.nextInt(postList.size()));
-            return selectedPost;
-        }
-        return null;
     }
 
 }

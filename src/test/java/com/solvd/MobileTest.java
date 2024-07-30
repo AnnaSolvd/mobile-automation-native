@@ -2,19 +2,22 @@ package com.solvd;
 
 import com.solvd.constans.BottomNavigationBarTitle;
 import com.solvd.constans.SideMenuTitle;
-import com.solvd.gui.components.BottomNavigationBar;
-import com.solvd.gui.components.DropDownMenu;
-import com.solvd.gui.components.LeftNavigationSidebar;
-import com.solvd.gui.components.ProfileNavigationSidebar;
+import com.solvd.gui.components.*;
 import com.solvd.gui.pages.common.*;
 import com.solvd.service.PostService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class MobileTest extends BaseTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(MobileTest.class);
 
     @Test(description = "TC-01")
     public void verifyThatUserCanUpdateProfileBio() {
@@ -72,7 +75,6 @@ public class MobileTest extends BaseTest {
         SearchPageBase searchPage = homePage.clickSearchButton();
         SearchResultPageBase searchResultPage = searchPage.typeSearchInput(searchTerm);
 
-        //TODO: it works, but it's flaky; add wait
         boolean isSearchTermTextPresent =  searchResultPage.isTermPresentInSearchPostsList(searchTerm);
         assertTrue(isSearchTermTextPresent, "Search term is not present in post results");
 
@@ -150,10 +152,51 @@ public class MobileTest extends BaseTest {
         softAssert.assertAll();
     }
 
-//    @Test(description = "TC-08")
-//    public void ()
-//
-//    @Test(description = "TC-09")
-//    public void ()
+    @Test(description = "TC-07")
+    public void verifyHistorySection(){
+
+    }
+
+
+    @Test(description = "TC-08")
+    public void verifyPost() {
+        SoftAssert softAssert = new SoftAssert();
+
+        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        homePage.isPageOpened();
+        softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
+
+        Post randomPost = homePage.getRandomPost();
+        String title = randomPost.getTitle();
+        String community = randomPost.getCommunity();
+        logger.info("Post details from home page: {}, {} \n", title, community);
+
+        PostDetailPageBase postDetailPage = homePage.clickRandomPostTitle();
+        String postTitle = postDetailPage.getPostTitle();
+        String postCommunity = postDetailPage.getPostCommunity();
+        logger.info("Post details from post detail page: {}, {} \n", postTitle, postCommunity);
+
+        assertEquals(postTitle, title, "Post title doesn't match");
+        assertEquals(postCommunity, community, "Post community doesn't match");
+
+        softAssert.assertAll();
+    }
+
+    @Test(description = "TC-09")
+    public void testVisibilityOfComments() {
+        SoftAssert softAssert = new SoftAssert();
+
+        HomePageBase homePage = initPage(driver, HomePageBase.class);
+        homePage.isPageOpened();
+        softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
+
+        PostDetailPageBase postDetailPage = homePage.clickRandomPostTitle();
+        boolean areCommentsPresent = postDetailPage.areCommentsPresent();
+        assertTrue(areCommentsPresent, "Comments should be visible");
+
+        softAssert.assertAll();
+    }
+
+    //TC-10 - implement i18n test in French language
 
 }

@@ -28,5 +28,6 @@ public class DeepLinkManager {
             throw new RuntimeException(e);
         }
     }
+
 }
 

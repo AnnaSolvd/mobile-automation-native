@@ -12,6 +12,8 @@ import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = PostDetailPageBase.class)
 public class PostDetailPage extends PostDetailPageBase {
@@ -32,8 +34,8 @@ public class PostDetailPage extends PostDetailPageBase {
     @FindBy(xpath = "//android.widget.TextView[@resource-id='com.reddit.frontpage:id/detail_subreddit_name']")
     private ExtendedWebElement postCommunity;
 
-//    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView[@resource-id='com.reddit.frontpage:id/richtext_recyclerview']/TextView")
-//    private ExtendedWebElement postBody;
+    @FindBy(xpath = "//android.view.ViewGroup[contains(@content-desc, 'comment by')]")
+    private List<ExtendedWebElement> commentList;
 
     public PostDetailPage(WebDriver driver) {
         super(driver);
@@ -64,9 +66,7 @@ public class PostDetailPage extends PostDetailPageBase {
         return postCommunity.getAttribute("text");
     }
 
-//    @Override
-//    public String getPostBody() {
-//        return postBody.getAttribute("text");
-//    }
-
+    public boolean areCommentsPresent() {
+        return !commentList.isEmpty();
+    }
 }

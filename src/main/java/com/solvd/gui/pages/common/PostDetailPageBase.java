@@ -17,4 +17,6 @@ public abstract class PostDetailPageBase extends AbstractPage{
     public abstract String getPostTitle();
 
     public abstract String getPostCommunity();
+
+    public abstract boolean areCommentsPresent();
 }
