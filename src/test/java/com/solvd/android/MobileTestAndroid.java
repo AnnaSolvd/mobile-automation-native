@@ -24,7 +24,6 @@ public class MobileTestAndroid extends AndroidBaseTest {
         SoftAssert softAssert = new SoftAssert();
 
         ProfilePageBase profilePage = initPage(getDriver(), ProfilePageBase.class);
-        profilePage.open();
         profilePage.isPageOpened();
         softAssert.assertTrue(profilePage.isCorrectUsernameOnProfilePage(username));
 

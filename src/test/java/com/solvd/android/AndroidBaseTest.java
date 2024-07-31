@@ -1,10 +1,13 @@
 package com.solvd.android;
 
+import com.solvd.reddit.gui.pages.android.CommunityPage;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.utils.resources.L10N;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -14,6 +17,8 @@ import java.lang.reflect.Method;
 import static com.zebrunner.carina.utils.R.CONFIG;
 
 public abstract class AndroidBaseTest implements IAbstractTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(AndroidBaseTest.class);
 
     protected WebDriver driver;
     protected String username;
@@ -36,17 +41,13 @@ public abstract class AndroidBaseTest implements IAbstractTest {
         L10N.setLocale(CONFIG.get("locale"));
         L10N.load();
 
-        WebDriver driver = getDriver();
-
-        if (method.getName().equals("verifySearchFunctionality")){
-            driver.get(R.TESTDATA.get("android.home"));
-        }
-
+        String url = R.TESTDATA.get("android.home");
+        driver = getDriver(url);
     }
 
     @AfterMethod
     public void tearDown() {
-        driver.quit();
+        getDriver().quit();
     }
 
 }
