@@ -42,6 +42,8 @@ public abstract class AndroidBaseTest implements IAbstractTest {
         L10N.load();
 
         String url = R.TESTDATA.get("android.home");
+        //String url = R.TESTDATA.get("android.profile") + username;
+        logger.info(url);
         driver = getDriver(url);
     }
 

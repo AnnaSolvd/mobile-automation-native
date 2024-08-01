@@ -28,14 +28,14 @@ public class HomePage extends HomePageBase {
     private static final Logger logger = LoggerFactory.getLogger(HomePage.class);
 
     @Localized
-    @FindBy(xpath = "//android.view.View[@content-desc='{L10N:HomePage.redditIconText}']")
+    @FindBy(xpath = "//android.view.View[@content-desc='{L10N:HomePageIOS.redditIconText}']")
     private ExtendedWebElement redditIcon;
 
     @FindBy(xpath = "//android.widget.ImageView[@resource-id='com.reddit.frontpage:id/inner_peeking_snoovatar']]")
     private ExtendedWebElement profileIcon;
 
     @Localized
-    @ExtendedFindBy(accessibilityId = "{L10N:HomePage.searchButtonText}")
+    @ExtendedFindBy(accessibilityId = "{L10N:HomePageIOS.searchButtonText}")
     private ExtendedWebElement searchButton;
 
     @FindBy(xpath = "//android.view.View[@resource-id='community_menu_button']/android.view.View/android.view.View/" +
@@ -52,7 +52,7 @@ public class HomePage extends HomePageBase {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(redditIcon);
-        logger.info("HomePage open");
+        logger.info("HomePageIOS open");
     }
 
     private Post selectPost() {

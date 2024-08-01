@@ -4,8 +4,7 @@ import com.solvd.reddit.constans.BottomNavigationBarTitle;
 import com.solvd.reddit.constans.SideMenuTitle;
 import com.solvd.reddit.gui.components.*;
 import com.solvd.reddit.gui.pages.common.*;
-import com.solvd.service.PostService;
-import com.zebrunner.carina.utils.R;
+import com.solvd.service.DataGeneratorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -53,8 +52,8 @@ public class MobileTestAndroid extends AndroidBaseTest {
         assertTrue(createPostPage.checkPostBodyButtonVisibility(), "Post body is not visible");
         assertTrue(createPostPage.checkPostTitleButtonVisibility(), "Post title is not visible");
 
-        createPostPage.typePostTitle(PostService.generateRandomPostTitle());
-        createPostPage.typePostBody(PostService.generateRandomPostBody());
+        createPostPage.typePostTitle(DataGeneratorService.generateRandomPostTitle(8));
+        createPostPage.typePostBody(DataGeneratorService.generateRandomPostBody(20));
         createPostPage.clickPostButton();
 
         /*TODO: problem with delay in adding post

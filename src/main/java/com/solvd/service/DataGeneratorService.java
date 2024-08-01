@@ -3,7 +3,7 @@ package com.solvd.service;
 import java.security.SecureRandom;
 import java.util.Random;
 
-public class PostService {
+public class DataGeneratorService {
 
     private static final Random random = new SecureRandom();
 
@@ -16,11 +16,15 @@ public class PostService {
         return sb.toString();
     }
 
-    public static String generateRandomPostTitle() {
-        return generateRandomString(8);
+    public static String generateRandomPostTitle(int postTitleLength) {
+        return generateRandomString(postTitleLength);
     }
 
-    public static String generateRandomPostBody() {
-        return generateRandomString(20);
+    public static String generateRandomPostBody(int postBodyLength) {
+        return generateRandomString(postBodyLength);
+    }
+
+    public static String generateRandomUser(int stringLength) {
+        return generateRandomString(stringLength);
     }
 }

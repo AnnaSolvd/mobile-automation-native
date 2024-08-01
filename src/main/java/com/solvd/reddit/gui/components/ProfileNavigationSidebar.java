@@ -64,27 +64,4 @@ public class ProfileNavigationSidebar extends AbstractUIObject implements ICusto
         return isPresent;
     }
 
-
-//    public HistoryPageBase clickHistoryButton(String buttonName) {
-//        sideMenuButtonsList.stream()
-//                .filter(button -> {
-//                    List<ExtendedWebElement> textViews = button.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
-//                    return textViews.stream().anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
-//                })
-//                .findFirst()
-//                .ifPresent(ExtendedWebElement::click);
-//        logger.info("Clicked on the button: {}", buttonName);
-//        return initPage(driver, HistoryPageBase.class);
-//    }
-//
-//    public boolean checkPresenceOfButton(String buttonName) {
-//        boolean isPresent = sideMenuButtonsList.stream()
-//                .anyMatch(button -> { List<ExtendedWebElement>
-//                        textViews = button.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
-//                    return textViews.stream().anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
-//                });
-//        logger.info("Checking presence of button: {} - Found: {}", buttonName, isPresent);
-//        return isPresent;
-//    }
-
 }
