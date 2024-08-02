@@ -24,7 +24,7 @@ public class DataGeneratorService {
         return generateRandomString(postBodyLength);
     }
 
-    public static String generateRandomUser(int stringLength) {
+    public static String generateUserData(int stringLength) {
         return generateRandomString(stringLength);
     }
 }

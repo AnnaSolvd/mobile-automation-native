@@ -15,22 +15,23 @@ public class LoginPageIOS extends LoginPageIOSBase {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginPageIOS.class);
 
-    @ExtendedFindBy(iosPredicate = "name == 'test-Username'")
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeTextField[`name == 'test-Username'`]")
     private ExtendedWebElement usernameInput;
 
-    @ExtendedFindBy(iosPredicate = "name == 'test-Password'")
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeSecureTextField[`name == 'test-Password'`]")
     private ExtendedWebElement passwordInput;
 
-    @ExtendedFindBy(iosPredicate = "name == 'test-LOGIN'")
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-LOGIN'`]")
     private ExtendedWebElement loginButton;
 
-    @ExtendedFindBy(iosPredicate = "name == 'Username and password do not match any user in this service.'")
-    private ExtendedWebElement invalidCredentialsAlert;
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Error message'`]")
+    private ExtendedWebElement invalidCredentialsMessage;
 
     public LoginPageIOS(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(passwordInput);
+        logger.info("LoginPage open");
     }
 
     @Override
@@ -46,8 +47,13 @@ public class LoginPageIOS extends LoginPageIOSBase {
     }
 
     @Override
-    public boolean isAlertPresent() {
-        return invalidCredentialsAlert.isVisible();
+    public boolean isLogInButtonVisible() {
+        return loginButton.isVisible();
+    }
+
+    @Override
+    public boolean isErrorMessagePresent() {
+        return invalidCredentialsMessage.isVisible();
     }
 
 }

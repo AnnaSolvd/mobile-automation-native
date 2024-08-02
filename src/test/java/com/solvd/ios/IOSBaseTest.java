@@ -1,16 +1,32 @@
 package com.solvd.ios;
 
+import com.solvd.swaglabs.gui.pages.common.HomePageIOSBase;
+import com.solvd.swaglabs.gui.pages.common.LoginPageIOSBase;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.utils.R;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.asserts.SoftAssert;
 
-public class IOSBaseTest implements IAbstractTest {
+public abstract class IOSBaseTest implements IAbstractTest {
 
-    protected WebDriver driver;
     protected String username;
     protected String password;
+
+    protected HomePageIOSBase logInUser() {
+        SoftAssert softAssert = new SoftAssert();
+        LoginPageIOSBase loginPage = initPage(getDriver(), LoginPageIOSBase.class);
+        loginPage.assertPageOpened();
+        loginPage.typeInForm(username, password);
+
+        HomePageIOSBase homePage = loginPage.clickLoginButton();
+        boolean isCartPresent = homePage.isCartButtonVisible();
+        softAssert.assertTrue(isCartPresent, "After successful login, cart button should be present");
+        softAssert.assertAll();
+
+        return homePage;
+    }
 
     @BeforeClass
     public void setUp() {
@@ -20,6 +36,6 @@ public class IOSBaseTest implements IAbstractTest {
 
     @AfterMethod
     public void tearDown() {
-        driver.quit();
+        getDriver().quit();
     }
 }

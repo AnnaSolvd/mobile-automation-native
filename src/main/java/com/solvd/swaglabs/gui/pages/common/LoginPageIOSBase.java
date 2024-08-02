@@ -15,5 +15,7 @@ public abstract class LoginPageIOSBase extends AbstractPage implements IMobileUt
 
     public abstract HomePageIOSBase clickLoginButton();
 
-    public abstract boolean isAlertPresent();
+    public abstract boolean isLogInButtonVisible();
+
+    public abstract boolean isErrorMessagePresent();
 }

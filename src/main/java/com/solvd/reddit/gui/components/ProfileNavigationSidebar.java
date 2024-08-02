@@ -22,10 +22,7 @@ public class ProfileNavigationSidebar extends AbstractUIObject implements ICusto
 
     private static final Logger logger = LoggerFactory.getLogger(ProfileNavigationSidebar.class);
 
-    //TODO: better locator
-    @FindBy(xpath = "//android.widget.ScrollView[@resource-id='com.reddit.frontpage:id/drawer_nav_items_scroll_view']" +
-            "//android.widget.LinearLayout[@resource-id='com.reddit.frontpage:id/drawer_nav_items_container']" +
-            "//android.widget.Button")
+    @FindBy(xpath = "//android.widget.LinearLayout[@resource-id='com.reddit.frontpage:id/drawer_nav_items_container']//android.widget.Button")
     private List<ExtendedWebElement> sideMenuButtonsList;
 
     @FindBy(id = "nav_user_name")
@@ -33,7 +30,6 @@ public class ProfileNavigationSidebar extends AbstractUIObject implements ICusto
 
     public ProfileNavigationSidebar(WebDriver driver) {
         super(driver);
-
     }
 
     protected ProfileNavigationSidebar(WebDriver driver, SearchContext searchContext) {
@@ -43,7 +39,8 @@ public class ProfileNavigationSidebar extends AbstractUIObject implements ICusto
     private void getButtonByName(String buttonName) {
         sideMenuButtonsList.stream()
                 .filter(button -> { List<ExtendedWebElement> textViews = button.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
-                    return textViews.stream().anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
+                    return textViews.stream()
+                            .anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
                 })
                 .findFirst()
                 .ifPresent(ExtendedWebElement::click);
@@ -58,7 +55,8 @@ public class ProfileNavigationSidebar extends AbstractUIObject implements ICusto
     public boolean checkPresenceOfButton(String buttonName) {
         boolean isPresent = sideMenuButtonsList.stream()
                 .anyMatch(button -> { List<ExtendedWebElement> textViews = button.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
-                    return textViews.stream().anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
+                    return textViews.stream()
+                            .anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
                 });
         logger.info("Checking presence of button: {} - Found: {}", buttonName, isPresent);
         return isPresent;

@@ -1,13 +1,20 @@
 package com.solvd.swaglabs.gui.pages.ios;
 
 import com.solvd.swaglabs.gui.pages.common.ProductPageIOSBase;
+import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = ProductPageIOSBase.class)
 public class ProductPageIOS extends ProductPageIOSBase {
 
-    @ExtendedFindBy(iosClassChain = " **/XCUIElementTypeStaticText[contains(@name, 'Sauce Labs Backpack')]")
+    private static final Logger logger = LoggerFactory.getLogger(ProductPageIOS.class);
+
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeStaticText[@contains(name,'Sauce Labs')]")
     private ExtendedWebElement productTitle;
 
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeStaticText[`name == 'test-Price'`]")
@@ -18,6 +25,9 @@ public class ProductPageIOS extends ProductPageIOSBase {
 
     public ProductPageIOS(WebDriver driver) {
         super(driver);
+        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+        setUiLoadedMarker(productTitle);
+        logger.info("ProductPageIOS open");
     }
 
     @Override
