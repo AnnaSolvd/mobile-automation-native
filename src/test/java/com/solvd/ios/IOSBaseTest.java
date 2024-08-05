@@ -1,5 +1,7 @@
 package com.solvd.ios;
 
+import com.solvd.swaglabs.gui.components.SwagLabsProduct;
+import com.solvd.swaglabs.gui.pages.common.CartPageIOSBase;
 import com.solvd.swaglabs.gui.pages.common.HomePageIOSBase;
 import com.solvd.swaglabs.gui.pages.common.LoginPageIOSBase;
 import com.zebrunner.carina.core.IAbstractTest;
@@ -14,18 +16,18 @@ public abstract class IOSBaseTest implements IAbstractTest {
     protected String username;
     protected String password;
 
-    protected HomePageIOSBase logInUser() {
-        SoftAssert softAssert = new SoftAssert();
+    public HomePageIOSBase logInUser() {
         LoginPageIOSBase loginPage = initPage(getDriver(), LoginPageIOSBase.class);
         loginPage.assertPageOpened();
         loginPage.typeInForm(username, password);
+        return loginPage.clickLoginButton();
+    }
 
-        HomePageIOSBase homePage = loginPage.clickLoginButton();
-        boolean isCartPresent = homePage.isCartButtonVisible();
-        softAssert.assertTrue(isCartPresent, "After successful login, cart button should be present");
-        softAssert.assertAll();
-
-        return homePage;
+    public CartPageIOSBase addProductToCart() {
+        HomePageIOSBase homePage = logInUser();
+        SwagLabsProduct product = homePage.getRandomProduct();
+        product.addProductToCart();
+        return homePage.clickCartButton();
     }
 
     @BeforeClass

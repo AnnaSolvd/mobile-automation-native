@@ -1,13 +1,13 @@
 package com.solvd.swaglabs.gui.pages.ios;
 
-import com.solvd.swaglabs.gui.pages.common.LeftMenuPageIOSBase;
+import com.solvd.swaglabs.gui.components.FilterModal;
+import com.solvd.swaglabs.gui.components.LeftNavigationSidebar;
 import com.solvd.swaglabs.gui.components.SwagLabsProduct;
 import com.solvd.swaglabs.gui.pages.common.CartPageIOSBase;
 import com.solvd.swaglabs.gui.pages.common.HomePageIOSBase;
 import com.solvd.swaglabs.gui.pages.common.ProductPageIOSBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -23,9 +23,6 @@ public class HomePageIOS extends HomePageIOSBase {
 
     private static final Logger logger = LoggerFactory.getLogger(HomePageIOS.class);
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Item'`]")
-    private List<SwagLabsProduct> productList;
-
     //TODO: Move to Header component
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Cart'`]")
     private ExtendedWebElement cartButton;
@@ -34,23 +31,31 @@ public class HomePageIOS extends HomePageIOSBase {
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Menu'`]")
     private ExtendedWebElement menuButton;
 
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Item'`]")
+    private List<SwagLabsProduct> productList;
+
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Modal Selector Button'`]/XCUIElementTypeOther" +
+            "/XCUIElementTypeOther")
+    private ExtendedWebElement filterButton;
+
     private SwagLabsProduct selectedProduct;
 
     public HomePageIOS(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(cartButton);
         logger.info("HomePageIOS open");
+        selectedProduct = selectProduct();
     }
 
     private SwagLabsProduct selectProduct() {
-        logger.info("Product list: {}", productList);
+        productList.forEach(p -> logger.info(p.getTitle()));
+
         if (productList.isEmpty()) {
             logger.error("Product list is empty");
         }
         Random random = new Random();
         selectedProduct = productList.get(random.nextInt(productList.size()));
-        logger.info("Selected post: {}", selectedProduct);
+        logger.info("Selected product: {}", selectedProduct.getTitle());
         return selectedProduct;
     }
 
@@ -58,6 +63,12 @@ public class HomePageIOS extends HomePageIOSBase {
         Point point = element.getLocation();
         Dimension size = element.getSize();
         tap(point.getX() + size.getWidth() / 2, point.getY() + size.getHeight() / 2 + 4);
+    }
+
+    @Override
+    public FilterModal clickFilterButton() {
+        filterButton.click();
+        return new FilterModal(getDriver());
     }
 
     @Override
@@ -73,22 +84,32 @@ public class HomePageIOS extends HomePageIOSBase {
     }
 
     @Override
-    public LeftMenuPageIOSBase clickMenuButton() {
+    public LeftNavigationSidebar clickMenuButton() {
         clickButton(menuButton);
         logger.info("Click menu button");
-        return new LeftMenuPageIOSBase(getDriver());
+        return new LeftNavigationSidebar(getDriver());
+    }
+
+    @Override
+    public boolean checkFirstProductPrice(String price) {
+        String productPrice = productList.get(0).getPrice();
+        String cleanedPrice = price.replaceAll("[^\\d.]", "");
+        logger.info("Product price: {}", cleanedPrice);
+        return productPrice.contains(price);
     }
 
     @Override
     public SwagLabsProduct getRandomProduct() {
-        return selectProduct();
+        return selectedProduct;
     }
 
     @Override
     public ProductPageIOSBase clickRandomProduct() {
-        SwagLabsProduct product = getRandomProduct();
-        product.clickProduct();
-        logger.info("Click product");
+        if (selectedProduct == null){
+            selectedProduct = getRandomProduct();
+        }
+        selectedProduct.clickProduct();
+        logger.info("Click product {}", selectedProduct);
         return initPage(getDriver(), ProductPageIOSBase.class);
     }
 

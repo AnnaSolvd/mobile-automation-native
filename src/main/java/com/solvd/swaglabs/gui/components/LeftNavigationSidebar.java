@@ -1,5 +1,6 @@
-package com.solvd.swaglabs.gui.pages.ios;
+package com.solvd.swaglabs.gui.components;
 
+import com.solvd.swaglabs.gui.pages.common.GeoLocationPageIOSBase;
 import com.solvd.swaglabs.gui.pages.common.LoginPageIOSBase;
 import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
@@ -10,28 +11,32 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LeftMenuPageIOS extends AbstractUIObject implements ICustomTypePageFactory {
+public class LeftNavigationSidebar extends AbstractUIObject implements ICustomTypePageFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(LeftMenuPageIOS.class);
-
-    //TODO: create list of buttons
-//    @ExtendedFindBy(iosClassChain = "")
-//    private List<ExtendedWebElement> sideMenuButtonsList;
+    private static final Logger logger = LoggerFactory.getLogger(LeftNavigationSidebar.class);
 
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-LOGOUT'`]")
     private ExtendedWebElement logOutButton;
 
-    public LeftMenuPageIOS(WebDriver driver) {
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-GEO LOCATION'`]")
+    private ExtendedWebElement geoLocationButton;
+
+    public LeftNavigationSidebar(WebDriver driver) {
         super(driver);
     }
 
-    protected LeftMenuPageIOS(WebDriver driver, SearchContext searchContext) {
+    protected LeftNavigationSidebar(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
     public LoginPageIOSBase clickLogOutButton() {
         logOutButton.click();
         return initPage(getDriver(), LoginPageIOSBase.class);
+    }
+
+    public GeoLocationPageIOSBase clickGeoLocationButton() {
+        geoLocationButton.click();
+        return initPage(getDriver(), GeoLocationPageIOSBase.class);
     }
 
 }

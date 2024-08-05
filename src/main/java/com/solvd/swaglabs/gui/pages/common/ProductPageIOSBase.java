@@ -10,9 +10,9 @@ public abstract class ProductPageIOSBase extends AbstractPage implements IMobile
         super(driver);
     }
 
-    public abstract String getProductTitle();
+    public abstract boolean checkProductTitle(String title);
 
-    public abstract String getProductPrice();
+    public abstract boolean checkProductPrice(String price);
 
     public abstract void clickAddToCart();
 

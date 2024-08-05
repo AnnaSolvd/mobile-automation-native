@@ -1,10 +1,8 @@
 package com.solvd.android;
 
-import com.solvd.reddit.gui.pages.android.CommunityPage;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.utils.resources.L10N;
-import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 import static com.zebrunner.carina.utils.R.CONFIG;
@@ -27,6 +26,17 @@ public abstract class AndroidBaseTest implements IAbstractTest {
     protected String publicCommunity;
     protected String privateTestingCommunity;
 
+    //TODO: deeplinks redirect to webview
+    protected void openDeepLinkWithIntent(String deepLinkUrl) {
+        String command = String.format("adb shell am start -a android.intent.action.VIEW -d \"%s\" com.reddit.frontpage", deepLinkUrl);
+        try {
+            Runtime.getRuntime().exec(command);
+            logger.info("Opened deep link using intent: " + deepLinkUrl);
+        } catch (IOException e) {
+            logger.error("Failed to execute ADB command for deep link: " + e.getMessage());
+        }
+    }
+
     @BeforeClass
     public void setUp() {
         username = R.TESTDATA.get("android.username");
@@ -40,11 +50,7 @@ public abstract class AndroidBaseTest implements IAbstractTest {
     public void setUpTestMethod(Method method) {
         L10N.setLocale(CONFIG.get("locale"));
         L10N.load();
-
-        String url = R.TESTDATA.get("android.home");
-        //String url = R.TESTDATA.get("android.profile") + username;
-        logger.info(url);
-        driver = getDriver(url);
+        driver = getDriver();
     }
 
     @AfterMethod

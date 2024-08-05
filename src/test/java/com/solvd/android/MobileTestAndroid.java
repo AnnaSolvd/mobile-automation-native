@@ -5,6 +5,7 @@ import com.solvd.reddit.constans.SideMenuTitle;
 import com.solvd.reddit.gui.components.*;
 import com.solvd.reddit.gui.pages.common.*;
 import com.solvd.service.DataGeneratorService;
+import com.zebrunner.carina.utils.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -21,8 +22,9 @@ public class MobileTestAndroid extends AndroidBaseTest {
     @Test(description = "TC-01")
     public void verifyThatUserCanUpdateProfileBio() {
         SoftAssert softAssert = new SoftAssert();
+        openDeepLinkWithIntent(R.TESTDATA.get("android.profile"));
 
-        ProfilePageBase profilePage = initPage(getDriver(), ProfilePageBase.class);
+        ProfilePageBase profilePage = initPage(driver, ProfilePageBase.class);
         profilePage.isPageOpened();
         softAssert.assertTrue(profilePage.isCorrectUsernameOnProfilePage(username));
 
@@ -40,7 +42,9 @@ public class MobileTestAndroid extends AndroidBaseTest {
     @Test(description = "TC-02")
     public void verifyUserPostingOnCommunity() {
         SoftAssert softAssert = new SoftAssert();
-        CommunityPageBase communityPage = initPage(getDriver(), CommunityPageBase.class);
+        openDeepLinkWithIntent(R.TESTDATA.get("android.community.private"));
+
+        CommunityPageBase communityPage = initPage(driver, CommunityPageBase.class);
 
         boolean isElementPresent = communityPage.isCommunityTitlePresent();
         softAssert.assertTrue(isElementPresent, "Community title is not present on screen");
@@ -52,8 +56,8 @@ public class MobileTestAndroid extends AndroidBaseTest {
         assertTrue(createPostPage.checkPostBodyButtonVisibility(), "Post body is not visible");
         assertTrue(createPostPage.checkPostTitleButtonVisibility(), "Post title is not visible");
 
-        createPostPage.typePostTitle(DataGeneratorService.generateRandomPostTitle(8));
-        createPostPage.typePostBody(DataGeneratorService.generateRandomPostBody(20));
+        createPostPage.typePostTitle(DataGeneratorService.generateRandomData(8));
+        createPostPage.typePostBody(DataGeneratorService.generateRandomData(20));
         createPostPage.clickPostButton();
 
         /*TODO: problem with delay in adding post
@@ -66,17 +70,16 @@ public class MobileTestAndroid extends AndroidBaseTest {
     @Test(description = "TC-03")
     public void verifySearchFunctionality() {
         SoftAssert softAssert = new SoftAssert();
-
+        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
         HomePageBase homePage = initPage(driver, HomePageBase.class);
         homePage.isPageOpened();
-        softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible on page");
 
+        softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible on page");
         SearchPageBase searchPage = homePage.clickSearchButton();
         SearchResultPageBase searchResultPage = searchPage.typeSearchInput(searchTerm);
 
         boolean isSearchTermTextPresent =  searchResultPage.isTermPresentInSearchPostsList(searchTerm);
         assertTrue(isSearchTermTextPresent, "Search term is not present in post results");
-
         softAssert.assertAll();
     }
 
@@ -84,8 +87,8 @@ public class MobileTestAndroid extends AndroidBaseTest {
     @Test(description = "TC-04")
     public void verifyJoiningCommunity() {
         SoftAssert softAssert = new SoftAssert();
-
-        CommunityPageBase communityPage = initPage(getDriver(), CommunityPageBase.class);
+        openDeepLinkWithIntent(R.TESTDATA.get("android.community.public"));
+        CommunityPageBase communityPage = initPage(driver, CommunityPageBase.class);
         communityPage.isPageOpened();
         softAssert.assertTrue(communityPage.isCommunityTitlePresent(), "Community title is not present");
 
@@ -106,7 +109,8 @@ public class MobileTestAndroid extends AndroidBaseTest {
     @Test(description = "TC-05")
     public void verifyRecentlyVisitedSection() {
         SoftAssert softAssert = new SoftAssert();
-        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
+        HomePageBase homePage = initPage(driver, HomePageBase.class);
         homePage.isPageOpened();
         assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
 
@@ -126,7 +130,8 @@ public class MobileTestAndroid extends AndroidBaseTest {
     @Test(description = "TC-06")
     public void verifySavedPostsSection() {
         SoftAssert softAssert = new SoftAssert();
-        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
+        HomePageBase homePage = initPage(driver, HomePageBase.class);
         homePage.isPageOpened();
         softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
 
@@ -150,10 +155,12 @@ public class MobileTestAndroid extends AndroidBaseTest {
         softAssert.assertAll();
     }
 
+
     @Test(description = "TC-07")
     public void verifyHistorySection(){
         SoftAssert softAssert = new SoftAssert();
-        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
+        HomePageBase homePage = initPage(driver, HomePageBase.class);
         homePage.isPageOpened();
         softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
 
@@ -161,14 +168,16 @@ public class MobileTestAndroid extends AndroidBaseTest {
         String postTitle = postDetailPage.getPostTitle();
 
         //TODO: Decrease time of regression: Remove steps and go straight to saved post page?
-        postDetailPage.clickReturnButton();
-        softAssert.assertTrue(homePage.isRedditIconVisible(),
-                "Reddit icon is not visible after return from post page");
-        ProfileNavigationSidebar sidebar = homePage.clickProfileIcon();
-        assertTrue(sidebar.checkPresenceOfButton(SideMenuTitle.HISTORY.getTitle()),
-                "Saved button is not visible");
+//        postDetailPage.clickReturnButton();
+//        softAssert.assertTrue(homePage.isRedditIconVisible(),
+//                "Reddit icon is not visible after return from post page");
+//        ProfileNavigationSidebar sidebar = homePage.clickProfileIcon();
+//        assertTrue(sidebar.checkPresenceOfButton(SideMenuTitle.HISTORY.getTitle()),
+//                "Saved button is not visible");
+        openDeepLinkWithIntent(R.TESTDATA.get("android.history"));
+        HistoryPageBase historyPostPage = initPage(driver, HistoryPageBase.class);
+        historyPostPage.isPageOpened();
 
-        HistoryPageBase historyPostPage = sidebar.clickButtonByName(SideMenuTitle.SAVED.getTitle(), HistoryPageBase.class);
         String savedPostTitle = historyPostPage.getFirstSavedPostTitle();
         assertEquals(savedPostTitle, postTitle, "Post title from detail page and saved page don't match");
         softAssert.assertAll();
@@ -178,8 +187,8 @@ public class MobileTestAndroid extends AndroidBaseTest {
     @Test(description = "TC-08")
     public void verifyPost() {
         SoftAssert softAssert = new SoftAssert();
-
-        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
+        HomePageBase homePage = initPage(driver, HomePageBase.class);
         homePage.isPageOpened();
         softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
 
@@ -199,11 +208,12 @@ public class MobileTestAndroid extends AndroidBaseTest {
         softAssert.assertAll();
     }
 
+
     @Test(description = "TC-09")
     public void testVisibilityOfComments() {
         SoftAssert softAssert = new SoftAssert();
-
-        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
+        HomePageBase homePage = initPage(driver, HomePageBase.class);
         homePage.isPageOpened();
         softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
 
@@ -213,6 +223,7 @@ public class MobileTestAndroid extends AndroidBaseTest {
 
         softAssert.assertAll();
     }
+
 
     //TC-10 - implement i18n test in French language
 

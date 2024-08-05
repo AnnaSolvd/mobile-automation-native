@@ -9,4 +9,10 @@ public abstract class CartPageIOSBase extends AbstractPage {
         super(driver);
     }
 
+    public abstract boolean isProductPresentInCart(String productTitle);
+
+    public abstract void removeProductFromCart(String productTitle);
+
+    public abstract CheckOutInformationIOSBase clickCheckOutButton();
+
 }

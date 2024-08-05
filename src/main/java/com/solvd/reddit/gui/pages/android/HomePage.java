@@ -52,7 +52,7 @@ public class HomePage extends HomePageBase {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(redditIcon);
-        logger.info("HomePageIOS open");
+        logger.info("HomePage open");
     }
 
     private Post selectPost() {

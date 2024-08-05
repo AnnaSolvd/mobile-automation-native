@@ -16,15 +16,7 @@ public class DataGeneratorService {
         return sb.toString();
     }
 
-    public static String generateRandomPostTitle(int postTitleLength) {
-        return generateRandomString(postTitleLength);
-    }
-
-    public static String generateRandomPostBody(int postBodyLength) {
-        return generateRandomString(postBodyLength);
-    }
-
-    public static String generateUserData(int stringLength) {
+    public static String generateRandomData(int stringLength) {
         return generateRandomString(stringLength);
     }
 }

@@ -29,7 +29,6 @@ public class LoginPageIOS extends LoginPageIOSBase {
 
     public LoginPageIOS(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(passwordInput);
         logger.info("LoginPage open");
     }
