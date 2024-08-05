@@ -23,11 +23,9 @@ public class HomePageIOS extends HomePageIOSBase {
 
     private static final Logger logger = LoggerFactory.getLogger(HomePageIOS.class);
 
-    //TODO: Move to Header component
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Cart'`]")
     private ExtendedWebElement cartButton;
 
-    //TODO: Move to Header component
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Menu'`]")
     private ExtendedWebElement menuButton;
 
