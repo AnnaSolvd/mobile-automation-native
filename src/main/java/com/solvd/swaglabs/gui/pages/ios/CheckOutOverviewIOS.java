@@ -17,13 +17,13 @@ public class CheckOutOverviewIOS extends CheckOutOverviewIOSBase {
 
     private static final Logger logger = LoggerFactory.getLogger(CheckOutOverviewIOS.class);
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeStaticText[`name == 'CHECKOUT: OVERVIEW'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'CHECKOUT: OVERVIEW'")
     private ExtendedWebElement pageTitle;
 
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Item'`]")
     private List<ProductCart> productList;
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-FINISH'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'test-FINISH'")
     private ExtendedWebElement finishButton;
 
     public CheckOutOverviewIOS(WebDriver driver) {

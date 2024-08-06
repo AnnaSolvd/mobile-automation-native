@@ -16,10 +16,10 @@ public class GeoLocationPageIOS extends GeoLocationPageIOSBase {
 
     private static final Logger logger = LoggerFactory.getLogger(GeoLocationPageIOS.class);
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeStaticText[`name == 'test-latitude'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'test-latitude'")
     private ExtendedWebElement latitudeText;
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeStaticText[`name == 'test-longitude'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'test-longitude'")
     private ExtendedWebElement longitudeText;
 
     public GeoLocationPageIOS(WebDriver driver) {

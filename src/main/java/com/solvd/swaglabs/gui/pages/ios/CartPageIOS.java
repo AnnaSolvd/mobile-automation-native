@@ -19,13 +19,13 @@ public class CartPageIOS extends CartPageIOSBase {
 
     private static final Logger logger = LoggerFactory.getLogger(CartPageIOS.class);
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeStaticText[`name == 'YOUR CART'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'YOUR CART'")
     private ExtendedWebElement pageTitle;
 
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Item'`]")
     private List<ProductCart> productList;
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-CHECKOUT'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'test-CHECKOUT'")
     private ExtendedWebElement checkOutButton;
 
     public CartPageIOS(WebDriver driver) {

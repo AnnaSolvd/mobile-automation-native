@@ -14,7 +14,7 @@ public class CheckOutCompleteIOS extends CheckOutCompleteIOSBase {
 
     private static final Logger logger = LoggerFactory.getLogger(CheckOutCompleteIOS.class);
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-BACK HOME'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'test-BACK HOME'")
     private ExtendedWebElement backHomeButton;
 
     public CheckOutCompleteIOS(WebDriver driver) {

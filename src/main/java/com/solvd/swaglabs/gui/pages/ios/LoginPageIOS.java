@@ -15,13 +15,13 @@ public class LoginPageIOS extends LoginPageIOSBase {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginPageIOS.class);
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeTextField[`name == 'test-Username'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'test-Username'")
     private ExtendedWebElement usernameInput;
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeSecureTextField[`name == 'test-Password'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'test-Password'")
     private ExtendedWebElement passwordInput;
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-LOGIN'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'test-LOGIN'")
     private ExtendedWebElement loginButton;
 
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Error message'`]")

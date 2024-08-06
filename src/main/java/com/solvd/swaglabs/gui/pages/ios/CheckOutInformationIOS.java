@@ -15,16 +15,16 @@ public class CheckOutInformationIOS extends CheckOutInformationIOSBase {
 
     private static final Logger logger = LoggerFactory.getLogger(CheckOutInformationIOS.class);
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeTextField[`name == 'test-First Name'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'test-First Name'")
     private ExtendedWebElement firstNameInput;
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeTextField[`name == 'test-Last Name'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'test-Last Name'")
     private ExtendedWebElement lastNameInput;
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeTextField[`name == 'test-Zip/Postal Code'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'test-Zip/Postal Code'")
     private ExtendedWebElement zipCodeInput;
 
-    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-CONTINUE'`]")
+    @ExtendedFindBy(iosPredicate = "name == 'test-CONTINUE'")
     private ExtendedWebElement continueButton;
 
     public CheckOutInformationIOS(WebDriver driver) {
