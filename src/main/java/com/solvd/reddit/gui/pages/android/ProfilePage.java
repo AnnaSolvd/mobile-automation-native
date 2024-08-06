@@ -27,7 +27,6 @@ public class ProfilePage extends ProfilePageBase {
 
     public ProfilePage(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(editButton);
         logger.info("ProfilePage open");
     }

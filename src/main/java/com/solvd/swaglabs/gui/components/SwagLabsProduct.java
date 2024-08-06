@@ -1,6 +1,8 @@
 package com.solvd.swaglabs.gui.components;
 
+import com.solvd.swaglabs.gui.pages.common.ProductPageIOSBase;
 import com.solvd.swaglabs.gui.pages.ios.HomePageIOS;
+import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
@@ -9,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SwagLabsProduct extends AbstractUIObject {
+public class SwagLabsProduct extends AbstractUIObject implements ICustomTypePageFactory {
 
     private static final Logger logger = LoggerFactory.getLogger(SwagLabsProduct.class);
 
@@ -42,8 +44,10 @@ public class SwagLabsProduct extends AbstractUIObject {
         addToCartButton.click();
     }
 
-    public void clickProduct() {
+    public ProductPageIOSBase clickProduct() {
         productTitle.click();
+        logger.info("Click product: {}", productTitle);
+        return initPage(getDriver(), ProductPageIOSBase.class);
     }
 
 }

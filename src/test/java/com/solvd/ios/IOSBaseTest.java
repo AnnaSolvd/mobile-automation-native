@@ -16,14 +16,14 @@ public abstract class IOSBaseTest implements IAbstractTest {
     protected String username;
     protected String password;
 
-    public HomePageIOSBase logInUser() {
+    protected HomePageIOSBase logInUser() {
         LoginPageIOSBase loginPage = initPage(getDriver(), LoginPageIOSBase.class);
         loginPage.assertPageOpened();
         loginPage.typeInForm(username, password);
         return loginPage.clickLoginButton();
     }
 
-    public CartPageIOSBase addProductToCart() {
+    protected CartPageIOSBase addProductToCart() {
         HomePageIOSBase homePage = logInUser();
         SwagLabsProduct product = homePage.getRandomProduct();
         product.addProductToCart();

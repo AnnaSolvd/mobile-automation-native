@@ -15,10 +15,10 @@ public class CreatePostPage extends CreatePostPageBase {
 
     private static final Logger logger = LoggerFactory.getLogger(CreatePostPage.class);
 
-    @FindBy(id = "post_title")
+    @FindBy(xpath = "//android.widget.EditText[@resource-id='post_title']")
     private ExtendedWebElement postTitle;
 
-    @FindBy(id = "post_body")
+    @FindBy(xpath= "//android.widget.TextView[@resource-id='post_body_placeholder_text']")
     private ExtendedWebElement postBody;
 
     @FindBy(xpath = "//android.view.View[@resource-id='action_button']/android.view.View/android.view.View" +
@@ -27,9 +27,8 @@ public class CreatePostPage extends CreatePostPageBase {
 
     public CreatePostPage(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(postTitle);
-        logger.info("CreatePage open");
+        logger.info("CreatePostPage open");
     }
 
     @Override
@@ -38,16 +37,16 @@ public class CreatePostPage extends CreatePostPageBase {
     }
 
     @Override
+    public boolean checkPostBodyButtonVisibility() {
+        return postBody.isVisible() && postBody.isClickable();
+    }
+
+    @Override
     public void typePostTitle(String text) {
         postTitle.click();
         postTitle.type(text);
         logger.info("Enter text into post title");
         hideKeyboard();
-    }
-
-    @Override
-    public boolean checkPostBodyButtonVisibility() {
-        return postBody.isVisible() && postBody.isClickable();
     }
 
     @Override

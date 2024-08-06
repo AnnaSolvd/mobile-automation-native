@@ -2,11 +2,9 @@ package com.solvd.swaglabs.gui.pages.ios;
 
 import com.solvd.swaglabs.gui.components.ProductCart;
 import com.solvd.swaglabs.gui.pages.common.CheckOutCompleteIOSBase;
-import com.solvd.swaglabs.gui.pages.common.CheckOutInformationIOSBase;
 import com.solvd.swaglabs.gui.pages.common.CheckOutOverviewIOSBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -38,7 +36,6 @@ public class CheckOutOverviewIOS extends CheckOutOverviewIOSBase {
     public boolean isPageTitlePresent() {
         return pageTitle.isPresent();
     }
-
 
     @Override
     public boolean isProductPresent(String productTitle) {

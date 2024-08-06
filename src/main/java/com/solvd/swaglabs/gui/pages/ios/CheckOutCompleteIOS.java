@@ -1,19 +1,13 @@
 package com.solvd.swaglabs.gui.pages.ios;
 
-import com.solvd.swaglabs.gui.components.ProductCart;
 import com.solvd.swaglabs.gui.pages.common.CheckOutCompleteIOSBase;
-import com.solvd.swaglabs.gui.pages.common.CheckOutInformationIOSBase;
-import com.solvd.swaglabs.gui.pages.common.CheckOutOverviewIOSBase;
 import com.solvd.swaglabs.gui.pages.common.HomePageIOSBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CheckOutCompleteIOSBase.class)
 public class CheckOutCompleteIOS extends CheckOutCompleteIOSBase {

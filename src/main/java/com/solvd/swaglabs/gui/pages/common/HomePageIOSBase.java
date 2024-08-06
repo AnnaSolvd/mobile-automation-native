@@ -24,6 +24,4 @@ public abstract class HomePageIOSBase extends AbstractPage implements IMobileUti
     public abstract boolean checkFirstProductPrice(String price);
 
     public abstract SwagLabsProduct getRandomProduct();
-
-    public abstract ProductPageIOSBase clickRandomProduct();
 }

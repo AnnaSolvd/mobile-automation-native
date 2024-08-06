@@ -1,12 +1,9 @@
 package com.solvd.reddit.gui.pages.android;
 
-import com.solvd.reddit.gui.components.Post;
+import com.solvd.reddit.gui.components.PreviewPost;
 import com.solvd.reddit.gui.pages.common.SavedPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
-import org.checkerframework.checker.i18n.qual.Localized;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
@@ -22,11 +19,18 @@ public class SavedPage extends SavedPageBase {
     @FindBy(xpath = "//android.widget.TextView[@text='{L10N:SavedPage.pageTitle}']")
     private ExtendedWebElement pageTitle;
 
+    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView[@resource-id='com.reddit.frontpage:id/link_list']")
+    private List<PreviewPost> postList;
+
     public SavedPage(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(pageTitle);
         logger.info("SavedPage open");
     }
+
+//    public boolean isPostPresent(String postTitle) {
+//        postList.stream()
+//                .filter(p -> p.getPostTitle().contains(postTitle)).
+//    }
 
 }

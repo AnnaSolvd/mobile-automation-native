@@ -32,9 +32,8 @@ public class CommunityPage extends CommunityPageBase {
     @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'{L10N:CommunityPage.leaveButtonText}')]")
     private ExtendedWebElement subredditLeaveButton;
 
-    public CommunityPage(WebDriver driver, String community) {
+    public CommunityPage(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(communityTitle);
         logger.info("CommunityPage open");
     }

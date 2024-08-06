@@ -50,8 +50,7 @@ public class MobileTestIOS extends IOSBaseTest {
         SwagLabsProduct product = homePage.getRandomProduct();
         String title = product.getTitle();
         String price = product.getPrice();
-        ProductPageIOSBase productPage = homePage.clickRandomProduct();
-
+        ProductPageIOSBase productPage = product.clickProduct();
         boolean isProductTitleMatching = productPage.checkProductTitle(title);
         boolean isProductPriceMatching = productPage.checkProductPrice(price);
         assertTrue(isProductTitleMatching, "Product title doesn't match");

@@ -30,12 +30,16 @@ public class ProductPageIOS extends ProductPageIOSBase {
 
     @Override
     public boolean checkProductTitle(String title) {
+        logger.info("title: {}", title);
+        logger.info("Product title: {}", productTitleText.getText());
         String productTitle = productTitleText.getText();
         return productTitle.contains(title);
     }
 
     @Override
     public boolean checkProductPrice(String price) {
+        logger.info("price: {}", price);
+        logger.info("Product price: {}", productPriceText.getText());
         String productPrice = productPriceText.getText();
         return productPrice.contains(price);
     }

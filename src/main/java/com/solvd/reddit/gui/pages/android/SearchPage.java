@@ -4,7 +4,6 @@ import com.solvd.reddit.gui.pages.common.SearchPageBase;
 import com.solvd.reddit.gui.pages.common.SearchResultPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.decorator.PageOpeningStrategy;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -21,7 +20,6 @@ public class SearchPage extends SearchPageBase {
 
     public SearchPage(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(searchInput);
         logger.info("SearchPage open");
     }

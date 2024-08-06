@@ -24,7 +24,6 @@ public class SearchResultPage extends SearchResultPageBase{
 
     public SearchResultPage(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(postsNavigationTabButton);
         logger.info("SearchResultPage open");
     }

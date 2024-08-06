@@ -23,8 +23,7 @@ public class HistoryPage extends HistoryPageBase {
 
     public HistoryPage(WebDriver driver) {
         super(driver);
-//        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
-//        setUiLoadedMarker(pageTitle);
+        setUiLoadedMarker(pageTitle);
         logger.info("HistoryPage open");
     }
 }

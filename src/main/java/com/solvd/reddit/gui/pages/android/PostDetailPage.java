@@ -39,7 +39,6 @@ public class PostDetailPage extends PostDetailPageBase {
 
     public PostDetailPage(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(dropDownMenuButton);
         logger.info("PostDetailPage open");
     }

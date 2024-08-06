@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = HomePageIOSBase.class)
@@ -36,25 +37,10 @@ public class HomePageIOS extends HomePageIOSBase {
             "/XCUIElementTypeOther")
     private ExtendedWebElement filterButton;
 
-    private SwagLabsProduct selectedProduct;
-
     public HomePageIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(cartButton);
         logger.info("HomePageIOS open");
-        selectedProduct = selectProduct();
-    }
-
-    private SwagLabsProduct selectProduct() {
-        productList.forEach(p -> logger.info(p.getTitle()));
-
-        if (productList.isEmpty()) {
-            logger.error("Product list is empty");
-        }
-        Random random = new Random();
-        selectedProduct = productList.get(random.nextInt(productList.size()));
-        logger.info("Selected product: {}", selectedProduct.getTitle());
-        return selectedProduct;
     }
 
     private void clickButton(ExtendedWebElement element) {
@@ -66,6 +52,7 @@ public class HomePageIOS extends HomePageIOSBase {
     @Override
     public FilterModal clickFilterButton() {
         filterButton.click();
+        logger.info("Filter button clicked");
         return new FilterModal(getDriver());
     }
 
@@ -77,20 +64,23 @@ public class HomePageIOS extends HomePageIOSBase {
     @Override
     public CartPageIOSBase clickCartButton() {
         clickButton(cartButton);
-        logger.info("Click cart button");
+        logger.info("Cart button clicked");
         return initPage(getDriver(), CartPageIOSBase.class);
     }
 
     @Override
     public LeftNavigationSidebar clickMenuButton() {
         clickButton(menuButton);
-        logger.info("Click menu button");
+        logger.info("Menu button clicked");
         return new LeftNavigationSidebar(getDriver());
     }
 
     @Override
     public boolean checkFirstProductPrice(String price) {
-        String productPrice = productList.get(0).getPrice();
+        if (productList.isEmpty()) {
+            throw new NoSuchElementException("Product list is empty");
+        }
+        String productPrice = productList.getFirst().getPrice();
         String cleanedPrice = price.replaceAll("[^\\d.]", "");
         logger.info("Product price: {}", cleanedPrice);
         return productPrice.contains(price);
@@ -98,17 +88,16 @@ public class HomePageIOS extends HomePageIOSBase {
 
     @Override
     public SwagLabsProduct getRandomProduct() {
-        return selectedProduct;
-    }
+        productList.forEach(p -> logger.info(p.getTitle()));
 
-    @Override
-    public ProductPageIOSBase clickRandomProduct() {
-        if (selectedProduct == null){
-            selectedProduct = getRandomProduct();
+        if (productList.isEmpty()) {
+            throw new NoSuchElementException("Product list is empty");
         }
-        selectedProduct.clickProduct();
-        logger.info("Click product {}", selectedProduct);
-        return initPage(getDriver(), ProductPageIOSBase.class);
+
+        Random random = new Random();
+        SwagLabsProduct selectedProduct = productList.get(random.nextInt(productList.size()));
+        logger.info("Selected product: {}", selectedProduct.getTitle());
+        return selectedProduct;
     }
 
 }

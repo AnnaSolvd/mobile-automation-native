@@ -19,7 +19,6 @@ public class SettingsPage extends SettingsPageBase {
 
     public SettingsPage(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(languageButton);
         logger.info("SettingsPage open");
     }

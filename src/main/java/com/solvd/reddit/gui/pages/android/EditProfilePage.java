@@ -23,7 +23,6 @@ public class EditProfilePage extends EditProfilePageBase {
 
     public EditProfilePage(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(aboutFieldInput);
         logger.info("EditProfilePage open");
     }
