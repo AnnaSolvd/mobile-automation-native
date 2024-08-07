@@ -1,8 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Carina Demo Tests - Mobile Sample (Android)" parallel="methods">
+<suite name="Mobile Tests Android" parallel="methods">
 	<test name="Mobile test">
 		<classes>
-			<class name="com.solvd.MobileSampleTest" />
+			<class name="com.solvd.android.MobileTestAndroid" />
 		</classes>
 	</test>
 </suite>
