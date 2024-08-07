@@ -124,24 +124,19 @@ public class MobileTestIOS extends IOSBaseTest {
 
     @Test(description = "TC-09")
     public void verifySortFunctionality() {
-        String expectedPrice = "7.99";
         HomePageIOSBase homePage = logInUser();
         FilterModal filterModal = homePage.clickFilterButton();
         filterModal.clickLowToHighFilterButton();
-        boolean isMatching = homePage.checkFirstProductPrice(expectedPrice);
+        boolean isMatching = homePage.checkFirstProductPrice(lowestPrice);
         assertTrue(isMatching, "Product price doesn't match lowest price in catalog");
     }
 
 
     @Test(description = "TC-10")
     public void verifyShowingGeoLocation() {
-        String expectedLatitude = " ";
-        String expectedLongitude = " ";
-
         HomePageIOSBase homePage = logInUser();
         LeftNavigationSidebar leftMenu = homePage.clickMenuButton();
         GeoLocationPageIOSBase geoLocationPage = leftMenu.clickGeoLocationButton();
-
         boolean isMatchingLatitude = geoLocationPage.checkLatitude(expectedLatitude);
         boolean isMatchingLongitude = geoLocationPage.checkLongitude(expectedLongitude);
         assertTrue(isMatchingLatitude, "Latitude is not equal to location");

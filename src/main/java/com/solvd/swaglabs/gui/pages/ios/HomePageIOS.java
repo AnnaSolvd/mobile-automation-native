@@ -77,12 +77,13 @@ public class HomePageIOS extends HomePageIOSBase {
 
     @Override
     public boolean checkFirstProductPrice(String price) {
+        productList.forEach(p -> logger.info(p.getTitle()));
+
         if (productList.isEmpty()) {
             throw new NoSuchElementException("Product list is empty");
         }
         String productPrice = productList.getFirst().getPrice();
-        String cleanedPrice = price.replaceAll("[^\\d.]", "");
-        logger.info("Product price: {}", cleanedPrice);
+        logger.info("Product price: {}", productPrice);
         return productPrice.contains(price);
     }
 

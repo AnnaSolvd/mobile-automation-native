@@ -1,5 +1,7 @@
 package com.solvd.reddit.gui.components;
 
+import com.solvd.reddit.gui.pages.common.CommunityPageBase;
+import com.solvd.reddit.gui.pages.common.PostDetailPageBase;
 import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
@@ -26,12 +28,14 @@ public class Post extends AbstractUIObject implements ICustomTypePageFactory {
         super(driver, searchContext);
     }
 
-    public void clickPostTitle() {
+    public PostDetailPageBase clickPostTitle() {
         postTitle.click();
+        return initPage(getDriver(), PostDetailPageBase.class);
     }
 
-    public void clickPostCommunity() {
+    public CommunityPageBase clickPostCommunity() {
         postCommunity.click();
+        return initPage(getDriver(), CommunityPageBase.class);
     }
 
     public String getTitle() {

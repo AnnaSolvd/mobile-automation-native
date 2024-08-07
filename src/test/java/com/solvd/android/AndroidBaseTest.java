@@ -36,15 +36,15 @@ public abstract class AndroidBaseTest implements IAbstractTest {
         }
     }
 
-    protected HomePageBase getHomePage() {
-        SoftAssert softAssert = new SoftAssert();
-        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
-        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
-        homePage.isPageOpened();
-        softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
-        softAssert.assertAll();
-        return homePage;
-    }
+//    protected HomePageBase getHomePage() {
+//        SoftAssert softAssert = new SoftAssert();
+//        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
+//        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+//        homePage.assertPageOpened();
+//        softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
+//        softAssert.assertAll();
+//        return homePage;
+//    }
 
     @BeforeClass
     public void setUp() {

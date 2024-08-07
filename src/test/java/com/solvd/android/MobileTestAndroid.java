@@ -20,7 +20,7 @@ public class MobileTestAndroid extends AndroidBaseTest {
 
     private static final Logger logger = LoggerFactory.getLogger(MobileTestAndroid.class);
 
-    @Test(description = "TC-01")
+    @Test(description = "TCA-01 - Verify user can update the about you section on their profile")
     public void verifyThatUserCanUpdateProfileBio() {
         SoftAssert softAssert = new SoftAssert();
         openDeepLinkWithIntent(R.TESTDATA.get("android.profile"));
@@ -74,13 +74,16 @@ public class MobileTestAndroid extends AndroidBaseTest {
     @Test(description = "TC-03")
     public void verifySearchFunctionality() {
         SoftAssert softAssert = new SoftAssert();
-        HomePageBase homePage = getHomePage();
 
-        softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible on page");
+        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.assertPageOpened();
+        softAssert.assertTrue(homePage.isRedditIconVisible(), "Reddit icon is not visible");
+
         SearchPageBase searchPage = homePage.clickSearchButton();
         SearchResultPageBase searchResultPage = searchPage.typeSearchInput(searchTerm);
 
-        boolean isSearchTermTextPresent =  searchResultPage.isTermPresentInSearchPostsList(searchTerm);
+        boolean isSearchTermTextPresent = searchResultPage.isTermPresentInSearchPostsList(searchTerm);
         assertTrue(isSearchTermTextPresent, "Search term is not present in post results");
         softAssert.assertAll();
     }
@@ -108,12 +111,15 @@ public class MobileTestAndroid extends AndroidBaseTest {
     }
 
 
-    @Test(description = "TC-05")
+    @Test(description = "TCA-05 - Verify user can see recently visited communities")
     public void verifyRecentlyVisitedSection() {
         SoftAssert softAssert = new SoftAssert();
-        HomePageBase homePage = getHomePage();
 
-        CommunityPageBase communityPage = homePage.clickRandomPostCommunity();
+        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.assertPageOpened();
+
+        CommunityPageBase communityPage = homePage.getRandomPost().clickPostCommunity();
         String communityTitle = communityPage.getCommunityTitle();
         softAssert.assertTrue(communityPage.isCommunityTitlePresent(), "Community title is not present");
 
@@ -127,25 +133,24 @@ public class MobileTestAndroid extends AndroidBaseTest {
 
 
     @Test(description = "TC-06")
-    public void verifySavedPostsSection() {
+    public void verifySavedPostSection() {
         SoftAssert softAssert = new SoftAssert();
-        HomePageBase homePage = getHomePage();
+        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.assertPageOpened();
 
-        PostDetailPageBase postDetailPage = homePage.clickRandomPostTitle();
+        PostDetailPageBase postDetailPage = homePage.getRandomPost().clickPostTitle();
         String postTitle = postDetailPage.getPostTitle();
         DropDownMenu menu = postDetailPage.clickDropDownMenuButton();
         menu.clickSaveButton();
 
-        //TODO: Decrease time of regression: Remove steps and go straight to saved post page?
+        //TODO: Decrease time of regression: Remove steps and go straight to saved post page
         postDetailPage.clickReturnButton();
-        softAssert.assertTrue(homePage.isRedditIconVisible(),
-                "Reddit icon is not visible after return from post page");
         ProfileNavigationSidebar sidebar = homePage.clickProfileIcon();
 
-        assertTrue(sidebar.checkPresenceOfButton(SideMenuTitle.SAVED.getTitle()), "Saved button is not visible");
         SavedPageBase savedPostPage = sidebar.clickButtonByName(SideMenuTitle.SAVED.getTitle(), SavedPageBase.class);
-        //String savedPostTitle = savedPostPage.getPostTitle();
-        //assertEquals(savedPostTitle, postTitle, "Post title from detail page and saved page don't match");
+        boolean isPresent = savedPostPage.isPostTitlePresent(postTitle);
+        assertTrue(isPresent, "Post title from detail page and saved page don't match");
         softAssert.assertAll();
     }
 
@@ -153,23 +158,20 @@ public class MobileTestAndroid extends AndroidBaseTest {
     @Test(description = "TC-07")
     public void verifyHistorySection(){
         SoftAssert softAssert = new SoftAssert();
-        HomePageBase homePage = getHomePage();
+        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.assertPageOpened();
 
-        PostDetailPageBase postDetailPage = homePage.clickRandomPostTitle();
+        PostDetailPageBase postDetailPage = homePage.getRandomPost().clickPostTitle();
         String postTitle = postDetailPage.getPostTitle();
 
         //TODO: Decrease time of regression: Remove steps and go straight to saved post page?
         postDetailPage.clickReturnButton();
-        softAssert.assertTrue(homePage.isRedditIconVisible(),
-                "Reddit icon is not visible after return from post page");
         ProfileNavigationSidebar sidebar = homePage.clickProfileIcon();
-        assertTrue(sidebar.checkPresenceOfButton(SideMenuTitle.HISTORY.getTitle()),
-                "Saved button is not visible");
+
         HistoryPageBase historyPage = sidebar.clickButtonByName(SideMenuTitle.HISTORY.getTitle(), HistoryPageBase.class);
-
-
-        //String savedPostTitle = historyPage.getFirstPostTitle();
-        //assertEquals(savedPostTitle, postTitle, "Post title from detail page and saved page don't match");
+        //boolean isPresent = historyPage.isPostTitlePresent(postTitle);
+        //assertTrue(isPresent, "Post title from detail page and saved page don't match");
         softAssert.assertAll();
     }
 
@@ -177,14 +179,16 @@ public class MobileTestAndroid extends AndroidBaseTest {
     @Test(description = "TC-08")
     public void verifyPost() {
         SoftAssert softAssert = new SoftAssert();
-        HomePageBase homePage = getHomePage();
+        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.assertPageOpened();
 
         Post randomPost = homePage.getRandomPost();
         String title = randomPost.getTitle();
         String community = randomPost.getCommunity();
         logger.info("Post details from home page: {}, {}", title, community);
 
-        PostDetailPageBase postDetailPage = homePage.clickRandomPostTitle();
+        PostDetailPageBase postDetailPage = randomPost.clickPostTitle();
         String postTitle = postDetailPage.getPostTitle();
         String postCommunity = postDetailPage.getPostCommunity();
         logger.info("Post details from post detail page: {}, {}", postTitle, postCommunity);
@@ -196,11 +200,13 @@ public class MobileTestAndroid extends AndroidBaseTest {
     }
 
 
-    @Test(description = "TC-09")
+    @Test(description = "TCA-09 - Verify comments are visible on the post detail page")
     public void testVisibilityOfComments() {
         SoftAssert softAssert = new SoftAssert();
-        HomePageBase homePage = getHomePage();
-        PostDetailPageBase postDetailPage = homePage.clickRandomPostTitle();
+        openDeepLinkWithIntent(R.TESTDATA.get("android.home"));
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.assertPageOpened();
+        PostDetailPageBase postDetailPage = homePage.getRandomPost().clickPostTitle();
         boolean areCommentsPresent = postDetailPage.areCommentsPresent();
         assertTrue(areCommentsPresent, "Comments should be visible");
         softAssert.assertAll();

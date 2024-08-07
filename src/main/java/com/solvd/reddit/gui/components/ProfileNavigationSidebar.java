@@ -2,7 +2,9 @@ package com.solvd.reddit.gui.components;
 
 import com.solvd.reddit.gui.pages.common.HistoryPageBase;
 import com.solvd.reddit.gui.pages.common.SavedPageBase;
+import com.zebrunner.carina.utils.android.IAndroidUtils;
 import com.zebrunner.carina.utils.factory.ICustomTypePageFactory;
+import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
@@ -18,15 +20,15 @@ import java.util.List;
 import java.util.Map;
 
 
-public class ProfileNavigationSidebar extends AbstractUIObject implements ICustomTypePageFactory {
+public class ProfileNavigationSidebar extends AbstractUIObject implements ICustomTypePageFactory, IAndroidUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(ProfileNavigationSidebar.class);
 
     @FindBy(xpath = "//android.widget.LinearLayout[@resource-id='com.reddit.frontpage:id/drawer_nav_items_container']//android.widget.Button")
-    private List<ExtendedWebElement> sideMenuButtonsList;
+    private List<ExtendedWebElement> buttonList;
 
-    @FindBy(id = "nav_user_name")
-    private ExtendedWebElement usernameText;
+    @FindBy(xpath = "//android.widget.TextView[@resource-id='com.reddit.frontpage:id/drawer_nav_item_title' and @text='History']")
+    private ExtendedWebElement historyButton;
 
     public ProfileNavigationSidebar(WebDriver driver) {
         super(driver);
@@ -37,29 +39,27 @@ public class ProfileNavigationSidebar extends AbstractUIObject implements ICusto
     }
 
     private void getButtonByName(String buttonName) {
-        sideMenuButtonsList.stream()
-                .filter(button -> { List<ExtendedWebElement> textViews = button.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
-                    return textViews.stream()
-                            .anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
+        buttonList.forEach(button -> logger.info("Button: {}", button));
+
+        buttonList.stream()
+                //TODO: change to .findAny.ifPresent
+                .filter(button -> {
+                    List<ExtendedWebElement> textViews = button.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
+                    return textViews.stream().anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
                 })
                 .findFirst()
                 .ifPresent(ExtendedWebElement::click);
         logger.info("Clicked on the button: {}", buttonName);
     }
 
-    public <T extends AbstractPage> T clickButtonByName(String buttonName, Class<T> pageClass) {
-        getButtonByName(buttonName);
-        return initPage(driver, pageClass);
+    private void swipeToBottom() {
+        swipe(historyButton);
     }
 
-    public boolean checkPresenceOfButton(String buttonName) {
-        boolean isPresent = sideMenuButtonsList.stream()
-                .anyMatch(button -> { List<ExtendedWebElement> textViews = button.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
-                    return textViews.stream()
-                            .anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
-                });
-        logger.info("Checking presence of button: {} - Found: {}", buttonName, isPresent);
-        return isPresent;
+    public <T extends AbstractPage> T clickButtonByName(String buttonName, Class<T> pageClass) {
+        swipeToBottom();
+        getButtonByName(buttonName);
+        return initPage(driver, pageClass);
     }
 
 }

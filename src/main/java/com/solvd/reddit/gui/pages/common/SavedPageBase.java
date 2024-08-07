@@ -9,4 +9,6 @@ public abstract class SavedPageBase extends BasePage {
         super(driver);
     }
 
+    public abstract boolean isPostTitlePresent(String expectedTitle);
+
 }
