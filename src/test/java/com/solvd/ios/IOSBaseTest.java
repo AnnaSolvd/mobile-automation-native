@@ -46,7 +46,7 @@ public abstract class IOSBaseTest implements IAbstractTest, IMobileUtils {
         return homePage.clickCartButton();
     }
 
-    protected void captureScreenshot(String title){
+    protected void captureScreenshot(){
         try{
             byte[] screenshotBytes = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
             long capturedAtMillis = System.currentTimeMillis();
