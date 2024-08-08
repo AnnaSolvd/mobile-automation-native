@@ -9,10 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
+
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CheckOutCompleteIOSBase.class)
 public class CheckOutCompleteIOS extends CheckOutCompleteIOSBase {
 
-    private static final Logger logger = LoggerFactory.getLogger(CheckOutCompleteIOS.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @ExtendedFindBy(iosPredicate = "name == 'test-BACK HOME'")
     private ExtendedWebElement backHomeButton;
@@ -20,7 +22,7 @@ public class CheckOutCompleteIOS extends CheckOutCompleteIOSBase {
     public CheckOutCompleteIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(backHomeButton);
-        logger.info("CheckOutCompleteIOS open");
+        LOGGER.info("CheckOutCompleteIOS open");
     }
 
     @Override
@@ -31,6 +33,7 @@ public class CheckOutCompleteIOS extends CheckOutCompleteIOSBase {
     @Override
     public HomePageIOSBase clickBackHomeButton() {
         backHomeButton.click();
+        LOGGER.info("Back home button clicked");
         return initPage(getDriver(), HomePageIOSBase.class);
     }
 

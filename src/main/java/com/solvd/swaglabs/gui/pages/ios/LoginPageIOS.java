@@ -10,10 +10,12 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
+
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = LoginPageIOSBase.class)
 public class LoginPageIOS extends LoginPageIOSBase {
 
-    private static final Logger logger = LoggerFactory.getLogger(LoginPageIOS.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @ExtendedFindBy(iosPredicate = "name == 'test-Username'")
     private ExtendedWebElement usernameInput;
@@ -30,7 +32,7 @@ public class LoginPageIOS extends LoginPageIOSBase {
     public LoginPageIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(passwordInput);
-        logger.info("LoginPage open");
+        LOGGER.info("LoginPage open");
     }
 
     @Override
@@ -42,6 +44,7 @@ public class LoginPageIOS extends LoginPageIOSBase {
     @Override
     public HomePageIOSBase clickLoginButton() {
         loginButton.click();
+        LOGGER.info("Login button clicked");
         return initPage(getDriver(), HomePageIOSBase.class);
     }
 

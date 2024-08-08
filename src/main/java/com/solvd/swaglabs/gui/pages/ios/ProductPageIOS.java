@@ -8,10 +8,12 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
+
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = ProductPageIOSBase.class)
 public class ProductPageIOS extends ProductPageIOSBase {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductPageIOS.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Description'`]/XCUIElementTypeStaticText[1]")
     private ExtendedWebElement productTitleText;
@@ -25,21 +27,19 @@ public class ProductPageIOS extends ProductPageIOSBase {
     public ProductPageIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(productTitleText);
-        logger.info("ProductPageIOS open");
+        LOGGER.info("ProductPageIOS open");
     }
 
     @Override
     public boolean checkProductTitle(String title) {
-        logger.info("title: {}", title);
-        logger.info("Product title: {}", productTitleText.getText());
+        LOGGER.info("Product title: {}", productTitleText.getText());
         String productTitle = productTitleText.getText();
         return productTitle.contains(title);
     }
 
     @Override
     public boolean checkProductPrice(String price) {
-        logger.info("price: {}", price);
-        logger.info("Product price: {}", productPriceText.getText());
+        LOGGER.info("Product price: {}", productPriceText.getText());
         String productPrice = productPriceText.getText();
         return productPrice.contains(price);
     }
@@ -47,6 +47,7 @@ public class ProductPageIOS extends ProductPageIOSBase {
     @Override
     public void clickAddToCart() {
         addToCartButton.click();
+        LOGGER.info("Add to cart button clicked");
     }
 
 }

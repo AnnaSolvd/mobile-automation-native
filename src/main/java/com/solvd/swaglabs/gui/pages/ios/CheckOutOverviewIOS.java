@@ -10,12 +10,13 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
 import java.util.List;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CheckOutOverviewIOSBase.class)
 public class CheckOutOverviewIOS extends CheckOutOverviewIOSBase {
 
-    private static final Logger logger = LoggerFactory.getLogger(CheckOutOverviewIOS.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @ExtendedFindBy(iosPredicate = "name == 'CHECKOUT: OVERVIEW'")
     private ExtendedWebElement pageTitle;
@@ -29,7 +30,7 @@ public class CheckOutOverviewIOS extends CheckOutOverviewIOSBase {
     public CheckOutOverviewIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(pageTitle);
-        logger.info("CheckOutOverviewIOS open");
+        LOGGER.info("CheckOutOverviewIOS open");
     }
 
     @Override
@@ -39,7 +40,7 @@ public class CheckOutOverviewIOS extends CheckOutOverviewIOSBase {
 
     @Override
     public boolean isProductPresent(String productTitle) {
-        productList.forEach(p -> logger.info(p.getTitle()));
+        productList.forEach(p -> LOGGER.info(p.getTitle()));
         return productList.stream()
                 .anyMatch(p -> p.getTitle().contains(productTitle));
     }
@@ -47,6 +48,7 @@ public class CheckOutOverviewIOS extends CheckOutOverviewIOSBase {
     @Override
     public CheckOutCompleteIOSBase clickFinishButton() {
         finishButton.click();
+        LOGGER.info("Finish button clicked");
         return initPage(getDriver(), CheckOutCompleteIOSBase.class);
     }
 

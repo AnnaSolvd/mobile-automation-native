@@ -12,12 +12,13 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
 import java.util.List;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CartPageIOSBase.class)
 public class CartPageIOS extends CartPageIOSBase {
 
-    private static final Logger logger = LoggerFactory.getLogger(CartPageIOS.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @ExtendedFindBy(iosPredicate = "name == 'YOUR CART'")
     private ExtendedWebElement pageTitle;
@@ -31,19 +32,19 @@ public class CartPageIOS extends CartPageIOSBase {
     public CartPageIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(pageTitle);
-        logger.info("CartPageIOS open");
+        LOGGER.info("CartPageIOS open");
     }
 
     @Override
     public boolean isProductPresentInCart(String productTitle) {
-        productList.forEach(p -> logger.info(p.getTitle()));
+        productList.forEach(p -> LOGGER.info(p.getTitle()));
         return productList.stream()
                 .anyMatch(p -> p.getTitle().contains(productTitle));
     }
 
     @Override
     public void removeProductFromCart(String productTitle) {
-        productList.forEach(p -> logger.info(p.getTitle()));
+        productList.forEach(p -> LOGGER.info(p.getTitle()));
         productList.stream()
                 .filter(p -> p.getTitle().contains(productTitle))
                 .forEach(ProductCart::clickRemoveButton);
@@ -52,6 +53,7 @@ public class CartPageIOS extends CartPageIOSBase {
     @Override
     public CheckOutInformationIOSBase clickCheckOutButton() {
         checkOutButton.click();
+        LOGGER.info("Checkout button clicked");
         return initPage(getDriver(), CheckOutInformationIOSBase.class);
     }
 

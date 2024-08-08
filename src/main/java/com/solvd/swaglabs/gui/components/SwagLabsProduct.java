@@ -11,9 +11,11 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
+
 public class SwagLabsProduct extends AbstractUIObject implements ICustomTypePageFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(SwagLabsProduct.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeStaticText[`name == 'test-Item title'`]")
     private ExtendedWebElement productTitle;
@@ -42,11 +44,12 @@ public class SwagLabsProduct extends AbstractUIObject implements ICustomTypePage
 
     public void addProductToCart() {
         addToCartButton.click();
+        LOGGER.info("Add to cart button clicked");
     }
 
     public ProductPageIOSBase clickProduct() {
         productTitle.click();
-        logger.info("Click product: {}", productTitle);
+        LOGGER.info("Product clicked: {}", productTitle);
         return initPage(getDriver(), ProductPageIOSBase.class);
     }
 

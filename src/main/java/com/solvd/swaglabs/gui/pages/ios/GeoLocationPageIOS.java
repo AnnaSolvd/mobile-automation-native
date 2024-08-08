@@ -10,11 +10,13 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
+
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = GeoLocationPageIOSBase.class)
 public class GeoLocationPageIOS extends GeoLocationPageIOSBase {
 
-    private static final Logger logger = LoggerFactory.getLogger(GeoLocationPageIOS.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @ExtendedFindBy(iosPredicate = "name == 'test-latitude'")
     private ExtendedWebElement latitudeText;
@@ -25,7 +27,7 @@ public class GeoLocationPageIOS extends GeoLocationPageIOSBase {
     public GeoLocationPageIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(latitudeText);
-        logger.info("GeoLocationPageIOS open");
+        LOGGER.info("GeoLocationPageIOS open");
     }
 
     @Override

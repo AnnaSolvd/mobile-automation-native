@@ -19,6 +19,7 @@ public class MobileTestIOS extends IOSBaseTest {
         loginPage.assertPageOpened();
         loginPage.typeInForm(username, password);
         HomePageIOSBase homePage = loginPage.clickLoginButton();
+        captureScreenshot("AfterLogin");
         boolean isCartPresent = homePage.isCartButtonVisible();
         assertTrue(isCartPresent, "After successful login, cart button should be present");
     }
@@ -30,6 +31,7 @@ public class MobileTestIOS extends IOSBaseTest {
         loginPage.assertPageOpened();
         loginPage.typeInForm(generateRandomData(3), generateRandomData(3));
         loginPage.clickLoginButton();
+        captureScreenshot("LoginPageErrorMessage");
         boolean isMessagePresent = loginPage.isErrorMessagePresent();
         assertTrue(isMessagePresent, "After invalid login, alert should be visible");
     }
@@ -38,8 +40,10 @@ public class MobileTestIOS extends IOSBaseTest {
     @Test(description = "TC-03")
     public void verifyLogOut() {
         HomePageIOSBase homePage = logInUser();
+        captureScreenshot("AfterLogin");
         LeftNavigationSidebar leftMenuPage = homePage.clickMenuButton();
         LoginPageIOSBase loginPage = leftMenuPage.clickLogOutButton();
+        captureScreenshot("AfterLogout");
         assertTrue(loginPage.isLogInButtonVisible(), "Login button should be visible after log out");
     }
 
@@ -51,6 +55,7 @@ public class MobileTestIOS extends IOSBaseTest {
         String title = product.getTitle();
         String price = product.getPrice();
         ProductPageIOSBase productPage = product.clickProduct();
+        captureScreenshot("SelectedProduct");
         boolean isProductTitleMatching = productPage.checkProductTitle(title);
         boolean isProductPriceMatching = productPage.checkProductPrice(price);
         assertTrue(isProductTitleMatching, "Product title doesn't match");
@@ -67,6 +72,7 @@ public class MobileTestIOS extends IOSBaseTest {
         product.addProductToCart();
         softAssert.assertTrue(homePage.isCartButtonVisible(), "Cart button should be visible");
         CartPageIOSBase cartPage = homePage.clickCartButton();
+        captureScreenshot("CartPage");
         boolean isPresent = cartPage.isProductPresentInCart(productTitle);
         assertTrue(isPresent, "Product is not present in cart");
         softAssert.assertAll();
@@ -82,11 +88,11 @@ public class MobileTestIOS extends IOSBaseTest {
         product.addProductToCart();
         softAssert.assertTrue(homePage.isCartButtonVisible(), "Cart button should be visible");
         CartPageIOSBase cartPage = homePage.clickCartButton();
-
+        captureScreenshot("AddProductCartPage");
         boolean isPresent = cartPage.isProductPresentInCart(productTitle);
         assertTrue(isPresent, "Product is not present in cart");
         cartPage.removeProductFromCart(productTitle);
-
+        captureScreenshot("RemoveProductCartPage");
         boolean isPresentAfterRemove = cartPage.isProductPresentInCart(productTitle);
         assertFalse(isPresentAfterRemove, "Product is present in cart after removing it");
         softAssert.assertAll();
@@ -111,11 +117,13 @@ public class MobileTestIOS extends IOSBaseTest {
         CheckOutInformationIOSBase checkOutInfoPage = cartPage.clickCheckOutButton();
         checkOutInfoPage.fillFormWithData(generateRandomData(3), generateRandomData(3),
                 generateRandomData(3));
+        captureScreenshot("FiledFormCheckoutInfoPage");
         CheckOutOverviewIOSBase checkOutOverviewPage = checkOutInfoPage.clickCheckOutButton();
         boolean isPresent = checkOutOverviewPage.isPageTitlePresent();
         assertTrue(isPresent, "Checkout overview page doesn't open");
         CheckOutCompleteIOSBase checkOutCompletePage = checkOutOverviewPage.clickFinishButton();
         HomePageIOSBase homePage = checkOutCompletePage.clickBackHomeButton();
+        captureScreenshot("CheckoutComplete");
         homePage.assertPageOpened();
         boolean isCartButtonPresent = homePage.isCartButtonVisible();
         assertTrue(isCartButtonPresent, "Home page doesn't open");
@@ -127,6 +135,7 @@ public class MobileTestIOS extends IOSBaseTest {
         HomePageIOSBase homePage = logInUser();
         FilterModal filterModal = homePage.clickFilterButton();
         filterModal.clickLowToHighFilterButton();
+        captureScreenshot("HomePageAfterSorting");
         boolean isMatching = homePage.checkFirstProductPrice(lowestPrice);
         assertTrue(isMatching, "Product price doesn't match lowest price in catalog");
     }

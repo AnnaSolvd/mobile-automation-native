@@ -11,9 +11,11 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
+
 public class LeftNavigationSidebar extends AbstractUIObject implements ICustomTypePageFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(LeftNavigationSidebar.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-LOGOUT'`]")
     private ExtendedWebElement logOutButton;
@@ -31,11 +33,13 @@ public class LeftNavigationSidebar extends AbstractUIObject implements ICustomTy
 
     public LoginPageIOSBase clickLogOutButton() {
         logOutButton.click();
+        LOGGER.info("Logout button clicked");
         return initPage(getDriver(), LoginPageIOSBase.class);
     }
 
     public GeoLocationPageIOSBase clickGeoLocationButton() {
         geoLocationButton.click();
+        LOGGER.info("Geolocation button clicked");
         return initPage(getDriver(), GeoLocationPageIOSBase.class);
     }
 

@@ -8,9 +8,11 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
+
 public class ProductCart extends AbstractUIObject {
 
-    private static final Logger logger = LoggerFactory.getLogger(SwagLabsProduct.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Description'`]/XCUIElementTypeStaticText")
     private ExtendedWebElement productTitle;
@@ -39,6 +41,7 @@ public class ProductCart extends AbstractUIObject {
 
     public void clickRemoveButton() {
         removeProductButton.click();
+        LOGGER.info("Remove product button clicked");
     }
 
 }

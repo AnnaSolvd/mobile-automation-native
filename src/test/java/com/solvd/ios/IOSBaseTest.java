@@ -1,25 +1,35 @@
 package com.solvd.ios;
 
-import com.solvd.reddit.gui.pages.common.HomePageBase;
 import com.solvd.swaglabs.gui.components.SwagLabsProduct;
 import com.solvd.swaglabs.gui.pages.common.CartPageIOSBase;
 import com.solvd.swaglabs.gui.pages.common.HomePageIOSBase;
 import com.solvd.swaglabs.gui.pages.common.LoginPageIOSBase;
+import com.zebrunner.agent.core.registrar.Screenshot;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.utils.R;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.asserts.SoftAssert;
+
+import java.lang.invoke.MethodHandles;
 
 public abstract class IOSBaseTest implements IAbstractTest, IMobileUtils {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+
     protected String username;
+
     protected String password;
+
     protected String lowestPrice;
+
     protected String expectedLatitude;
+
     protected String expectedLongitude;
 
     protected HomePageIOSBase logInUser() {
@@ -34,6 +44,16 @@ public abstract class IOSBaseTest implements IAbstractTest, IMobileUtils {
         SwagLabsProduct product = homePage.getRandomProduct();
         product.addProductToCart();
         return homePage.clickCartButton();
+    }
+
+    protected void captureScreenshot(String title){
+        try{
+            byte[] screenshotBytes = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
+            long capturedAtMillis = System.currentTimeMillis();
+            Screenshot.upload(screenshotBytes, capturedAtMillis);
+        } catch (Exception e) {
+                LOGGER.error("Failed to capture or upload screenshot");
+        }
     }
 
     @BeforeMethod

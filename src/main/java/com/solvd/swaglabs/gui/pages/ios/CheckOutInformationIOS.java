@@ -10,10 +10,12 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
+
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CheckOutInformationIOSBase.class)
 public class CheckOutInformationIOS extends CheckOutInformationIOSBase {
 
-    private static final Logger logger = LoggerFactory.getLogger(CheckOutInformationIOS.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @ExtendedFindBy(iosPredicate = "name == 'test-First Name'")
     private ExtendedWebElement firstNameInput;
@@ -30,7 +32,7 @@ public class CheckOutInformationIOS extends CheckOutInformationIOSBase {
     public CheckOutInformationIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(firstNameInput);
-        logger.info("CheckOutInformationIOS open");
+        LOGGER.info("CheckOutInformationIOS open");
     }
 
     @Override
@@ -43,6 +45,7 @@ public class CheckOutInformationIOS extends CheckOutInformationIOSBase {
     @Override
     public CheckOutOverviewIOSBase clickCheckOutButton() {
         continueButton.click();
+        LOGGER.info("Continue button clicked");
         return initPage(getDriver(), CheckOutOverviewIOSBase.class);
     }
 

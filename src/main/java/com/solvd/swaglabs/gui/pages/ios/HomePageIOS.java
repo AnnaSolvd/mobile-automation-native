@@ -5,7 +5,6 @@ import com.solvd.swaglabs.gui.components.LeftNavigationSidebar;
 import com.solvd.swaglabs.gui.components.SwagLabsProduct;
 import com.solvd.swaglabs.gui.pages.common.CartPageIOSBase;
 import com.solvd.swaglabs.gui.pages.common.HomePageIOSBase;
-import com.solvd.swaglabs.gui.pages.common.ProductPageIOSBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
@@ -15,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -22,7 +22,7 @@ import java.util.Random;
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = HomePageIOSBase.class)
 public class HomePageIOS extends HomePageIOSBase {
 
-    private static final Logger logger = LoggerFactory.getLogger(HomePageIOS.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == 'test-Cart'`]")
     private ExtendedWebElement cartButton;
@@ -40,7 +40,7 @@ public class HomePageIOS extends HomePageIOSBase {
     public HomePageIOS(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(cartButton);
-        logger.info("HomePageIOS open");
+        LOGGER.info("HomePageIOS open");
     }
 
     private void clickButton(ExtendedWebElement element) {
@@ -52,7 +52,7 @@ public class HomePageIOS extends HomePageIOSBase {
     @Override
     public FilterModal clickFilterButton() {
         filterButton.click();
-        logger.info("Filter button clicked");
+        LOGGER.info("Filter button clicked");
         return new FilterModal(getDriver());
     }
 
@@ -64,32 +64,32 @@ public class HomePageIOS extends HomePageIOSBase {
     @Override
     public CartPageIOSBase clickCartButton() {
         clickButton(cartButton);
-        logger.info("Cart button clicked");
+        LOGGER.info("Cart button clicked");
         return initPage(getDriver(), CartPageIOSBase.class);
     }
 
     @Override
     public LeftNavigationSidebar clickMenuButton() {
         clickButton(menuButton);
-        logger.info("Menu button clicked");
+        LOGGER.info("Menu button clicked");
         return new LeftNavigationSidebar(getDriver());
     }
 
     @Override
     public boolean checkFirstProductPrice(String price) {
-        productList.forEach(p -> logger.info(p.getTitle()));
+        productList.forEach(p -> LOGGER.info(p.getTitle()));
 
         if (productList.isEmpty()) {
             throw new NoSuchElementException("Product list is empty");
         }
         String productPrice = productList.getFirst().getPrice();
-        logger.info("Product price: {}", productPrice);
+        LOGGER.info("Product price: {}", productPrice);
         return productPrice.contains(price);
     }
 
     @Override
     public SwagLabsProduct getRandomProduct() {
-        productList.forEach(p -> logger.info(p.getTitle()));
+        productList.forEach(p -> LOGGER.info(p.getTitle()));
 
         if (productList.isEmpty()) {
             throw new NoSuchElementException("Product list is empty");
@@ -97,7 +97,7 @@ public class HomePageIOS extends HomePageIOSBase {
 
         Random random = new Random();
         SwagLabsProduct selectedProduct = productList.get(random.nextInt(productList.size()));
-        logger.info("Selected product: {}", selectedProduct.getTitle());
+        LOGGER.info("Selected product: {}", selectedProduct.getTitle());
         return selectedProduct;
     }
 
