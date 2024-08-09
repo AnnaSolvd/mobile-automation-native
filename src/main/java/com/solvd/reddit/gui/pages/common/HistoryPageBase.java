@@ -8,4 +8,6 @@ public abstract class HistoryPageBase extends BasePage {
     protected HistoryPageBase(WebDriver driver) {
         super(driver);
     }
+
+    public abstract boolean isPostTitlePresent(String expectedTitle);
 }

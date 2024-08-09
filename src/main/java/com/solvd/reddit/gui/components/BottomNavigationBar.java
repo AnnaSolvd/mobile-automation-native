@@ -18,7 +18,7 @@ public class BottomNavigationBar extends AbstractUIObject implements ICustomType
     private static final Logger logger = LoggerFactory.getLogger(BottomNavigationBar.class);
 
     //TODO: better locator
-    @FindBy(xpath = "//android.widget.LinearLayout[@resource-id='com.reddit.frontpage:id/bottom_nav_view']")
+    @FindBy(xpath = "//android.widget.LinearLayout[@resource-id='com.reddit.frontpage:id/bottom_nav_compose']")
     private List<ExtendedWebElement> navigationBarButtonsList;
 
     public BottomNavigationBar(WebDriver driver) {
@@ -40,15 +40,5 @@ public class BottomNavigationBar extends AbstractUIObject implements ICustomType
 
         logger.info("Clicked on the button: {}", buttonName);
         return initPage(getDriver(), CreatePostPageBase.class);
-    }
-
-    public boolean checkPresenceOfButton(String buttonName) {
-        boolean isPresent = navigationBarButtonsList.stream()
-                .anyMatch(button -> {
-                    List<ExtendedWebElement> textViews = button.findExtendedWebElements(By.xpath(".//android.widget.TextView"));
-                    return textViews.stream().anyMatch(textView -> textView.getText().equalsIgnoreCase(buttonName));
-                });
-        logger.info("Checking presence of button: {} - Found: {}", buttonName, isPresent);
-        return isPresent;
     }
 }

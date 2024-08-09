@@ -21,9 +21,20 @@ public class HistoryPage extends HistoryPageBase {
     @FindBy(xpath = "//android.widget.TextView[@text='{L10N:HistoryPage.pageTitle}']")
     private ExtendedWebElement pageTitle;
 
+    @FindBy(xpath = "//androidx.recyclerview.widget.RecyclerView[@resource-id='com.reddit.frontpage:id/link_list']/android.widget.LinearLayout")
+    private List<ExtendedWebElement> postList;
+
     public HistoryPage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(pageTitle);
         logger.info("HistoryPage open");
+    }
+
+    @Override
+    public boolean isPostTitlePresent(String expectedTitle) {
+        return postList.stream()
+                .map(postElement -> postElement.findExtendedWebElement(By.xpath(".//android.widget.TextView[@resource-id='com.reddit.frontpage:id/title']")))
+                .map(ExtendedWebElement::getText)
+                .anyMatch(expectedTitle::equalsIgnoreCase);
     }
 }

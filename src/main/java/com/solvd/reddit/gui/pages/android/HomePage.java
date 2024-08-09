@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -22,7 +23,7 @@ import java.util.Random;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = HomePageBase.class)
 public class HomePage extends HomePageBase {
 
-    private static final Logger logger = LoggerFactory.getLogger(HomePage.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @FindBy(xpath = "//android.view.View[@content-desc='Home feed']")
     private ExtendedWebElement redditIcon;
@@ -44,7 +45,7 @@ public class HomePage extends HomePageBase {
     public HomePage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(redditIcon);
-        logger.info("HomePage open");
+        LOGGER.info("HomePage opens");
     }
 
     @Override
@@ -61,20 +62,20 @@ public class HomePage extends HomePageBase {
     @Override
     public SearchPageBase clickSearchButton() {
         searchButton.click();
-        logger.info("Click search button");
+        LOGGER.info("Search button clicked");
         return initPage(getDriver(), SearchPageBase.class);
     }
 
     @Override
     public LeftNavigationSidebar clickLeftNavigationBar() {
         leftNavigationBarButton.click();
-        logger.info("Click navigation bar button");
+        LOGGER.info("Left sidebar button clicked");
         return new LeftNavigationSidebar(getDriver());
     }
 
     @Override
     public Post getRandomPost() {
-        postList.forEach(p -> logger.info(p.getTitle()));
+        postList.forEach(p -> LOGGER.info(p.getTitle()));
 
         if (postList.isEmpty()) {
             throw new NoSuchElementException("Product list is empty");
@@ -82,7 +83,7 @@ public class HomePage extends HomePageBase {
 
         Random random = new Random();
         Post selectedPost = postList.get(random.nextInt(postList.size()));
-        logger.info("Selected post title: {}", selectedPost.getTitle());
+        LOGGER.info("Selected post title: {}", selectedPost.getTitle());
         return selectedPost;
     }
 

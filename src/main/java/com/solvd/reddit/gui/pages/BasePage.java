@@ -19,7 +19,7 @@ public abstract class BasePage extends AbstractPage {
 
     public String getFirstSavedPostTitle() {
         if (!postList.isEmpty()) {
-            ExtendedWebElement firstPost = postList.get(0);
+            ExtendedWebElement firstPost = postList.getFirst();
             ExtendedWebElement titleElement = firstPost.findExtendedWebElement(By.id("com.reddit.frontpage:id/title"));
             titleElement.getText();
         } else {

@@ -13,7 +13,7 @@ import static org.testng.Assert.assertTrue;
 
 public class MobileTestIOS extends IOSBaseTest {
 
-    @Test(description = "TC-01")
+    @Test(description = "TC-01", priority = 1)
     public void verifySuccessfulLogIn() {
         LoginPageIOSBase loginPage = initPage(getDriver(), LoginPageIOSBase.class);
         loginPage.assertPageOpened();
@@ -25,7 +25,7 @@ public class MobileTestIOS extends IOSBaseTest {
     }
 
 
-    @Test(description = "TC-02")
+    @Test(description = "TC-02", priority = 2)
     public void verifyInvalidLogIn() {
         LoginPageIOSBase loginPage = initPage(getDriver(), LoginPageIOSBase.class);
         loginPage.assertPageOpened();
@@ -37,7 +37,7 @@ public class MobileTestIOS extends IOSBaseTest {
     }
 
 
-    @Test(description = "TC-03")
+    @Test(description = "TC-03", priority = 3)
     public void verifyLogOut() {
         HomePageIOSBase homePage = logInUser();
         captureScreenshot();
@@ -48,7 +48,7 @@ public class MobileTestIOS extends IOSBaseTest {
     }
 
 
-    @Test(description = "TC-04")
+    @Test(description = "TC-04", priority = 4)
     public void checkProductDetails() {
         HomePageIOSBase homePage = logInUser();
         SwagLabsProduct product = homePage.getRandomProduct();
@@ -63,7 +63,7 @@ public class MobileTestIOS extends IOSBaseTest {
     }
 
 
-    @Test(description = "TC-05")
+    @Test(description = "TC-05", priority = 5)
     public void verifyCart() {
         SoftAssert softAssert = new SoftAssert();
         HomePageIOSBase homePage = logInUser();
@@ -79,7 +79,7 @@ public class MobileTestIOS extends IOSBaseTest {
     }
 
 
-    @Test(description = "TC-06")
+    @Test(description = "TC-06", priority = 6)
     public void verifyRemoveProductFromCart() {
         SoftAssert softAssert = new SoftAssert();
         HomePageIOSBase homePage = logInUser();
@@ -99,7 +99,7 @@ public class MobileTestIOS extends IOSBaseTest {
     }
 
 
-    @Test(description = "TC-07")
+    @Test(description = "TC-07", priority = 7)
     public void verifyCheckOutForm() {
         CartPageIOSBase cartPage = addProductToCart();
         CheckOutInformationIOSBase checkOutInfoPage = cartPage.clickCheckOutButton();
@@ -111,7 +111,7 @@ public class MobileTestIOS extends IOSBaseTest {
     }
 
 
-    @Test(description = "TC-08")
+    @Test(description = "TC-08", priority = 8)
     public void verifyCheckOverview() {
         CartPageIOSBase cartPage = addProductToCart();
         CheckOutInformationIOSBase checkOutInfoPage = cartPage.clickCheckOutButton();
@@ -130,7 +130,7 @@ public class MobileTestIOS extends IOSBaseTest {
     }
 
 
-    @Test(description = "TC-09")
+    @Test(description = "TC-09", priority = 9)
     public void verifySortFunctionality() {
         HomePageIOSBase homePage = logInUser();
         FilterModal filterModal = homePage.clickFilterButton();
@@ -141,7 +141,7 @@ public class MobileTestIOS extends IOSBaseTest {
     }
 
 
-    @Test(description = "TC-10")
+    @Test(description = "TC-10", priority = 10)
     public void verifyShowingGeoLocation() {
         HomePageIOSBase homePage = logInUser();
         LeftNavigationSidebar leftMenu = homePage.clickMenuButton();

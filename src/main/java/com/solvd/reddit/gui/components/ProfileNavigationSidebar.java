@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class ProfileNavigationSidebar extends AbstractUIObject implements ICustomTypePageFactory, IAndroidUtils {
+public class ProfileNavigationSidebar extends AbstractUIObject implements ICustomTypePageFactory, IAndroidUtils{
 
     private static final Logger logger = LoggerFactory.getLogger(ProfileNavigationSidebar.class);
 
@@ -53,7 +53,7 @@ public class ProfileNavigationSidebar extends AbstractUIObject implements ICusto
     }
 
     private void swipeToBottom() {
-        swipe(historyButton);
+        historyButton.scrollTo();
     }
 
     public <T extends AbstractPage> T clickButtonByName(String buttonName, Class<T> pageClass) {

@@ -46,14 +46,11 @@ public abstract class AndroidBaseTest implements IAbstractTest {
 //        return homePage;
 //    }
 
-    @BeforeClass
-    public void setUp() {
+    @BeforeMethod
+    public void setUp(Method method) {
         username = R.TESTDATA.get("android.username");
         searchTerm = R.TESTDATA.get("android.search_term");
-    }
 
-    @BeforeMethod
-    public void setUpTestMethod(Method method) {
         L10N.setLocale(CONFIG.get("locale"));
         L10N.load();
     }

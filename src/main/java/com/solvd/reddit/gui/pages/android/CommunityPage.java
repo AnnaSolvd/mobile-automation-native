@@ -13,10 +13,12 @@ import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
+
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = CommunityPageBase.class)
 public class CommunityPage extends CommunityPageBase {
 
-    private static final Logger logger = LoggerFactory.getLogger(CommunityPage.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @FindBy(xpath = "//android.widget.TextView[@resource-id='subreddit_header_title']")
     private ExtendedWebElement communityTitle;
@@ -32,10 +34,13 @@ public class CommunityPage extends CommunityPageBase {
     @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'{L10N:CommunityPage.leaveButtonText}')]")
     private ExtendedWebElement subredditLeaveButton;
 
+    @FindBy(xpath = "//android.widget.Button[@resource-id='android:id/button1']")
+    private ExtendedWebElement leaveButton;
+
     public CommunityPage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(communityTitle);
-        logger.info("CommunityPage open");
+        LOGGER.info("CommunityPage opens");
     }
 
     @Override
@@ -58,20 +63,26 @@ public class CommunityPage extends CommunityPageBase {
     public void clickJoinButton() {
         if (subredditJoinButton.isElementPresent()) {
             subredditJoinButton.click();
-            logger.info("Click join button");
+            LOGGER.info("Click join button");
         } else if (subredditLeaveButton.isElementPresent()) {
             subredditLeaveButton.click();
-            logger.info("Click leave button");
+            leaveButton.click();
+            LOGGER.info("Click leave button");
         } else {
-            throw new NoSuchElementException("Neither join nor leave button is present");
+            LOGGER.error("Neither join nor leave button is present");
         }
     }
 
     @Override
     public boolean hasJoinedState() {
-        String contentDesc = subredditJoinButton.getAttribute("content-desc");
-        logger.info("Content-desc of join button: {}", contentDesc);
-        return contentDesc.contains("Leave");
+        if (subredditLeaveButton.isElementPresent()) {
+            return true;
+        } else if (subredditJoinButton.isElementPresent()){
+           return false;
+        } else {
+            LOGGER.error("Neither join nor leave button is present");
+        }
+        return false;
     }
 
 }

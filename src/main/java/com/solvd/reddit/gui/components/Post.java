@@ -11,13 +11,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class Post extends AbstractUIObject implements ICustomTypePageFactory {
 
-    @FindBy(xpath = "(//android.view.View[@resource-id='post_header'])[1]/android.view.View[2]")
+    @FindBy(xpath = "(//android.view.View[@resource-id='post_header'])/android.view.View[2]")
     private ExtendedWebElement postCommunity;
 
-    @FindBy(xpath = "//android.view.View[@resource-id='post_join_button']")
-    private ExtendedWebElement joinButton;
-
-    @FindBy(xpath = "//android.view.View[@resource-id='post_unit']/android.view.View[4]")
+    @FindBy(xpath = "(//android.view.View[@resource-id='post_unit'])/android.view.View[4]")
     private ExtendedWebElement postTitle;
 
     public Post(WebDriver driver) {
